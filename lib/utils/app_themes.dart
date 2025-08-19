@@ -11,7 +11,7 @@ class AppThemes {
     hoverColor: AppColors.transparentColor,
     focusColor: AppColors.redColor,
     scaffoldBackgroundColor: AppColors.blackColor,
-    tabBarTheme: TabBarThemeData(
+    tabBarTheme: TabBarTheme(
       unselectedLabelStyle: AppStylesInter.bold20Yellow,
       //labelStyle: AppStylesInter.bold20Black,
       indicatorColor: AppColors.transparentColor,
@@ -20,7 +20,7 @@ class AppThemes {
       unselectedLabelColor: AppColors.transparentColor,
       tabAlignment: TabAlignment.center,
     ),
-    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: AppColors.transparentColor,
       type: BottomNavigationBarType.fixed,
       elevation: 0,
@@ -55,7 +55,7 @@ class AppThemes {
     hoverColor: AppColors.transparentColor,
     focusColor: AppColors.redColor,
     scaffoldBackgroundColor: AppColors.blackColor,
-    tabBarTheme: TabBarThemeData(
+    tabBarTheme: TabBarTheme(
       unselectedLabelStyle: AppStylesInter.bold20Yellow,
       //labelStyle: AppStylesInter.bold20Black,
       indicatorColor: AppColors.transparentColor,
