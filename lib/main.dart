@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/feature/auth/login_screen.dart';
+import 'package:movies_app/feature/auth/register_screen.dart';
 import 'package:movies_app/providers/app_Language_Provider.dart';
 import 'package:movies_app/providers/app_theme_provider.dart';
 import 'package:movies_app/utils/app_routes.dart';
@@ -34,9 +35,10 @@ class MyApp extends StatelessWidget {
     var themeProvider = Provider.of<AppThemeProvider>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.loginScreenRouteName,
+      initialRoute: AppRoutes.registerScreenRouteName,
       routes: {
-        AppRoutes.loginScreenRouteName: (context) => const LoginScreen()
+        AppRoutes.loginScreenRouteName: (context) => const LoginScreen(),
+        AppRoutes.registerScreenRouteName: (context) => RegisterScreen()
       },
       locale: Locale(languageProvider.appLanguage),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
