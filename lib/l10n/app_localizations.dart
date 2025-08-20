@@ -488,6 +488,12 @@ abstract class AppLocalizations {
   /// **'Update Data'**
   String get update_data;
 
+  /// No description provided for @pick_avatar.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick Avatar'**
+  String get pick_avatar;
+
   /// No description provided for @similar.
   ///
   /// In en, this message translates to:
