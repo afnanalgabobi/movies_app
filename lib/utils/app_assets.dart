@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class AppAssets {
   static const String americaFlag = 'assets/images/america_flag.png';
   static const String arrowBackIcon = 'assets/images/arrow_back_icon.png';
@@ -55,4 +53,5 @@ class AppAssets {
   static const String userIcon = 'assets/images/user_icon.png';
   static const String watchListIcon = 'assets/images/watch_list_icon.png';
   static const String watchNowImage = 'assets/images/watch_now_image.png';
+  static const String eyeoffIcon = "assets/images/icon eye off.png";
 }

@@ -7,10 +7,11 @@ import 'app_styles_roboto.dart';
 class AppThemes {
   static final ThemeData darkTheme = ThemeData(
     primaryColor: AppColors.blackColor,
-    canvasColor: AppColors.yellowColor,
+    canvasColor: AppColors.whiteColor,
     hoverColor: AppColors.transparentColor,
     focusColor: AppColors.redColor,
     scaffoldBackgroundColor: AppColors.blackColor,
+    cardColor: AppColors.grayColor,
     tabBarTheme: TabBarTheme(
       unselectedLabelStyle: AppStylesInter.bold20Yellow,
       //labelStyle: AppStylesInter.bold20Black,
@@ -46,15 +47,18 @@ class AppThemes {
       bodyMedium: AppStylesRoboto.regular20White,
       bodyLarge: AppStylesRoboto.bold24White,
       titleLarge: AppStylesInter.bold20Black,
+      titleMedium: AppStylesRoboto.regular16White,
+      titleSmall: AppStylesRoboto.regular14White,
     ),
   );
 
   static final ThemeData lightTheme = ThemeData(
-    primaryColor: AppColors.blackColor,
-    canvasColor: AppColors.yellowColor,
-    hoverColor: AppColors.transparentColor,
+    primaryColor: AppColors.whiteColor,
+    canvasColor: AppColors.blackColor,
+    hoverColor: AppColors.lightGrayColor,
     focusColor: AppColors.redColor,
-    scaffoldBackgroundColor: AppColors.blackColor,
+    scaffoldBackgroundColor: AppColors.whiteColor,
+    cardColor: AppColors.whiteColor,
     tabBarTheme: TabBarTheme(
       unselectedLabelStyle: AppStylesInter.bold20Yellow,
       //labelStyle: AppStylesInter.bold20Black,
@@ -90,6 +94,8 @@ class AppThemes {
       bodyMedium: AppStylesRoboto.regular20Black,
       bodyLarge: AppStylesRoboto.bold24Black,
       titleLarge: AppStylesInter.bold20White,
+      titleMedium: AppStylesRoboto.regular16Black,
+      titleSmall: AppStylesRoboto.regular14Black,
     ),
   );
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movies_app/feature/auth/forget_password.dart';
 import 'package:movies_app/feature/auth/login_screen.dart';
 import 'package:movies_app/feature/auth/register_screen.dart';
 import 'package:movies_app/providers/app_Language_Provider.dart';
@@ -35,17 +36,18 @@ class MyApp extends StatelessWidget {
     var themeProvider = Provider.of<AppThemeProvider>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.registerScreenRouteName,
+      initialRoute: AppRoutes.loginScreenRouteName,
       routes: {
-        AppRoutes.loginScreenRouteName: (context) => const LoginScreen(),
-        AppRoutes.registerScreenRouteName: (context) => RegisterScreen()
+        AppRoutes.loginScreenRouteName: (context) => LoginScreen(),
+        AppRoutes.registerScreenRouteName: (context) => RegisterScreen(),
+        AppRoutes.forgetPasswordScreenRouteName: (context) => ForgetPassword()
       },
       locale: Locale(languageProvider.appLanguage),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       theme: AppThemes.lightTheme,
       darkTheme: AppThemes.darkTheme,
-      themeMode: themeProvider.appTheme,
+      themeMode: ThemeMode.dark,
     );
   }
 }
