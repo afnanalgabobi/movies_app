@@ -209,6 +209,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get update_data => 'تحديث البيانات';
 
   @override
+  String get pick_avatar => 'اختر شخصية';
+
+  @override
   String get similar => 'مشابه';
 
   @override
