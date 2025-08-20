@@ -209,6 +209,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get update_data => 'Update Data';
 
   @override
+  String get pick_avatar => 'Pick Avatar';
+
+  @override
   String get similar => 'Similar';
 
   @override
