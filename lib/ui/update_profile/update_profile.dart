@@ -102,7 +102,6 @@ class _UpdateProfileState extends State<UpdateProfile> {
                 onTap: () {},
               ),
               Spacer(),
-
               CustomElevatedButton(
                 onPressed: () {},
                 text: AppLocalizations.of(context)!.delete_account,
@@ -180,7 +179,6 @@ class _UpdateProfileState extends State<UpdateProfile> {
                         ? AppColors.yellowColor
                         : AppColors.transparentColor,
                   ),
-
                   child: CircleAvatar(
                     backgroundColor: AppColors.transparentColor,
                     child: Image.asset(
