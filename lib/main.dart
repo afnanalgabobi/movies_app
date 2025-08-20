@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app/feature/auth/forget_password.dart';
-import 'package:movies_app/feature/auth/login_screen.dart';
-import 'package:movies_app/feature/auth/register_screen.dart';
 import 'package:movies_app/providers/app_Language_Provider.dart';
 import 'package:movies_app/providers/app_theme_provider.dart';
+import 'package:movies_app/ui/auth/forget_password.dart';
+import 'package:movies_app/ui/auth/login_screen.dart';
+import 'package:movies_app/ui/auth/register_screen.dart';
 import 'package:movies_app/utils/app_routes.dart';
 import 'package:movies_app/utils/app_themes.dart';
 import 'package:provider/provider.dart';
@@ -47,7 +47,6 @@ class MyApp extends StatelessWidget {
       supportedLocales: AppLocalizations.supportedLocales,
       theme: AppThemes.lightTheme,
       darkTheme: AppThemes.darkTheme,
-      themeMode: ThemeMode.dark,
       themeMode: ThemeMode.dark,
     );
   }
