@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/providers/app_Language_Provider.dart';
 import 'package:movies_app/providers/app_theme_provider.dart';
-import 'package:movies_app/ui/auth/forget_password.dart';
+import 'package:movies_app/ui/auth/forget_password_screen.dart';
 import 'package:movies_app/ui/auth/login_screen.dart';
 import 'package:movies_app/ui/auth/register_screen.dart';
 import 'package:movies_app/ui/update_profile/update_profile.dart';
@@ -40,12 +40,9 @@ class MyApp extends StatelessWidget {
       routes: {
         AppRoutes.loginScreenRouteName: (context) => LoginScreen(),
         AppRoutes.registerScreenRouteName: (context) => RegisterScreen(),
-        AppRoutes.forgetPasswordScreenRouteName: (context) => ForgetPassword()
+        AppRoutes.forgetPasswordScreenRouteName: (context) => ForgetPassword(),
         AppRoutes.updateProfileScreenRouteName : (context) => UpdateProfile(),
-      }
-
-      initialRoute: AppRoutes.updateProfileScreenRouteName,
-   
+      },
       locale: Locale(languageProvider.appLanguage),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
