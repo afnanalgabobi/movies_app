@@ -40,21 +40,21 @@ class MyApp extends StatelessWidget {
     var themeProvider = Provider.of<AppThemeProvider>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.onBoardingScreenRouteName,
+      initialRoute: AppRoutes.onboardingScreenRouteName,
       routes: {
+        AppRoutes.onboardingScreenRouteName: (context) => OnBoardingScreen(),
         AppRoutes.loginScreenRouteName: (context) => LoginScreen(),
         AppRoutes.registerScreenRouteName: (context) => RegisterScreen(),
         AppRoutes.forgetPasswordScreenRouteName: (context) =>
             ForgetPasswordScreen(),
         AppRoutes.updateProfileScreenRouteName: (context) => UpdateProfile(),
-        AppRoutes.onBoardingScreenRouteName: (context) => OnBoardingScreen(),
       },
       locale: Locale(languageProvider.appLanguage),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       theme: AppThemes.lightTheme,
       darkTheme: AppThemes.darkTheme,
-      themeMode: ThemeMode.dark,
+      themeMode: themeProvider.appTheme,
     );
   }
 }
