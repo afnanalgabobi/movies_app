@@ -26,10 +26,8 @@ void main() async {
     ChangeNotifierProvider(
       create: (_) => AppThemeProvider()..setTheme(savedTheme),
     ),
-    ChangeNotifierProvider(
-      create: (_) => OnBoardingProvider(),
-    ),
-  ], child: const MyApp()));
+    ChangeNotifierProvider(create: (context) => OnBoardingProvider()),
+  ], child:  MyApp()));
 }
 
 class MyApp extends StatelessWidget {
