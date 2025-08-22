@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/providers/app_Language_Provider.dart';
 import 'package:movies_app/providers/app_theme_provider.dart';
+import 'package:movies_app/providers/onBoarding_Provider.dart';
 import 'package:movies_app/ui/OnBoarding/onBoarding_screen.dart';
 import 'package:movies_app/ui/auth/forget_password_screen.dart';
 import 'package:movies_app/ui/auth/login_screen.dart';
@@ -25,7 +26,9 @@ void main() async {
     ChangeNotifierProvider(
       create: (_) => AppThemeProvider()..setTheme(savedTheme),
     ),
-    2
+      ChangeNotifierProvider(create: (context) => OnBoardingProvider()),
+  ], child:  MyApp()));
+    
   ], child: MyApp()));
 }
 
@@ -39,11 +42,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute: AppRoutes.onboardingScreenRouteName,
+
       routes: {
         AppRoutes.onboardingScreenRouteName: (context) => OnBoardingScreen(),
         AppRoutes.loginScreenRouteName: (context) => LoginScreen(),
         AppRoutes.registerScreenRouteName: (context) => RegisterScreen(),
         AppRoutes.forgetPasswordScreenRouteName: (context) => ForgetPassword(),
+        AppRoutes.updateProfileScreenRouteName: (context) => UpdateProfile(),
+        AppRoutes.onBoardingScreenRouteName: (context) => OnBoardingScreen(),
       },
       locale: Locale(languageProvider.appLanguage),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
