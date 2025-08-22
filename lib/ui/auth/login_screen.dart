@@ -20,7 +20,7 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController emailcontroller = TextEditingController();
 
   TextEditingController passwordcontroller = TextEditingController();
-
+  var _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -40,54 +40,64 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(
                 height: size.height * .07,
               ),
-              CustomTextFormField(
-                controller: emailcontroller,
-                prefixIcon: ImageIcon(
-                  const AssetImage(
-                    AppAssets.emailIcon,
-                  ),
-                  color: Theme.of(context).canvasColor,
-                ),
-                hintText: AppLocalizations.of(context)!.email,
-              ),
-              SizedBox(
-                height: size.height * .02,
-              ),
-              CustomTextFormField(
-                controller: passwordcontroller,
-                prefixIcon: ImageIcon(
-                  const AssetImage(
-                    AppAssets.passwordIcon,
-                  ),
-                  color: Theme.of(context).canvasColor,
-                ),
-                hintText: AppLocalizations.of(context)!.password,
-                suffixIcon: ImageIcon(
-                  const AssetImage(
-                    AppAssets.eyeoffIcon,
-                  ),
-                  color: Theme.of(context).canvasColor,
-                ),
-              ),
-              SizedBox(
-                height: size.height * .02,
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.of(context)
-                      .pushNamed(AppRoutes.forgetPasswordScreenRouteName);
-                },
-                child: Text(
-                  textAlign: TextAlign.end,
-                  AppLocalizations.of(context)!.forget_password,
-                  style: AppStylesRoboto.regular14Yellow,
-                ),
-              ),
-              SizedBox(
-                height: size.height * .03,
-              ),
-              CustomElevatedButton(
-                  onPressed: () {}, text: AppLocalizations.of(context)!.login),
+              Form(
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      CustomTextFormField(
+                        controller: emailcontroller,
+                        prefixIcon: ImageIcon(
+                          const AssetImage(
+                            AppAssets.emailIcon,
+                          ),
+                          color: Theme.of(context).canvasColor,
+                        ),
+                        hintText: AppLocalizations.of(context)!.email,
+                        validator: emailValidator,
+                      ),
+                      SizedBox(
+                        height: size.height * .02,
+                      ),
+                      CustomTextFormField(
+                        controller: passwordcontroller,
+                        prefixIcon: ImageIcon(
+                          const AssetImage(
+                            AppAssets.passwordIcon,
+                          ),
+                          color: Theme.of(context).canvasColor,
+                        ),
+                        hintText: AppLocalizations.of(context)!.password,
+                        validator: passwordValidator,
+                        suffixIcon: ImageIcon(
+                          const AssetImage(
+                            AppAssets.eyeoffIcon,
+                          ),
+                          color: Theme.of(context).canvasColor,
+                        ),
+                      ),
+                      SizedBox(
+                        height: size.height * .02,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).pushNamed(
+                              AppRoutes.forgetPasswordScreenRouteName);
+                        },
+                        child: Text(
+                          textAlign: TextAlign.end,
+                          AppLocalizations.of(context)!.forget_password,
+                          style: AppStylesRoboto.regular14Yellow,
+                        ),
+                      ),
+                      SizedBox(
+                        height: size.height * .03,
+                      ),
+                      CustomElevatedButton(
+                          onPressed: login,
+                          text: AppLocalizations.of(context)!.login),
+                    ],
+                  )),
               SizedBox(
                 height: size.height * .02,
               ),
@@ -152,5 +162,25 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+  }
+
+  String? emailValidator(String? input) {
+    if (input == null || input.trim().isEmpty) {
+      return 'Please enter your Email';
+    }
+    return null;
+  }
+
+  String? passwordValidator(String? input) {
+    if (input == null || input.trim().isEmpty) {
+      return 'Please enter your password';
+    }
+    return null;
+  }
+
+  void login() {
+    if (_formKey.currentState!.validate() == true) {
+      Navigator.pushNamed(context, AppRoutes.homeScreenRouteName);
+    }
   }
 }

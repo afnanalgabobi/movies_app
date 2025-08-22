@@ -12,7 +12,7 @@ class AppThemes {
     focusColor: AppColors.redColor,
     scaffoldBackgroundColor: AppColors.blackColor,
     cardColor: AppColors.grayColor,
-    tabBarTheme: TabBarThemeData(
+    tabBarTheme: TabBarTheme(
       unselectedLabelStyle: AppStylesInter.bold20Yellow,
       //labelStyle: AppStylesInter.bold20Black,
       indicatorColor: AppColors.transparentColor,
@@ -59,7 +59,7 @@ class AppThemes {
     focusColor: AppColors.redColor,
     scaffoldBackgroundColor: AppColors.whiteColor,
     cardColor: AppColors.whiteColor,
-    tabBarTheme: TabBarThemeData(
+    tabBarTheme: TabBarTheme(
       unselectedLabelStyle: AppStylesInter.bold20Yellow,
       //labelStyle: AppStylesInter.bold20Black,
       indicatorColor: AppColors.transparentColor,

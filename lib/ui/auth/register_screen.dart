@@ -25,6 +25,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController phonecontroller = TextEditingController();
   TextEditingController passwordcontroller = TextEditingController();
   TextEditingController confirmPasswordcontroller = TextEditingController();
+  var _formKey = GlobalKey<FormState>();
   @override
   void initState() {
     super.initState();
@@ -79,86 +80,99 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 style: Theme.of(context).textTheme.titleMedium,
                 textAlign: TextAlign.center,
               ),
-              CustomTextFormField(
-                controller: namecontroller,
-                prefixIcon: ImageIcon(
-                  const AssetImage(
-                    AppAssets.nameIcon,
-                  ),
-                  color: Theme.of(context).canvasColor,
-                ),
-                hintText: AppLocalizations.of(context)!.name,
-              ),
-              SizedBox(
-                height: size.height * .02,
-              ),
-              CustomTextFormField(
-                controller: emailcontroller,
-                prefixIcon: ImageIcon(
-                  const AssetImage(
-                    AppAssets.emailIcon,
-                  ),
-                  color: Theme.of(context).canvasColor,
-                ),
-                hintText: AppLocalizations.of(context)!.email,
-              ),
-              SizedBox(
-                height: size.height * .02,
-              ),
-              CustomTextFormField(
-                controller: passwordcontroller,
-                prefixIcon: ImageIcon(
-                  const AssetImage(
-                    AppAssets.passwordIcon,
-                  ),
-                  color: Theme.of(context).canvasColor,
-                ),
-                hintText: AppLocalizations.of(context)!.password,
-                suffixIcon: ImageIcon(
-                  const AssetImage(
-                    AppAssets.eyeoffIcon,
-                  ),
-                  color: Theme.of(context).canvasColor,
-                ),
-              ),
-              SizedBox(
-                height: size.height * .02,
-              ),
-              CustomTextFormField(
-                controller: passwordcontroller,
-                prefixIcon: ImageIcon(
-                  const AssetImage(
-                    AppAssets.passwordIcon,
-                  ),
-                  color: Theme.of(context).canvasColor,
-                ),
-                hintText: AppLocalizations.of(context)!.confirm_password,
-                suffixIcon: ImageIcon(
-                  const AssetImage(
-                    AppAssets.eyeoffIcon,
-                  ),
-                  color: Theme.of(context).canvasColor,
-                ),
-              ),
-              SizedBox(
-                height: size.height * .02,
-              ),
-              CustomTextFormField(
-                controller: phonecontroller,
-                prefixIcon: ImageIcon(
-                  const AssetImage(
-                    AppAssets.phoneIcon,
-                  ),
-                  color: Theme.of(context).canvasColor,
-                ),
-                hintText: AppLocalizations.of(context)!.phone_number,
-              ),
-              SizedBox(
-                height: size.height * .02,
-              ),
-              CustomElevatedButton(
-                  onPressed: () {},
-                  text: AppLocalizations.of(context)!.create_account),
+              Form(
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      CustomTextFormField(
+                        controller: namecontroller,
+                        prefixIcon: ImageIcon(
+                          const AssetImage(
+                            AppAssets.nameIcon,
+                          ),
+                          color: Theme.of(context).canvasColor,
+                        ),
+                        hintText: AppLocalizations.of(context)!.name,
+                        validator: nameValidator,
+                      ),
+                      SizedBox(
+                        height: size.height * .02,
+                      ),
+                      CustomTextFormField(
+                        controller: emailcontroller,
+                        prefixIcon: ImageIcon(
+                          const AssetImage(
+                            AppAssets.emailIcon,
+                          ),
+                          color: Theme.of(context).canvasColor,
+                        ),
+                        hintText: AppLocalizations.of(context)!.email,
+                        validator: emailValidator,
+                      ),
+                      SizedBox(
+                        height: size.height * .02,
+                      ),
+                      CustomTextFormField(
+                        controller: passwordcontroller,
+                        prefixIcon: ImageIcon(
+                          const AssetImage(
+                            AppAssets.passwordIcon,
+                          ),
+                          color: Theme.of(context).canvasColor,
+                        ),
+                        hintText: AppLocalizations.of(context)!.password,
+                        validator: passwordValidator,
+                        suffixIcon: ImageIcon(
+                          const AssetImage(
+                            AppAssets.eyeoffIcon,
+                          ),
+                          color: Theme.of(context).canvasColor,
+                        ),
+                      ),
+                      SizedBox(
+                        height: size.height * .02,
+                      ),
+                      CustomTextFormField(
+                        controller: passwordcontroller,
+                        prefixIcon: ImageIcon(
+                          const AssetImage(
+                            AppAssets.passwordIcon,
+                          ),
+                          color: Theme.of(context).canvasColor,
+                        ),
+                        hintText:
+                            AppLocalizations.of(context)!.confirm_password,
+                        validator: confirmpasswordValidator,
+                        suffixIcon: ImageIcon(
+                          const AssetImage(
+                            AppAssets.eyeoffIcon,
+                          ),
+                          color: Theme.of(context).canvasColor,
+                        ),
+                      ),
+                      SizedBox(
+                        height: size.height * .02,
+                      ),
+                      CustomTextFormField(
+                        controller: phonecontroller,
+                        prefixIcon: ImageIcon(
+                          const AssetImage(
+                            AppAssets.phoneIcon,
+                          ),
+                          color: Theme.of(context).canvasColor,
+                        ),
+                        hintText: AppLocalizations.of(context)!.phone_number,
+                        validator: phoneValidator,
+                      ),
+                      SizedBox(
+                        height: size.height * .02,
+                      ),
+                      CustomElevatedButton(
+                          onPressed: register,
+                          text: AppLocalizations.of(context)!.create_account),
+                    ],
+                  )),
               SizedBox(
                 height: size.height * .02,
               ),
@@ -186,5 +200,46 @@ class _RegisterScreenState extends State<RegisterScreen> {
         ),
       ),
     );
+  }
+
+  String? emailValidator(String? input) {
+    if (input == null || input.trim().isEmpty) {
+      return 'Please enter your Email';
+    }
+    return null;
+  }
+
+  String? nameValidator(String? input) {
+    if (input == null || input.trim().isEmpty) {
+      return 'Please enter your name';
+    }
+    return null;
+  }
+
+  String? phoneValidator(String? input) {
+    if (input == null || input.trim().isEmpty) {
+      return 'Please enter your phone';
+    }
+    return null;
+  }
+
+  String? confirmpasswordValidator(String? input) {
+    if (input == null || input.trim().isEmpty) {
+      return 'Please enter your password';
+    }
+    return null;
+  }
+
+  String? passwordValidator(String? input) {
+    if (input == null || input.trim().isEmpty) {
+      return 'Please enter your password';
+    }
+    return null;
+  }
+
+  void register() {
+    if (_formKey.currentState!.validate() == true) {
+      Navigator.pushNamed(context, AppRoutes.homeScreenRouteName);
+    }
   }
 }
