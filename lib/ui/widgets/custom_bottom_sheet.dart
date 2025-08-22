@@ -1,10 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_app/ui/widgets/custom_elevated_button.dart';
 import 'package:movies_app/utils/app_routes.dart';
 import 'package:provider/provider.dart';
 import '../../l10n/app_localizations.dart';
-import '../../providers/onboarding_provider.dart';
+import '../../providers/onBoarding_Provider.dart';
 import '../../utils/app_colors.dart';
 
 class CustomBottomSheet extends StatelessWidget {
@@ -27,10 +26,11 @@ class CustomBottomSheet extends StatelessWidget {
     var width = MediaQuery.sizeOf(context).width;
     var onBoardingProvider = Provider.of<OnBoardingProvider>(context);
 
-    return BottomSheet(
+    return Provider<OnBoardingProvider>(
+        create: (_) => OnBoardingProvider(),
+        child: BottomSheet(
       clipBehavior: Clip.antiAlias,
       backgroundColor: AppColors.grayColor,
-      dragHandleSize: Size(double.infinity, 100),
       onClosing: () {},
       builder: (context) {
         return Padding(
@@ -49,7 +49,7 @@ class CustomBottomSheet extends StatelessWidget {
                 onPressed: () {
                   nextButton != 6 ?
                   onBoardingProvider.change(nextButton):
-                  Navigator.of(context).pushReplacementNamed(AppRoutes.homeScreenRouteName);
+                  Navigator.of(context).pushReplacementNamed(AppRoutes.loginScreenRouteName);
                 },
                 text: onBoardingProvider.selectedIndex != 5
                     ? AppLocalizations.of(context)!.next
@@ -73,7 +73,7 @@ class CustomBottomSheet extends StatelessWidget {
           ),
         );
       },
-    );
+    ));
   }
 }
 
