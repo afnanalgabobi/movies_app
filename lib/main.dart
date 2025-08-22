@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/providers/app_Language_Provider.dart';
 import 'package:movies_app/providers/app_theme_provider.dart';
-import 'package:movies_app/ui/auth/forget_password.dart';
+import 'package:movies_app/ui/auth/forget_password_screen.dart';
 import 'package:movies_app/ui/auth/login_screen.dart';
 import 'package:movies_app/ui/auth/register_screen.dart';
+import 'package:movies_app/ui/home_screen/home_screen.dart';
+import 'package:movies_app/ui/update_profile/update_profile.dart';
 import 'package:movies_app/utils/app_routes.dart';
 import 'package:movies_app/utils/app_themes.dart';
 import 'package:provider/provider.dart';
@@ -37,17 +39,23 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute: AppRoutes.loginScreenRouteName,
+      initialRoute: AppRoutes.onboardingScreenRouteName,
+
       routes: {
+        AppRoutes.onboardingScreenRouteName: (context) => OnBoardingScreen(),
         AppRoutes.loginScreenRouteName: (context) => LoginScreen(),
         AppRoutes.registerScreenRouteName: (context) => RegisterScreen(),
-        AppRoutes.forgetPasswordScreenRouteName: (context) => ForgetPassword()
+        AppRoutes.forgetPasswordScreenRouteName: (context) => ForgetPassword(),
+        AppRoutes.updateProfileScreenRouteName : (context) => UpdateProfile(),
+        AppRoutes.updateProfileScreenRouteName: (context) => UpdateProfile(),
+        AppRoutes.homeScreenRouteName: (context) => HomeScreen(),
       },
       locale: Locale(languageProvider.appLanguage),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       theme: AppThemes.lightTheme,
       darkTheme: AppThemes.darkTheme,
-      themeMode: ThemeMode.dark,
+      themeMode: themeProvider.appTheme,
     );
   }
 }
