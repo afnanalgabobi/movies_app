@@ -146,7 +146,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get create_one => 'Create One';
 
   @override
-  String get or => 'Or';
+  String get or => 'OR';
 
   @override
   String get login_with_google => 'Login With Google';
