@@ -31,7 +31,7 @@ class CustomBottomSheet extends StatelessWidget {
         create: (_) => OnBoardingProvider(),
         child: BottomSheet(
           clipBehavior: Clip.antiAlias,
-          backgroundColor: AppColors.grayColor,
+          backgroundColor: Theme.of(context).dividerColor,
           onClosing: () {},
           builder: (context) {
             return Padding(
