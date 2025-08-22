@@ -6,6 +6,7 @@ import 'package:movies_app/ui/OnBoarding/onBoarding_screen.dart';
 import 'package:movies_app/ui/auth/forget_password_screen.dart';
 import 'package:movies_app/ui/auth/login_screen.dart';
 import 'package:movies_app/ui/auth/register_screen.dart';
+import 'package:movies_app/ui/home_screen/home_screen.dart';
 import 'package:movies_app/ui/update_profile/update_profile.dart';
 import 'package:movies_app/utils/app_routes.dart';
 import 'package:movies_app/utils/app_themes.dart';
@@ -46,6 +47,7 @@ class MyApp extends StatelessWidget {
         AppRoutes.forgetPasswordScreenRouteName: (context) => ForgetPassword(),
         AppRoutes.updateProfileScreenRouteName: (context) => UpdateProfile(),
         AppRoutes.onBoardingScreenRouteName: (context) => OnBoardingScreen(),
+        AppRoutes.homeScreenRouteName: (context) => HomeScreen(),
       },
       locale: Locale(languageProvider.appLanguage),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
