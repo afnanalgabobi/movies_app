@@ -6,6 +6,11 @@ class AppGradient {
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
   );
+  static const LinearGradient whiteGradient = LinearGradient(
+    colors: [Colors.transparent, Color(0xFFFFFFFF)],
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+  );
   static const LinearGradient greenGradient = LinearGradient(
     colors: [Colors.transparent, Color(0xFF084250)],
     begin: Alignment.topCenter,
@@ -27,8 +32,8 @@ class AppGradient {
     end: Alignment.bottomCenter,
   );
   static const LinearGradient grayGradient = LinearGradient(
-    colors: [Colors.transparent, Color(0xFF2A2C30)],
-    begin: Alignment.topCenter,
-    end: Alignment.bottomCenter,
-  );
+      colors: [Colors.transparent, Color(0xFF2A2C30)],
+      begin: Alignment.topCenter,
+      end: Alignment.bottomCenter,
+      );
 }
