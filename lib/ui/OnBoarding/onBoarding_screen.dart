@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/l10n/app_localizations.dart';
 import 'package:movies_app/utils/app_colors.dart';
+import 'package:provider/provider.dart';
+
+import '../../data/OnBoardingBGList.dart';
+import '../../providers/onBoarding_Provider.dart';
+import '../widgets/custom_bottom_sheet.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   OnBoardingScreen({super.key});
@@ -10,13 +15,13 @@ class OnBoardingScreen extends StatefulWidget {
 }
 
 class _OnBoardingScreenState extends State<OnBoardingScreen> {
-//  List<String> onBoardingBGList = OnBoardingData.onBoardingBGList;
+ List<String> onBoardingBGList = OnBoardingData.onBoardingBGList;
 
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.sizeOf(context).height;
     var width = MediaQuery.sizeOf(context).width;
-    //  var onBoardingProvider = Provider.of<OnBoardingProvider>(context);
+     var onBoardingProvider = Provider.of<OnBoardingProvider>(context);
 
     List<String> onBoardingTitlesList = [
       AppLocalizations.of(context)!.onboarding_title_screen1,
@@ -45,12 +50,12 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         alignment: Alignment.bottomCenter,
         children: [
           Container(
-              //  decoration: BoxDecoration(
-              //  image: DecorationImage(
-              //    image: AssetImage(onBoardingBGList[onBoardingProvider.selectedIndex]),
-              //     fit: BoxFit.cover,
-              //   ),
-              // ),
+               decoration: BoxDecoration(
+               image: DecorationImage(
+                 image: AssetImage(onBoardingBGList[onBoardingProvider.selectedIndex]),
+                  fit: BoxFit.cover,
+                ),
+              ),
               ),
           Container(
             decoration: BoxDecoration(
@@ -62,12 +67,12 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               ),
             ),
           ),
-          //// CustomBottomSheet(
-          ////    title: onBoardingTitlesList[onBoardingProvider.selectedIndex],
-          //    subTitle: onBoardingSubTitlesList[onBoardingProvider.selectedIndex],
-          //    nextButton: onBoardingNextFnList[onBoardingProvider.selectedIndex],
-          //    backButton: onBoardingBackFnList[onBoardingProvider.selectedIndex],
-          //  ),
+          CustomBottomSheet(
+             title: onBoardingTitlesList[onBoardingProvider.selectedIndex],
+             subTitle: onBoardingSubTitlesList[onBoardingProvider.selectedIndex],
+             nextButton: onBoardingNextFnList[onBoardingProvider.selectedIndex],
+             backButton: onBoardingBackFnList[onBoardingProvider.selectedIndex],
+           ),
         ],
       ),
     );

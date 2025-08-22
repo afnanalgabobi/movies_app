@@ -85,6 +85,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                       hintText: 'John Safwat',
                       validator: userNameValidator,
                     ),
+                    SizedBox(height: height * 0.02,),
                     CustomTextFormField(
                       controller: userNameController,
                       prefixIcon: Image.asset(AppAssets.phoneIcon),
