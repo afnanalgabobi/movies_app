@@ -10,6 +10,7 @@ class AppThemes {
     canvasColor: AppColors.whiteColor,
     hoverColor: AppColors.transparentColor,
     focusColor: AppColors.redColor,
+    dividerColor: AppColors.grayColor,
     scaffoldBackgroundColor: AppColors.blackColor,
     cardColor: AppColors.grayColor,
     tabBarTheme: TabBarThemeData(
@@ -57,6 +58,7 @@ class AppThemes {
     canvasColor: AppColors.blackColor,
     hoverColor: AppColors.lightGrayColor,
     focusColor: AppColors.redColor,
+    dividerColor: AppColors.whiteColor,
     scaffoldBackgroundColor: AppColors.whiteColor,
     cardColor: AppColors.whiteColor,
     tabBarTheme: TabBarThemeData(
