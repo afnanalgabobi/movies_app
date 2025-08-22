@@ -4,8 +4,8 @@ import 'package:movies_app/ui/widgets/custom_elevated_button.dart';
 import 'package:movies_app/ui/widgets/custom_text_form_field.dart';
 import 'package:movies_app/utils/app_assets.dart';
 
-class ForgetPassword extends StatelessWidget {
-  ForgetPassword({super.key});
+class ForgetPasswordScreen extends StatelessWidget {
+  ForgetPasswordScreen({super.key});
   TextEditingController emailcontroller = TextEditingController();
   @override
   Widget build(BuildContext context) {
