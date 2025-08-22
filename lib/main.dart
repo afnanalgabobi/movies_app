@@ -12,6 +12,7 @@ import 'package:movies_app/utils/app_routes.dart';
 import 'package:movies_app/utils/app_themes.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import 'l10n/app_localizations.dart';
 
 void main() async {
@@ -40,8 +41,10 @@ class MyApp extends StatelessWidget {
     var themeProvider = Provider.of<AppThemeProvider>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.onBoardingScreenRouteName,
+      initialRoute: AppRoutes.onboardingScreenRouteName,
+
       routes: {
+        AppRoutes.onboardingScreenRouteName: (context) => OnBoardingScreen(),
         AppRoutes.loginScreenRouteName: (context) => LoginScreen(),
         AppRoutes.registerScreenRouteName: (context) => RegisterScreen(),
         AppRoutes.forgetPasswordScreenRouteName: (context) => ForgetPassword(),
@@ -54,7 +57,7 @@ class MyApp extends StatelessWidget {
       supportedLocales: AppLocalizations.supportedLocales,
       theme: AppThemes.lightTheme,
       darkTheme: AppThemes.darkTheme,
-      themeMode: ThemeMode.dark,
+      themeMode: themeProvider.appTheme,
     );
   }
 }
