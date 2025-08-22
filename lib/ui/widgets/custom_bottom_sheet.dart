@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/ui/widgets/custom_elevated_button.dart';
 import 'package:movies_app/utils/app_routes.dart';
+import 'package:movies_app/utils/app_styles_inter.dart';
 import 'package:provider/provider.dart';
+
 import '../../l10n/app_localizations.dart';
 import '../../providers/onBoarding_Provider.dart';
 import '../../utils/app_colors.dart';
@@ -30,8 +32,8 @@ class CustomBottomSheet extends StatelessWidget {
         create: (_) => OnBoardingProvider(),
         child: BottomSheet(
       clipBehavior: Clip.antiAlias,
-      backgroundColor: AppColors.grayColor,
-      onClosing: () {},
+          backgroundColor: Theme.of(context).primaryColor,
+          onClosing: () {},
       builder: (context) {
         return Padding(
           padding: EdgeInsets.all(height * 0.02),
@@ -40,11 +42,16 @@ class CustomBottomSheet extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Text(title, style: Theme.of(context).textTheme.headlineMedium),
-              Text(
+                  Text(
+                    title,
+                    style: Theme.of(context).textTheme.labelMedium,
+                    textAlign: TextAlign.center,
+                  ),
+                  Text(
                 subTitle ?? '' ,
-                style: Theme.of(context).textTheme.headlineSmall,
-              ),
+                    style: Theme.of(context).textTheme.headlineMedium,
+                    textAlign: TextAlign.center,
+                  ),
               CustomElevatedButton(
                 onPressed: () {
                   nextButton != 6 ?
@@ -54,8 +61,8 @@ class CustomBottomSheet extends StatelessWidget {
                 text: onBoardingProvider.selectedIndex != 5
                     ? AppLocalizations.of(context)!.next
                     : AppLocalizations.of(context)!.finish,
-                textStyle: Theme.of(context).textTheme.headlineMedium,
-              ),
+                    textStyle: Theme.of(context).textTheme.labelSmall,
+                  ),
               nextButton != 1 && nextButton != 2 && backButton != -1
                   ? CustomElevatedButton(
                 onPressed: () {
@@ -64,12 +71,15 @@ class CustomBottomSheet extends StatelessWidget {
                   );
                 },
                 text: AppLocalizations.of(context)!.back,
-                textStyle: Theme.of(context).textTheme.headlineMedium,
-                backgroundColor: AppColors.transparentColor,
+                          textStyle: AppStylesInter.semibold20Yellow,
+                          backgroundColor: AppColors.transparentColor,
                 borderColor: AppColors.yellowColor,
               )
                   : SizedBox(),
-            ],
+                  SizedBox(
+                    height: height * 0.02,
+                  )
+                ],
           ),
         );
       },

@@ -1,12 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_app/l10n/app_localizations.dart';
 import 'package:movies_app/ui/widgets/custom_bottom_sheet.dart';
-
 import 'package:movies_app/utils/app_colors.dart';
 import 'package:provider/provider.dart';
 
-import '../../data/OnBoardingBGList.dart';
+import '../../data/OnBoardingData.dart';
 import '../../providers/onBoarding_Provider.dart';
 
 class OnBoardingScreen extends StatefulWidget {
@@ -18,7 +16,7 @@ class OnBoardingScreen extends StatefulWidget {
 
 class _OnBoardingScreenState extends State<OnBoardingScreen> {
   List<String> onBoardingBGList = OnBoardingData.onBoardingBGList;
-
+  List<LinearGradient> onboardingGradient = OnBoardingData.onboardingGradient;
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.sizeOf(context).height;
@@ -65,12 +63,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           ),
           Container(
             decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [AppColors.blackColor, Colors.black12],
-                stops: [0.1, 0.9],
-                begin: FractionalOffset.bottomCenter,
-                end: FractionalOffset.topCenter,
-              ),
+              gradient: onboardingGradient[onBoardingProvider.selectedIndex],
             ),
           ),
           CustomBottomSheet(

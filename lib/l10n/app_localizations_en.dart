@@ -1,5 +1,6 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
+
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -78,7 +79,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get onboarding_title_screen1 => 'Find Your Next Favorite Movie Here';
 
   @override
-  String get onboarding_subtitle_screen1 => 'Get access to a huge library of movies to suit all tastes. You will surely like it.';
+  String get onboarding_subtitle_screen1 =>
+      'Get access to a huge library of movies to suit all tastes. You will surely like it.';
 
   @override
   String get explore_now => 'Explore Now';
@@ -93,25 +95,29 @@ class AppLocalizationsEn extends AppLocalizations {
   String get onboarding_title_screen2 => 'Discover Movies';
 
   @override
-  String get onboarding_subtitle_screen2 => 'Explore a vast collection of movies in all qualities and genres. Find your next favorite film with ease.';
+  String get onboarding_subtitle_screen2 =>
+      'Explore a vast collection of movies in all qualities and genres. Find your next favorite film with ease.';
 
   @override
   String get onboarding_title_screen3 => 'Explore All Genres';
 
   @override
-  String get onboarding_subtitle_screen3 => 'Discover movies from every genre, in all available qualities. Find something new and exciting to watch every day.';
+  String get onboarding_subtitle_screen3 =>
+      'Discover movies from every genre, in all available qualities. Find something new and exciting to watch every day.';
 
   @override
   String get onboarding_title_screen4 => 'Create Watch lists';
 
   @override
-  String get onboarding_subtitle_screen4 => 'Save movies to your watchlist to keep track of what you want to watch next. Enjoy films in various qualities and genres.';
+  String get onboarding_subtitle_screen4 =>
+      'Save movies to your watchlist to keep track of what you want to watch next. Enjoy films in various qualities and genres.';
 
   @override
   String get onboarding_title_screen5 => 'Rate, Review, and Learn';
 
   @override
-  String get onboarding_subtitle_screen5 => 'Share your thoughts on the movies you\'ve watched. Dive deep into film details and help others discover great movies with your reviews.';
+  String get onboarding_subtitle_screen5 =>
+      'Share your thoughts on the movies you\'ve watched. Dive deep into film details and help others discover great movies with your reviews.';
 
   @override
   String get onboarding_title_screen6 => 'Start Watching Now';
