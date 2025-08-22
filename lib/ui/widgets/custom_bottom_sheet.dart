@@ -13,6 +13,7 @@ class CustomBottomSheet extends StatelessWidget {
   String? subTitle;
   int nextButton;
   int? backButton;
+  Color? backgroundColor;
 
   CustomBottomSheet({
     super.key,
@@ -32,7 +33,9 @@ class CustomBottomSheet extends StatelessWidget {
         create: (_) => OnBoardingProvider(),
         child: BottomSheet(
       clipBehavior: Clip.antiAlias,
-          backgroundColor: Theme.of(context).primaryColor,
+          backgroundColor: nextButton == 1
+              ? AppColors.transparentColor
+              : Theme.of(context).primaryColor,
           onClosing: () {},
       builder: (context) {
         return Padding(
