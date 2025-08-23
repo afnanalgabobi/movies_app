@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 class AppColors {
   static const Color blackColor = Color(0xff121312);
+  static const Color blackColorWithObacity =
+      Color.fromRGBO(18, 19, 18, 0.7098039215686275);
   static const Color grayColor = Color(0xff282A28);
   static const Color yellowColor = Color(0xffFFBB3B);
   static const Color whiteColor = Color(0xffFFFFFF);

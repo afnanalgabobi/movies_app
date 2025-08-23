@@ -54,4 +54,5 @@ class AppAssets {
   static const String watchListIcon = 'assets/images/watch_list_icon.png';
   static const String watchNowImage = 'assets/images/watch_now_image.png';
   static const String eyeoffIcon = "assets/images/icon eye off.png";
+  static const String containerImage = 'assets/images/container_image.png';
 }
