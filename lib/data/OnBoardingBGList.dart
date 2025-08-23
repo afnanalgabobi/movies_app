@@ -3,7 +3,7 @@ import 'package:movies_app/utils/app_assets.dart';
 
 import '../utils/app_gradients.dart';
 
-class OnBoardingData{
+class OnBoardingData {
   static List<String> onBoardingBGList = [
     AppAssets.onboardingImage1,
     AppAssets.onboardingImage2,
@@ -23,11 +23,11 @@ class OnBoardingData{
   ];
 
   static List<LinearGradient> onboardingGradientLight = [
-  AppGradient.whiteGradient,
-  AppGradient.greenGradient,
-  AppGradient.redGradient,
-  AppGradient.purbleGradient,
-  AppGradient.burgundyGradient,
-  AppGradient.grayGradient,
+    AppGradient.whiteGradient,
+    AppGradient.greenGradient,
+    AppGradient.redGradient,
+    AppGradient.purbleGradient,
+    AppGradient.burgundyGradient,
+    AppGradient.grayGradient,
   ];
 }

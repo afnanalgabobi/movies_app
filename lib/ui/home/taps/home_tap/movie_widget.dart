@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class HomeTap extends StatelessWidget {
-  const HomeTap({super.key});
+class MovieWidget extends StatelessWidget {
+  const MovieWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
