@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_app/ui/update_profile/update_profile.dart';
 import 'package:movies_app/utils/app_assets.dart';
@@ -20,7 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
     UpdateProfile(),
   ];
 
-  var  BottomNavigationBarItems = [
+  var BottomNavigationBarItems = [
     AppAssets.homeTabUnselected,
     AppAssets.searchTabUnselected,
     AppAssets.browseTabUnselected,
