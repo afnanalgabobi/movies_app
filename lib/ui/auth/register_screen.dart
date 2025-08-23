@@ -134,7 +134,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         height: size.height * .02,
                       ),
                       CustomTextFormField(
-                        controller: passwordcontroller,
+                        controller: confirmPasswordcontroller,
                         prefixIcon: ImageIcon(
                           const AssetImage(
                             AppAssets.passwordIcon,

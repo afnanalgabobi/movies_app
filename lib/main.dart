@@ -6,7 +6,7 @@ import 'package:movies_app/ui/OnBoarding/onBoarding_screen.dart';
 import 'package:movies_app/ui/auth/forget_password_screen.dart';
 import 'package:movies_app/ui/auth/login_screen.dart';
 import 'package:movies_app/ui/auth/register_screen.dart';
-import 'package:movies_app/ui/home_screen/home_screen.dart';
+import 'package:movies_app/ui/home/home_screen.dart';
 import 'package:movies_app/ui/update_profile/update_profile.dart';
 import 'package:movies_app/utils/app_routes.dart';
 import 'package:movies_app/utils/app_themes.dart';
@@ -28,8 +28,7 @@ void main() async {
     ChangeNotifierProvider(
       create: (_) => AppThemeProvider()..setTheme(savedTheme),
     ),
-    ChangeNotifierProvider(
-        create: (context) => OnBoardingProvider()),
+    ChangeNotifierProvider(create: (context) => OnBoardingProvider()),
   ], child: MyApp()));
 }
 
@@ -42,7 +41,7 @@ class MyApp extends StatelessWidget {
     var themeProvider = Provider.of<AppThemeProvider>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.onboardingScreenRouteName,
+      initialRoute: AppRoutes.homeScreenRouteName,
       routes: {
         AppRoutes.onboardingScreenRouteName: (context) => OnBoardingScreen(),
         AppRoutes.loginScreenRouteName: (context) => LoginScreen(),
