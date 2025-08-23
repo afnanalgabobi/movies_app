@@ -10,9 +10,10 @@ class AppThemes {
     canvasColor: AppColors.whiteColor,
     hoverColor: AppColors.transparentColor,
     focusColor: AppColors.redColor,
+    dividerColor: AppColors.grayColor,
     scaffoldBackgroundColor: AppColors.blackColor,
     cardColor: AppColors.grayColor,
-    tabBarTheme: TabBarTheme(
+    tabBarTheme: TabBarThemeData(
       unselectedLabelStyle: AppStylesInter.bold20Yellow,
       //labelStyle: AppStylesInter.bold20Black,
       indicatorColor: AppColors.transparentColor,
@@ -57,9 +58,10 @@ class AppThemes {
     canvasColor: AppColors.blackColor,
     hoverColor: AppColors.lightGrayColor,
     focusColor: AppColors.redColor,
+    dividerColor: AppColors.whiteColor,
     scaffoldBackgroundColor: AppColors.whiteColor,
     cardColor: AppColors.whiteColor,
-    tabBarTheme: TabBarTheme(
+    tabBarTheme: TabBarThemeData(
       unselectedLabelStyle: AppStylesInter.bold20Yellow,
       //labelStyle: AppStylesInter.bold20Black,
       indicatorColor: AppColors.transparentColor,

@@ -4,7 +4,6 @@ import 'package:movies_app/l10n/app_localizations.dart';
 import 'package:movies_app/utils/app_assets.dart';
 import 'package:movies_app/utils/app_colors.dart';
 import 'package:movies_app/utils/app_styles_roboto.dart';
-
 import '../widgets/custom_app_bar.dart';
 import '../widgets/custom_elevated_button.dart';
 import '../widgets/custom_text_form_field.dart';
@@ -85,6 +84,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                       hintText: 'John Safwat',
                       validator: userNameValidator,
                     ),
+                    SizedBox(height: height * 0.02,),
                     CustomTextFormField(
                       controller: userNameController,
                       prefixIcon: Image.asset(AppAssets.phoneIcon),
