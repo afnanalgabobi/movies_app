@@ -43,6 +43,9 @@ dependencies:
   toggle_switch: ^2.3.0
   flutter_native_splash: ^2.1.4
   carousel_slider: ^5.1.1
+  http: ^1.5.0
+  flutter_bloc: ^9.1.1
+  cached_network_image: ^3.4.1
  
  
   

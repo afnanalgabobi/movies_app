@@ -18,7 +18,8 @@ class OnBoardingScreen extends StatefulWidget {
 class _OnBoardingScreenState extends State<OnBoardingScreen> {
   List<String> onBoardingBGList = OnBoardingData.onBoardingBGList;
   List<LinearGradient> onboardingGradient = OnBoardingData.onboardingGradient;
-  List<LinearGradient> onboardingGradientLight = OnBoardingData.onboardingGradientLight;
+  List<LinearGradient> onboardingGradientLight =
+      OnBoardingData.onboardingGradientLight;
 
   @override
   Widget build(BuildContext context) {
@@ -49,33 +50,34 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     List<int> onBoardingBackFnList = [5, -1, 1, 2, 3, 4];
 
     return Scaffold(
-        backgroundColor: AppColors.transparentColor,
-        body: Stack(
-            alignment: Alignment.bottomCenter,
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage(
-                        onBoardingBGList[onBoardingProvider.selectedIndex]),
-                    fit: BoxFit.cover,
-                  ),
-                ),
+      backgroundColor: AppColors.transparentColor,
+      body: Stack(
+        alignment: Alignment.bottomCenter,
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(
+                    onBoardingBGList[onBoardingProvider.selectedIndex]),
+                fit: BoxFit.cover,
               ),
-              Container(
-                decoration: BoxDecoration(
-                    gradient: !themeProvider.isDarkMode()?
-                    onboardingGradient[onBoardingProvider.selectedIndex]
-                        : onboardingGradientLight[onBoardingProvider.selectedIndex]
-                ),
-              ),
-              CustomBottomSheet(
-                title: onBoardingTitlesList[onBoardingProvider.selectedIndex],
-                subTitle: onBoardingSubTitlesList[onBoardingProvider.selectedIndex],
-                nextButton: onBoardingNextFnList[onBoardingProvider.selectedIndex],
-                backButton: onBoardingBackFnList[onBoardingProvider.selectedIndex],
-              ),
-            ], ),
-        );
-    }
+            ),
+          ),
+          Container(
+            decoration: BoxDecoration(
+                gradient: !themeProvider.isDarkMode()
+                    ? onboardingGradient[onBoardingProvider.selectedIndex]
+                    : onboardingGradientLight[
+                        onBoardingProvider.selectedIndex]),
+          ),
+          CustomBottomSheet(
+            title: onBoardingTitlesList[onBoardingProvider.selectedIndex],
+            subTitle: onBoardingSubTitlesList[onBoardingProvider.selectedIndex],
+            nextButton: onBoardingNextFnList[onBoardingProvider.selectedIndex],
+            backButton: onBoardingBackFnList[onBoardingProvider.selectedIndex],
+          ),
+        ],
+      ),
+    );
+  }
 }
