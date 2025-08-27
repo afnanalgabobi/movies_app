@@ -8,4 +8,5 @@ class AppRoutes {
   static const String movieDetailsScreenRouteName = 'movie_details_screen';
   static const String onboardingScreenRouteName = 'onboarding_screen';
   static const String SearchTabRouteName = 'search_screen';
+  static const String BrowseTabRouteName = 'browse_screen';
 }

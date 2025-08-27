@@ -55,6 +55,7 @@ class MyApp extends StatelessWidget {
         AppRoutes.updateProfileScreenRouteName: (context) => UpdateProfile(),
         AppRoutes.homeScreenRouteName: (context) => HomeScreen(),
         AppRoutes.SearchTabRouteName: (context) => SearchTap(),
+        AppRoutes.BrowseTabRouteName: (context) => BrowseTap(),
 
       },
       locale: Locale(languageProvider.appLanguage),
