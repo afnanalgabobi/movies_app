@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app/ui/home/taps/brows_tap/brows_tap.dart';
+import 'package:movies_app/ui/home/taps/browse_tap/browse_tap.dart';
 import 'package:movies_app/ui/home/taps/home_tap/home_tap.dart';
 import 'package:movies_app/ui/home/taps/search_tap/search_tap.dart';
 import 'package:movies_app/ui/update_profile/update_profile.dart';
@@ -19,7 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final List<Widget> taps = [
     const HomeTap(),
     const SearchTap(),
-    const BrowsTap(),
+    const BrowseTap(),
     UpdateProfile(),
   ];
 

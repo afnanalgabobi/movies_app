@@ -2,16 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:movies_app/ui/widgets/custom_movies_container_item.dart';
 import 'package:movies_app/utils/app_assets.dart';
 
-class CustomGrideView extends StatelessWidget {
+class CustomGridView extends StatelessWidget {
   int crossAxisCount;
   double crossAxisSpacing;
   double mainAxisSpacing;
+  int itemCount;
+  double? childAspectRatio;
 
-  CustomGrideView(
+  CustomGridView(
       {super.key,
       required this.crossAxisCount,
       required this.crossAxisSpacing,
-      required this.mainAxisSpacing});
+      required this.mainAxisSpacing,
+      required this.itemCount,
+      this.childAspectRatio});
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +24,9 @@ class CustomGrideView extends StatelessWidget {
         crossAxisCount: crossAxisCount,
         crossAxisSpacing: crossAxisSpacing,
         mainAxisSpacing: mainAxisSpacing,
+      childAspectRatio: childAspectRatio?? 1/1,
       ),
-      itemCount: 10,
+      itemCount: itemCount,
       itemBuilder: (context, index) {
         return CustomMoviesContainerItem(
           movieImagePath: AppAssets.containerImage,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/providers/app_Language_Provider.dart';
 import 'package:movies_app/providers/app_theme_provider.dart';
 import 'package:movies_app/providers/onBoarding_Provider.dart';
@@ -7,15 +8,18 @@ import 'package:movies_app/ui/auth/forget_password_screen.dart';
 import 'package:movies_app/ui/auth/login_screen.dart';
 import 'package:movies_app/ui/auth/register_screen.dart';
 import 'package:movies_app/ui/home/home_screen.dart';
+import 'package:movies_app/ui/home/taps/browse_tap/browse_tap.dart';
+import 'package:movies_app/ui/home/taps/search_tap/search_tap.dart';
 import 'package:movies_app/ui/update_profile/update_profile.dart';
 import 'package:movies_app/utils/app_routes.dart';
 import 'package:movies_app/utils/app_themes.dart';
+import 'package:movies_app/utils/my_bloc_observer.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'l10n/app_localizations.dart';
 
 void main() async {
+  Bloc.observer = MyBlocObserver();
   WidgetsFlutterBinding.ensureInitialized();
   final prefs = await SharedPreferences.getInstance();
   final savedLang = prefs.getString('language') ?? 'en';
@@ -50,6 +54,7 @@ class MyApp extends StatelessWidget {
             ForgetPasswordScreen(),
         AppRoutes.updateProfileScreenRouteName: (context) => UpdateProfile(),
         AppRoutes.homeScreenRouteName: (context) => HomeScreen(),
+
       },
       locale: Locale(languageProvider.appLanguage),
       localizationsDelegates: AppLocalizations.localizationsDelegates,

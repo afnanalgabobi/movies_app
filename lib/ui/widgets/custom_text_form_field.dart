@@ -9,6 +9,7 @@ class CustomTextFormField extends StatelessWidget {
   Color? colorBorderSide;
   String? hintText;
   TextStyle? hintStyle;
+  TextStyle? style;
   String? labelText;
   TextStyle? labelStyle;
   Widget? prefixIcon;
@@ -59,7 +60,7 @@ class CustomTextFormField extends StatelessWidget {
           hintText: hintText,
           hintStyle: hintStyle ?? Theme.of(context).textTheme.titleMedium,
           labelText: labelText,
-          labelStyle: hintStyle ?? Theme.of(context).textTheme.titleMedium,
+          labelStyle: labelStyle ?? Theme.of(context).textTheme.titleMedium,
           prefixIcon: prefixIcon,
           suffixIcon: suffixIcon),
       maxLines: maxLines ?? 1,
@@ -67,6 +68,8 @@ class CustomTextFormField extends StatelessWidget {
       obscureText: obscureText,
       obscuringCharacter: obscuringCharacter,
       controller: controller,
+      style:style??Theme.of(context).textTheme.titleMedium,
+      cursorColor: Theme.of(context).canvasColor,
       validator: validator,
     );
   }

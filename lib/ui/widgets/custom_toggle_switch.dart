@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/utils/app_assets.dart';
 import 'package:movies_app/utils/app_colors.dart';
+import 'package:provider/provider.dart';
 import 'package:toggle_switch/toggle_switch.dart';
+
+import '../../providers/app_Language_Provider.dart';
 
 class CustomToggleSwitch extends StatefulWidget {
   const CustomToggleSwitch({super.key});
@@ -14,6 +17,8 @@ class _CustomToggleSwitchState extends State<CustomToggleSwitch> {
   int activeIndex = 1;
   @override
   Widget build(BuildContext context) {
+    var languageProvider=Provider.of<AppLanguageProvider>(context);
+
     return Container(
       alignment: Alignment.center,
       child: ToggleSwitch(
@@ -63,6 +68,11 @@ class _CustomToggleSwitchState extends State<CustomToggleSwitch> {
         onToggle: (index) {
           setState(() {
             activeIndex = index!;
+            if(activeIndex==1){
+            languageProvider.changeLanguage('ar');
+            }else{
+              languageProvider.changeLanguage('en');
+            }
           });
           print('switched to: $index');
         },
