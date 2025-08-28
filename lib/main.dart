@@ -65,6 +65,7 @@ class MyApp extends StatelessWidget {
             ForgetPasswordScreen(),
         AppRoutes.updateProfileScreenRouteName: (context) => UpdateProfile(),
         AppRoutes.homeScreenRouteName: (context) => HomeScreen(),
+        AppRoutes.SearchTabRouteName: (context) => SearchTap(),
 
       },
       locale: Locale(languageProvider.appLanguage),
