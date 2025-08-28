@@ -16,16 +16,16 @@ import 'package:movies_app/utils/app_themes.dart';
 import 'package:movies_app/utils/my_bloc_observer.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'l10n/app_localizations.dart';
 
 void main() async {
+  Bloc.observer = MyBlocObserver();
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = MyBlocObserver();
   final prefs = await SharedPreferences.getInstance();
   final savedLang = prefs.getString('language') ?? 'en';
   final savedTheme =
-      prefs.getString('theme') == 'dark' ? ThemeMode.dark : ThemeMode.light;
+  prefs.getString('theme') == 'dark' ? ThemeMode.dark : ThemeMode.light;
   Bloc.observer = MyBlocObserver();
   runApp(MultiProvider(
       providers: [
@@ -65,6 +65,7 @@ class MyApp extends StatelessWidget {
             ForgetPasswordScreen(),
         AppRoutes.updateProfileScreenRouteName: (context) => UpdateProfile(),
         AppRoutes.homeScreenRouteName: (context) => HomeScreen(),
+
       },
       locale: Locale(languageProvider.appLanguage),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
