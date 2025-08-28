@@ -1,14 +1,13 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies_app/api/api_manager.dart';
 import 'package:movies_app/l10n/app_localizations.dart';
 import 'package:movies_app/ui/Login/cubit/login_states.dart';
 import 'package:movies_app/ui/Login/cubit/login_view_model.dart';
 import 'package:movies_app/ui/widgets/custom_dialog.dart';
 import 'package:movies_app/ui/widgets/custom_elevated_button.dart';
+import 'package:movies_app/ui/widgets/custom_language_toggle_switch.dart';
 import 'package:movies_app/ui/widgets/custom_text_form_field.dart';
-import 'package:movies_app/ui/widgets/custom_toggle_switch.dart';
 import 'package:movies_app/utils/app_assets.dart';
 import 'package:movies_app/utils/app_colors.dart';
 import 'package:movies_app/utils/app_routes.dart';
@@ -184,7 +183,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   SizedBox(
                     height: size.height * .03,
                   ),
-                  const CustomToggleSwitch(),
+                   CustomLanguageToggleSwitch(),
                 ],
               ),
             ),
@@ -228,8 +227,8 @@ import 'package:flutter/material.dart';
 import 'package:movies_app/api/api_manager.dart';
 import 'package:movies_app/l10n/app_localizations.dart';
 import 'package:movies_app/ui/widgets/custom_elevated_button.dart';
+import 'package:movies_app/ui/widgets/custom_language_toggle_switch.dart';
 import 'package:movies_app/ui/widgets/custom_text_form_field.dart';
-import 'package:movies_app/ui/widgets/custom_toggle_switch.dart';
 import 'package:movies_app/utils/app_assets.dart';
 import 'package:movies_app/utils/app_colors.dart';
 import 'package:movies_app/utils/app_routes.dart';
@@ -382,7 +381,7 @@ class _LoginScreenState extends State<LoginScreen> {
               SizedBox(
                 height: size.height * .03,
               ),
-              const CustomToggleSwitch(),
+              CustomLanguageToggleSwitch(),
             ],
           ),
         ),

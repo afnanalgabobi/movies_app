@@ -6,10 +6,10 @@ import 'package:movies_app/providers/onBoarding_Provider.dart';
 import 'package:movies_app/ui/OnBoarding/onBoarding_screen.dart';
 import 'package:movies_app/ui/auth/forget_password_screen.dart';
 import 'package:movies_app/ui/auth/login_screen.dart';
-import 'package:movies_app/ui/auth/register_screen.dart';
+import 'package:movies_app/ui/auth/register_auth/register_screen.dart';
 import 'package:movies_app/ui/home/home_screen.dart';
-import 'package:movies_app/ui/home/taps/browse_tap/browse_tap.dart';
-import 'package:movies_app/ui/home/taps/search_tap/search_tap.dart';
+import 'package:movies_app/ui/home/taps/home_tap/cubit/category_index_cubit/category_index_cubit.dart';
+import 'package:movies_app/ui/home/taps/home_tap/cubit/history_cubit/history_cubit.dart';
 import 'package:movies_app/ui/update_profile/update_profile.dart';
 import 'package:movies_app/utils/app_routes.dart';
 import 'package:movies_app/utils/app_themes.dart';
@@ -21,19 +21,30 @@ import 'l10n/app_localizations.dart';
 void main() async {
   Bloc.observer = MyBlocObserver();
   WidgetsFlutterBinding.ensureInitialized();
+  Bloc.observer = MyBlocObserver();
   final prefs = await SharedPreferences.getInstance();
   final savedLang = prefs.getString('language') ?? 'en';
   final savedTheme =
-      prefs.getString('theme') == 'dark' ? ThemeMode.dark : ThemeMode.light;
-  runApp(MultiProvider(providers: [
-    ChangeNotifierProvider(
-      create: (_) => AppLanguageProvider()..setLanguage(savedLang),
-    ),
-    ChangeNotifierProvider(
-      create: (_) => AppThemeProvider()..setTheme(savedTheme),
-    ),
-    ChangeNotifierProvider(create: (context) => OnBoardingProvider()),
-  ], child: MyApp()));
+  prefs.getString('theme') == 'dark' ? ThemeMode.dark : ThemeMode.light;
+  Bloc.observer = MyBlocObserver();
+  runApp(MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => AppLanguageProvider()..setLanguage(savedLang),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => AppThemeProvider()..setTheme(savedTheme),
+        ),
+        ChangeNotifierProvider(create: (context) => OnBoardingProvider()),
+      ],
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(create: (context) => CategoryIndexCubit()),
+          BlocProvider(create: (context) => HistoryCubit()),
+          //    BlocProvider(create: (context) => MovieViewModel()),
+        ],
+        child: MyApp(),
+      )));
 }
 
 class MyApp extends StatelessWidget {

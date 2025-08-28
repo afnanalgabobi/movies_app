@@ -3,13 +3,13 @@ import 'package:movies_app/utils/app_assets.dart';
 import 'package:movies_app/utils/app_styles_roboto.dart';
 
 import '../../../utils/app_colors.dart';
+import '../../model/responsemovies/movie.dart';
 
 class CustomMoviesContainerItem extends StatelessWidget {
-  String movieImagePath;
-  String rateText;
+  Movie movie;
 
   CustomMoviesContainerItem(
-      {super.key, required this.movieImagePath, required this.rateText});
+      {super.key, required this.movie});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class CustomMoviesContainerItem extends StatelessWidget {
       height: height * 0.3,
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage(movieImagePath),
+          image: AssetImage(movie.backgroundImage.toString()),
           fit: BoxFit.fill,
         ),
         borderRadius: BorderRadius.circular(16),
@@ -42,7 +42,7 @@ class CustomMoviesContainerItem extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  rateText,
+                  movie.rating.toString(),
                   style: AppStylesRoboto.regular16White,
                 ),
                 SizedBox(

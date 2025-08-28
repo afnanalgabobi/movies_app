@@ -7,7 +7,7 @@ flutter_native_splash:
   # dart run flutter_native_splash:remove
 
   # IMPORTANT NOTE: These parameter do not affect the configuration of Android 12 and later, which
-  # handle splash screens differently that prior versions of Android.  Android 12 and later must be
+  # handle splash view differently that prior versions of Android.  Android 12 and later must be
   # configured specifically in the android_12 section below.
 
   # color or background_image is the only required parameter.  Use color to set the background

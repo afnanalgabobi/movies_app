@@ -1,6 +1,6 @@
 import 'package:movies_app/utils/app_assets.dart';
 
-class AvatarData{
+class AvatarData {
   static List<String> avatarList = [
     AppAssets.avatar1,
     AppAssets.avatar2,
