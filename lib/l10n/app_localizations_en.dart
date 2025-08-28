@@ -222,4 +222,50 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get genres => 'Genres';
+
+  @override
+  String get enter_your_name => 'Please Enter Your Name';
+
+  @override
+  String get name_must_be_more_than_2_character =>
+      'Name Must Be More Than 2 Character';
+
+  @override
+  String get enter_your_email => 'Please enter your Email';
+
+  @override
+  String get valid_email => 'Please Enter A Valid Email';
+
+  @override
+  String get enter_your_pass => 'Please enter your password';
+
+  @override
+  String get pass_more_than_8 => 'Password Should Be More Than 8 Characters';
+
+  @override
+  String get pass_reg_ex =>
+      'Password must contain an uppercase letter, a number, and a special character';
+
+  @override
+  String get enter_re_pass => 'Please Re-Enter Your Password';
+
+  @override
+  String get pass_do_not_match => 'Password & ConfirmPassword Don’t Match';
+
+  @override
+  String get enter_your_phone => 'Please Enter Your Phone';
+
+  @override
+  String get phone_length =>
+      'Phone Number Must be More Than 10 digit (e.g. 01123456789)';
+
+  @override
+  String get phone_number_must_start_with => 'Phone number must start with +20';
+
+  @override
+  String get egyptian_mobile_number_example =>
+      'Enter a valid Egyptian mobile number (e.g. +201012345678)';
+
+  @override
+  String get welcome => 'Welcome';
 }

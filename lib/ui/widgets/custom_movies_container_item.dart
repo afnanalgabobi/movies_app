@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app/models/movie_model.dart';
 import 'package:movies_app/utils/app_assets.dart';
 import 'package:movies_app/utils/app_styles_roboto.dart';
 
 import '../../../utils/app_colors.dart';
+import '../../model/responsemovies/movie.dart';
 
 class CustomMoviesContainerItem extends StatelessWidget {
   Movie movie;

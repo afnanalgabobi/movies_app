@@ -222,4 +222,50 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get genres => 'الأنواع';
+
+  @override
+  String get enter_your_name => 'من فضلك أدخل اسمك';
+
+  @override
+  String get name_must_be_more_than_2_character =>
+      'الاسم يجب أن يكون أكثر من حرفين';
+
+  @override
+  String get enter_your_email => 'من فضلك أدخل بريدك الإلكتروني';
+
+  @override
+  String get valid_email => 'من فضلك أدخل بريد إلكتروني صحيح';
+
+  @override
+  String get enter_your_pass => 'من فضلك أدخل كلمة المرور';
+
+  @override
+  String get pass_more_than_8 => 'كلمة المرور يجب أن تكون أكثر من 8 أحرف';
+
+  @override
+  String get pass_reg_ex =>
+      'كلمة المرور يجب أن تحتوي على حرف كبير، رقم، ورمز خاص';
+
+  @override
+  String get enter_re_pass => 'من فضلك أعد إدخال كلمة المرور';
+
+  @override
+  String get pass_do_not_match => 'كلمة المرور وتأكيد كلمة المرور غير متطابقين';
+
+  @override
+  String get enter_your_phone => 'من فضلك أدخل رقم الهاتف';
+
+  @override
+  String get phone_length =>
+      'رقم الهاتف يجب أن يكون أكثر من 10 أرقام (مثال: 01123456789)';
+
+  @override
+  String get phone_number_must_start_with => 'رقم الهاتف يجب أن يبدأ بـ +20';
+
+  @override
+  String get egyptian_mobile_number_example =>
+      'أدخل رقم موبايل مصري صحيح (مثال: +201012345678)';
+
+  @override
+  String get welcome => 'مرحبا';
 }

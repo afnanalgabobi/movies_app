@@ -6,7 +6,7 @@ import 'package:movies_app/providers/onBoarding_Provider.dart';
 import 'package:movies_app/ui/OnBoarding/onBoarding_screen.dart';
 import 'package:movies_app/ui/auth/forget_password_screen.dart';
 import 'package:movies_app/ui/auth/login_screen.dart';
-import 'package:movies_app/ui/auth/register_screen.dart';
+import 'package:movies_app/ui/auth/register_auth/register_screen.dart';
 import 'package:movies_app/ui/home/home_screen.dart';
 import 'package:movies_app/ui/home/taps/home_tap/cubit/category_index_cubit/category_index_cubit.dart';
 import 'package:movies_app/ui/home/taps/home_tap/cubit/history_cubit/history_cubit.dart';
@@ -26,6 +26,7 @@ void main() async {
   final savedLang = prefs.getString('language') ?? 'en';
   final savedTheme =
       prefs.getString('theme') == 'dark' ? ThemeMode.dark : ThemeMode.light;
+  Bloc.observer = MyBlocObserver();
   runApp(MultiProvider(
       providers: [
         ChangeNotifierProvider(

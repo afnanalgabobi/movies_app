@@ -31,7 +31,7 @@ class AppThemes {
       unselectedItemColor: AppColors.whiteColor,
     ),
     appBarTheme: AppBarTheme(
-      backgroundColor: AppColors.transparentColor,
+      backgroundColor: AppColors.blackColor,
       iconTheme: IconThemeData(color: AppColors.yellowColor),
       elevation: 0,
       titleTextStyle: AppStylesRoboto.regular16Yellow,
@@ -79,7 +79,7 @@ class AppThemes {
       unselectedItemColor: AppColors.whiteColor,
     ),
     appBarTheme: AppBarTheme(
-      backgroundColor: AppColors.transparentColor,
+      backgroundColor: AppColors.whiteColor,
       iconTheme: IconThemeData(color: AppColors.yellowColor),
       elevation: 0,
       titleTextStyle: AppStylesRoboto.regular16Yellow,
