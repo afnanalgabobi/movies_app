@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/data/avatarList.dart';
 import 'package:movies_app/l10n/app_localizations.dart';
+import 'package:movies_app/ui/widgets/custom_app_bar.dart';
+import 'package:movies_app/ui/widgets/custom_elevated_button.dart';
+import 'package:movies_app/ui/widgets/custom_text_form_field.dart';
 import 'package:movies_app/utils/app_assets.dart';
 import 'package:movies_app/utils/app_colors.dart';
+import 'package:movies_app/utils/app_routes.dart';
 import 'package:movies_app/utils/app_styles_roboto.dart';
-import '../widgets/custom_app_bar.dart';
-import '../widgets/custom_elevated_button.dart';
-import '../widgets/custom_text_form_field.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class UpdateProfile extends StatefulWidget {
   // User user;
   UpdateProfile({super.key});
+
   var avatarList = AvatarData.avatarList;
+
   @override
   State<UpdateProfile> createState() => _UpdateProfileState();
 }
@@ -28,7 +32,11 @@ class _UpdateProfileState extends State<UpdateProfile> {
 
     return SafeArea(
       child: Scaffold(
-        appBar: CustomAppBar(title: AppLocalizations.of(context)!.pick_avatar),
+        appBar: CustomAppBar(
+          title: AppLocalizations.of(context)!.pick_avatar,
+          leading:
+              IconButton(onPressed: () {}, icon: const Icon(Icons.arrow_back)),
+        ),
         body: Padding(
           padding: EdgeInsets.only(
             left: width * 0.04,
@@ -63,7 +71,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                             ),
                             child: Icon(
                               Icons.camera_alt_outlined,
-                              color: Theme.of(context)!.primaryColor,
+                              color: Theme.of(context).primaryColor,
                             ),
                           ),
                         ),
@@ -102,11 +110,18 @@ class _UpdateProfileState extends State<UpdateProfile> {
                   AppLocalizations.of(context)!.reset_password,
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushNamed(
+                      context, AppRoutes.resetPasswordScreenRouteName);
+                },
               ),
               Spacer(),
               CustomElevatedButton(
-                onPressed: () {},
+                onPressed: () async {
+                  final prefs = await SharedPreferences.getInstance();
+                  await prefs.setString('token', "");
+                  Navigator.pushNamed(context, AppRoutes.loginScreenRouteName);
+                },
                 text: AppLocalizations.of(context)!.delete_account,
                 textStyle: AppStylesRoboto.regular20White,
                 backgroundColor: AppColors.redColor,
@@ -176,7 +191,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                 child: Container(
                   padding: EdgeInsets.all(height * 0.006),
                   decoration: BoxDecoration(
-                    border: Border.all(color: Theme.of(context)!.canvasColor),
+                    border: Border.all(color: Theme.of(context).canvasColor),
                     borderRadius: BorderRadius.circular(32),
                     color: selectedAvatarIndex == index
                         ? AppColors.yellowColor

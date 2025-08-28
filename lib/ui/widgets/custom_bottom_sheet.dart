@@ -86,7 +86,7 @@ class CustomBottomSheet extends StatelessWidget {
                           backgroundColor: AppColors.transparentColor,
                           borderColor: AppColors.yellowColor,
                         )
-                      : SizedBox(),
+                      : const SizedBox(),
                   SizedBox(
                     height: height * 0.02,
                   )

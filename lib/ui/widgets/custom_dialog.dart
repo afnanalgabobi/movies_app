@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app/utils/app_styles_inter.dart';
-import 'package:movies_app/utils/app_styles_roboto.dart';
 
 import '../../utils/app_colors.dart';
 

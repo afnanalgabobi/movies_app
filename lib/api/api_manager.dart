@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:movies_app/api/api_constants.dart';
 import 'package:movies_app/api/end_points.dart';
 import 'package:movies_app/model/LoginResponse.dart';
+import 'package:movies_app/model/reset_password_response.dart';
 import 'package:movies_app/model/responsemovies/responsemovies.dart';
 
 import '../model/register_request.dart';
@@ -43,7 +44,8 @@ class ApiManager {
 
   static Future<LoginResponse?> loginAuth(String email, String password) async {
     Uri url = Uri.https(ApiConstants.baseAuthUrl, EndPoints.loginAuthApi);
-    var response = await http.post(url,
+    var response = await http.post(
+      url,
       headers: {
         "Content-Type": "application/json",
       },
@@ -52,25 +54,50 @@ class ApiManager {
         "password": password,
       }),
     );
-    try{
+    try {
       var responseBody = response.body;
-      var json=jsonDecode(responseBody);
-      return LoginResponse.fromJson(json);
-    }catch(e){
-      throw e;
+      var json = jsonDecode(responseBody);
 
+      return LoginResponse.fromJson(json);
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  static Future<ResetPasswordResponse?> resetPasswordAuth(
+      String oldPassword, String newPassword, String token) async {
+    Uri url =
+        Uri.https(ApiConstants.baseAuthUrl, EndPoints.resetPasswordAuthApi);
+
+    var response = await http.patch(
+      url,
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer $token",
+      },
+      body: jsonEncode({
+        "oldPassword": oldPassword,
+        "newPassword": newPassword,
+      }),
+    );
+    try {
+      var responseBody = response.body;
+      var json = jsonDecode(responseBody);
+      return ResetPasswordResponse.fromJson(json);
+    } catch (e) {
+      rethrow;
     }
   }
 
   static Future<Responsemovies?> getMoviesList({String? category}) async {
     Uri url;
     if (category != null && category.isNotEmpty) {
-      url = Uri.https(ApiConstants.baseMoviesUrl, EndPoints.moviesListendpoints,
+      url = Uri.https(ApiConstants.baseMoviesUrl, EndPoints.moviesListEndPoints,
           {"genre": category});
     } else {
       url = Uri.https(
         ApiConstants.baseMoviesUrl,
-        EndPoints.moviesListendpoints,
+        EndPoints.moviesListEndPoints,
       );
     }
     try {
@@ -89,7 +116,7 @@ class ApiManager {
       rethrow;
     }
   }
-
+}
 // static Future<Map<String, dynamic>> saveUser(String email, String password) async {
 //   final token = "your_access_token_here";
 //   Uri url = Uri.https(ApiConstants.baseUrl, EndPoints.loginAuthApi);
@@ -103,4 +130,3 @@ class ApiManager {
 //   );
 //   return jsonDecode(response.body);
 // }
-}

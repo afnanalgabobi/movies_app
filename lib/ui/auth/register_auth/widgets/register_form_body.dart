@@ -31,7 +31,7 @@ class _RegisterFormBodyState extends State<RegisterFormBody> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
-  var _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
 
   int languageValue = 0;
 
@@ -213,7 +213,7 @@ class _RegisterFormBodyState extends State<RegisterFormBody> {
                     SizedBox(
                       height: size.height * .02,
                     ),
-                    CustomLanguageToggleSwitch(),
+                    const CustomLanguageToggleSwitch(),
                   ],
                 )),
           ),

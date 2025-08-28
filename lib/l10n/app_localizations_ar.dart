@@ -240,6 +240,15 @@ class AppLocalizationsAr extends AppLocalizations {
   String get enter_your_pass => 'من فضلك أدخل كلمة المرور';
 
   @override
+  String get enter_your_old_pass => 'من فضلك أدخل كلمة المرور القديمة';
+
+  @override
+  String get enter_your_new_pass => 'من فضلك أدخل كلمة المرور الجديدة';
+
+  @override
+  String get enter_your_confirm_new_pass => 'من فضلك أكد كلمة المرور الجديدة';
+
+  @override
   String get pass_more_than_8 => 'كلمة المرور يجب أن تكون أكثر من 8 أحرف';
 
   @override
@@ -268,4 +277,13 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get welcome => 'مرحبا';
+
+  @override
+  String get old_password => 'كلمه السر القديمه';
+
+  @override
+  String get new_password => 'كلمه السر الجديده';
+
+  @override
+  String get confirm_new_password => ' تأكيد كلمه السر الجديده';
 }

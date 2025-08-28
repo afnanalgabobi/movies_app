@@ -11,7 +11,7 @@ class DialogUtils {
             children: [
               Text(
                 loadingMessage ?? "",
-                style: TextStyle(fontSize: 16),
+                style: const TextStyle(fontSize: 16),
               ),
               const Spacer(),
               const CircularProgressIndicator(),
@@ -42,7 +42,7 @@ class DialogUtils {
           },
           child: Text(
             posActionTitle,
-            style: TextStyle(fontSize: 16),
+            style: const TextStyle(fontSize: 16),
           )));
     }
     if (negActionTitle != null) {
@@ -53,7 +53,7 @@ class DialogUtils {
           },
           child: Text(
             negActionTitle,
-            style: TextStyle(fontSize: 16),
+            style: const TextStyle(fontSize: 16),
           )));
     }
     showDialog(
@@ -62,12 +62,12 @@ class DialogUtils {
         return CupertinoAlertDialog(
           content: Text(
             message,
-            style: TextStyle(fontSize: 16),
+            style: const TextStyle(fontSize: 16),
           ),
           title: title != null
               ? Text(
                   title,
-                  style: TextStyle(fontSize: 16),
+                  style: const TextStyle(fontSize: 16),
                 )
               : null,
           actions: actions,

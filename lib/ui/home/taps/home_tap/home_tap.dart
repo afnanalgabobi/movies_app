@@ -16,7 +16,7 @@ import 'package:movies_app/utils/app_colors.dart';
 import 'package:movies_app/utils/app_styles_roboto.dart';
 
 class HomeTap extends StatefulWidget {
-  HomeTap({super.key});
+  const HomeTap({super.key});
 
   @override
   State<HomeTap> createState() => _HomeTapState();

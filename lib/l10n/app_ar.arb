@@ -82,5 +82,11 @@
   "phone_length": "رقم الهاتف يجب أن يكون أكثر من 10 أرقام (مثال: 01123456789)",
   "phone_number_must_start_with": "رقم الهاتف يجب أن يبدأ بـ +20",
   "egyptian_mobile_number_example": "أدخل رقم موبايل مصري صحيح (مثال: +201012345678)",
-  "welcome": "مرحبا"
+  "welcome": "مرحبا",
+  "old_password": "كلمه السر القديمه",
+  "new_password": "كلمه السر الجديده",
+  "confirm_new_password": " تأكيد كلمه السر الجديده",
+  "enter_your_old_pass": "من فضلك أدخل كلمة المرور القديمة",
+  "enter_your_new_pass": "من فضلك أدخل كلمة المرور الجديدة",
+  "enter_your_confirm_new_pass": "من فضلك أكد كلمة المرور الجديدة"
 }

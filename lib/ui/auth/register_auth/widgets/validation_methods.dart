@@ -15,7 +15,7 @@ class ValidationMethods {
     final bool isValid =
         RegExp(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")
             .hasMatch(email!);
-    if (email == null || email.trim().isEmpty) {
+    if (email.trim().isEmpty) {
       return AppLocalizations.of(context)!.enter_your_email;
     } else if (!isValid) {
       return AppLocalizations.of(context)!.please_enter_valid_email;
@@ -28,7 +28,7 @@ class ValidationMethods {
         RegExp(r'^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$').hasMatch(
       password!,
     );
-    if (password == null || password.trim().isEmpty) {
+    if (password.trim().isEmpty) {
       return AppLocalizations.of(context)!.enter_your_pass;
     } else if (password.trim().length < 8) {
       return AppLocalizations.of(context)!.pass_more_than_8;

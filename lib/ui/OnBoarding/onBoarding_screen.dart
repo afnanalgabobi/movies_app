@@ -9,7 +9,7 @@ import '../../data/OnBoardingBGList.dart';
 import '../../providers/onBoarding_Provider.dart';
 
 class OnBoardingScreen extends StatefulWidget {
-  OnBoardingScreen({super.key});
+  const OnBoardingScreen({super.key});
 
   @override
   State<OnBoardingScreen> createState() => _OnBoardingScreenState();
