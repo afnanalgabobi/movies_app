@@ -21,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final List<Widget> taps = [
     HomeTap(),
     const SearchTap(),
-    const BrowseTap(),
+     BrowseTap(),
     UpdateProfile(),
   ];
 
