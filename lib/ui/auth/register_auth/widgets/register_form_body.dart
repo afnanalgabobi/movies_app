@@ -60,21 +60,21 @@ class _RegisterFormBodyState extends State<RegisterFormBody> {
       create: (context) => viewModel,
       child: BlocConsumer<RegisterViewModel, RegisterStates>(
           listener: (context, state) {
-        if (state is RegisterSuccessState) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-                content: Text(
-                    "${AppLocalizations.of(context)!.welcome} ${state.user.name}!")),
-          );
-          Navigator.pushReplacementNamed(
-              context, AppRoutes.homeScreenRouteName);
-          // Navigate to home or login screen
-        } else if (state is RegisterErrorState) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(state.error)),
-          );
-        }
-      }, builder: (context, state) {
+            if (state is RegisterSuccessState) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                    content: Text(
+                        "${AppLocalizations.of(context)!.welcome} ${state.user.name}!")),
+              );
+              Navigator.pushReplacementNamed(
+                  context, AppRoutes.homeScreenRouteName);
+              // Navigate to home or login screen
+            } else if (state is RegisterErrorState) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text(state.error)),
+              );
+            }
+          }, builder: (context, state) {
         if (state is RegisterLoadingState) {
           return const Center(child: CircularProgressIndicator());
         }

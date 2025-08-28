@@ -3,16 +3,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/providers/app_Language_Provider.dart';
 import 'package:movies_app/providers/app_theme_provider.dart';
 import 'package:movies_app/providers/onBoarding_Provider.dart';
+import 'package:movies_app/providers/profile_provider.dart';
 import 'package:movies_app/ui/OnBoarding/onBoarding_screen.dart';
-import 'package:movies_app/ui/auth/forget_password_screen.dart';
 import 'package:movies_app/ui/auth/login_auth/login_screen.dart';
 import 'package:movies_app/ui/auth/register_auth/register_screen.dart';
 import 'package:movies_app/ui/home/home_screen.dart';
 import 'package:movies_app/ui/home/taps/browse_tap/browse_tap.dart';
 import 'package:movies_app/ui/home/taps/home_tap/cubit/category_index_cubit/category_index_cubit.dart';
 import 'package:movies_app/ui/home/taps/home_tap/cubit/history_cubit/history_cubit.dart';
+import 'package:movies_app/ui/home/taps/profile_tap/profile_view_model.dart';
+import 'package:movies_app/ui/home/taps/profile_tap/profile_widgets/update_profile/update_profile.dart';
 import 'package:movies_app/ui/home/taps/search_tap/search_tap.dart';
-import 'package:movies_app/ui/update_profile/update_profile.dart';
 import 'package:movies_app/utils/app_routes.dart';
 import 'package:movies_app/utils/app_themes.dart';
 import 'package:movies_app/utils/my_bloc_observer.dart';
@@ -39,11 +40,13 @@ void main() async {
           create: (_) => AppThemeProvider()..setTheme(savedTheme),
         ),
         ChangeNotifierProvider(create: (context) => OnBoardingProvider()),
+        ChangeNotifierProvider(create: (context) => ProfileProvider()),
       ],
       child: MultiBlocProvider(
         providers: [
           BlocProvider(create: (context) => CategoryIndexCubit()),
           BlocProvider(create: (context) => HistoryCubit()),
+          BlocProvider(create: (context) => ProfileCubit()),
           //    BlocProvider(create: (context) => MovieViewModel()),
         ],
         child: MyApp(),
@@ -59,13 +62,13 @@ class MyApp extends StatelessWidget {
     var themeProvider = Provider.of<AppThemeProvider>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.onboardingScreenRouteName,
+      initialRoute: AppRoutes.homeScreenRouteName,
       routes: {
         AppRoutes.onboardingScreenRouteName: (context) => OnBoardingScreen(),
         AppRoutes.loginScreenRouteName: (context) => LoginScreen(),
         AppRoutes.registerScreenRouteName: (context) => RegisterScreen(),
-        AppRoutes.forgetPasswordScreenRouteName: (context) =>
-            ForgetPasswordScreen(),
+        // AppRoutes.forgetPasswordScreenRouteName: (context) =>
+        //     ForgetPasswordScreen(),
         AppRoutes.updateProfileScreenRouteName: (context) => UpdateProfile(),
         AppRoutes.homeScreenRouteName: (context) => HomeScreen(),
         AppRoutes.SearchTabRouteName: (context) => SearchTap(),

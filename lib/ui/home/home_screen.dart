@@ -3,8 +3,8 @@ import 'package:movies_app/ui/home/taps/browse_tap/browse_tap.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/ui/home/taps/home_tap/cubit/category_index_cubit/category_index_cubit.dart';
 import 'package:movies_app/ui/home/taps/home_tap/home_tap.dart';
+import 'package:movies_app/ui/home/taps/profile_tap/profile_tap.dart';
 import 'package:movies_app/ui/home/taps/search_tap/search_tap.dart';
-import 'package:movies_app/ui/update_profile/update_profile.dart';
 import 'package:movies_app/utils/app_assets.dart';
 import 'package:movies_app/utils/app_colors.dart';
 
@@ -22,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
     HomeTap(),
     const SearchTap(),
      BrowseTap(),
-    UpdateProfile(),
+    ProfileTap(),
   ];
 
   @override
