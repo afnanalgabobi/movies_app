@@ -517,6 +517,90 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Genres'**
   String get genres;
+
+  /// No description provided for @enter_your_name.
+  ///
+  /// In en, this message translates to:
+  /// **'Please Enter Your Name'**
+  String get enter_your_name;
+
+  /// No description provided for @name_must_be_more_than_2_character.
+  ///
+  /// In en, this message translates to:
+  /// **'Name Must Be More Than 2 Character'**
+  String get name_must_be_more_than_2_character;
+
+  /// No description provided for @enter_your_email.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your Email'**
+  String get enter_your_email;
+
+  /// No description provided for @valid_email.
+  ///
+  /// In en, this message translates to:
+  /// **'Please Enter A Valid Email'**
+  String get valid_email;
+
+  /// No description provided for @enter_your_pass.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your password'**
+  String get enter_your_pass;
+
+  /// No description provided for @pass_more_than_8.
+  ///
+  /// In en, this message translates to:
+  /// **'Password Should Be More Than 8 Characters'**
+  String get pass_more_than_8;
+
+  /// No description provided for @pass_reg_ex.
+  ///
+  /// In en, this message translates to:
+  /// **'Password must contain an uppercase letter, a number, and a special character'**
+  String get pass_reg_ex;
+
+  /// No description provided for @enter_re_pass.
+  ///
+  /// In en, this message translates to:
+  /// **'Please Re-Enter Your Password'**
+  String get enter_re_pass;
+
+  /// No description provided for @pass_do_not_match.
+  ///
+  /// In en, this message translates to:
+  /// **'Password & ConfirmPassword Don’t Match'**
+  String get pass_do_not_match;
+
+  /// No description provided for @enter_your_phone.
+  ///
+  /// In en, this message translates to:
+  /// **'Please Enter Your Phone'**
+  String get enter_your_phone;
+
+  /// No description provided for @phone_length.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone Number Must be More Than 10 digit (e.g. 01123456789)'**
+  String get phone_length;
+
+  /// No description provided for @phone_number_must_start_with.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone number must start with +20'**
+  String get phone_number_must_start_with;
+
+  /// No description provided for @egyptian_mobile_number_example.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid Egyptian mobile number (e.g. +201012345678)'**
+  String get egyptian_mobile_number_example;
+
+  /// No description provided for @welcome.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome'**
+  String get welcome;
 }
 
 class _AppLocalizationsDelegate
