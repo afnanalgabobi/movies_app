@@ -2,8 +2,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/l10n/app_localizations.dart';
-import 'package:movies_app/ui/Login/cubit/login_states.dart';
-import 'package:movies_app/ui/Login/cubit/login_view_model.dart';
 import 'package:movies_app/ui/widgets/custom_dialog.dart';
 import 'package:movies_app/ui/widgets/custom_elevated_button.dart';
 import 'package:movies_app/ui/widgets/custom_language_toggle_switch.dart';
@@ -12,6 +10,9 @@ import 'package:movies_app/utils/app_assets.dart';
 import 'package:movies_app/utils/app_colors.dart';
 import 'package:movies_app/utils/app_routes.dart';
 import 'package:movies_app/utils/app_styles_roboto.dart';
+
+import 'cubit/login_states.dart';
+import 'cubit/login_view_model.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({super.key});
@@ -35,16 +36,22 @@ class _LoginScreenState extends State<LoginScreen> {
           }
           else if(state is LoginSuccessState){
             DialogUtils.hideLoading(context: context);
-            DialogUtils.showMessage(context: context, message: 'Success Login',posActionName:'ok' ,
-                posAction: (){
+              DialogUtils.showMessage(
+                  context: context,
+                  message: 'Success login_auth',
+                  posActionName: 'ok',
+                  posAction: (){
                   Navigator.pushNamed(context, AppRoutes.homeScreenRouteName);
                 });
 
           }
           else if(state is LoginErrorState){
             DialogUtils.hideLoading(context: context);
-            DialogUtils.showMessage(context: context, message: 'Failed Login',posActionName: 'ok');
-          }
+              DialogUtils.showMessage(
+                  context: context,
+                  message: 'Failed login_auth',
+                  posActionName: 'ok');
+            }
         },
         builder:
       (context, state) {

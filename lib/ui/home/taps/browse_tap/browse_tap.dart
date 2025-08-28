@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/ui/home/taps/browse_tap/widget/movie_tab_item.dart';
 import 'package:movies_app/utils/app_styles_inter.dart';
+
 import '../../../../utils/app_colors.dart';
 import '../../../widgets/custom_grid_view/custom_grid_view.dart';
 
@@ -56,8 +57,9 @@ class _BrowseTapState extends State<BrowseTap> {
                     crossAxisSpacing: 10,
                     mainAxisSpacing: 10,
                     itemCount: 10,
-                    childAspectRatio: 2/3,
-                  ),
+                childAspectRatio: 2 / 3,
+                moviesList: [],
+              ),
                 ),
               ],
             ),

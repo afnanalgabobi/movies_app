@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/api/api_manager.dart';
-import 'package:movies_app/ui/Login/cubit/login_states.dart';
+
+import 'login_states.dart';
 
 class LoginViewModel extends Cubit<LoginState> {
   var emailController = TextEditingController();

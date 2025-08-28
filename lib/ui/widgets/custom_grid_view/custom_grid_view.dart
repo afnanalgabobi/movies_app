@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/ui/widgets/custom_movies_container_item.dart';
+
 import '../../../model/responsemovies/movie.dart';
 
 class CustomGridView extends StatelessWidget {
@@ -8,7 +9,7 @@ class CustomGridView extends StatelessWidget {
   double mainAxisSpacing;
   int itemCount;
   double? childAspectRatio;
-  List<Movie> moviesList;
+  List<Movie>? moviesList;
 
   CustomGridView(
       {super.key,
@@ -17,8 +18,8 @@ class CustomGridView extends StatelessWidget {
         required this.mainAxisSpacing,
         required this.itemCount,
         this.childAspectRatio,
-        required this.moviesList,
-      });
+    this.moviesList,
+  });
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
@@ -31,7 +32,7 @@ class CustomGridView extends StatelessWidget {
       itemCount: itemCount,
       itemBuilder: (context, index) {
         return CustomMoviesContainerItem(
-          movie: moviesList[index],
+          movie: moviesList![index],
         );
       },
     );
