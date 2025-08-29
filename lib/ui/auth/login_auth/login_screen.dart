@@ -15,8 +15,7 @@ import 'cubit/login_states.dart';
 import 'cubit/login_view_model.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
-
+  LoginScreen({super.key});
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
@@ -34,12 +33,14 @@ class _LoginScreenState extends State<LoginScreen> {
             print("State Changed: $state");
             if (state is LoginLoadingState) {
               DialogUtils.showLoading(
-                  context: context, loadingText: 'Loading...');
-            } else if (state is LoginSuccessState) {
+                  context: context, loadingText: "Logging in...");
+            } else {
               DialogUtils.hideLoading(context: context);
+            }
+            if (state is LoginSuccessState) {
               DialogUtils.showMessage(
                   context: context,
-                  message: 'Success login_auth',
+                  message: 'Login Successful',
                   posActionName: 'ok',
                   posAction: () {
                     Navigator.pushNamed(context, AppRoutes.homeScreenRouteName);
@@ -49,10 +50,11 @@ class _LoginScreenState extends State<LoginScreen> {
               DialogUtils.showMessage(
                   context: context,
                   message: 'Failed ${state.errorMessage}',
-                  posActionName: 'ok');
+                  posActionName: 'Try Again');
             }
           },
           builder: (context, state) {
+            var cubit = LoginViewModel.get(context);
             return Scaffold(
               body: Padding(
                 padding: EdgeInsets.symmetric(
@@ -99,12 +101,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 hintText:
                                     AppLocalizations.of(context)!.password,
                                 validator: passwordValidator,
-                                suffixIcon: ImageIcon(
-                                  const AssetImage(
-                                    AppAssets.eyeoffIcon,
-                                  ),
-                                  color: Theme.of(context).canvasColor,
-                                ),
+                                isPassword: true,
                               ),
                               SizedBox(
                                 height: size.height * .02,

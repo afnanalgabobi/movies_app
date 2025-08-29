@@ -8,7 +8,6 @@ class RegisterLoadingState extends RegisterStates {}
 
 class RegisterSuccessState extends RegisterStates {
   final UserData user;
-
   RegisterSuccessState(this.user);
 }
 

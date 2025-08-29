@@ -54,10 +54,12 @@ class ValidationMethods {
     if (value == null || value.isEmpty) {
       return AppLocalizations.of(context)!.enter_your_phone;
     }
+    value = value.trim();
 
     //todo: Ensure the number starts with +20
     if (!value.startsWith("+20")) {
-      return AppLocalizations.of(context)!.phone_number_must_start_with;
+      value = "+20$value";
+      //return AppLocalizations.of(context)!.phone_number_must_start_with;
     }
 
     //todo: Remove the "+20" prefix for further validation

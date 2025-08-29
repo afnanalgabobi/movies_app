@@ -16,8 +16,6 @@ class CustomLanguageToggleSwitch extends StatefulWidget {
 
 class _CustomLanguageToggleSwitchState
     extends State<CustomLanguageToggleSwitch> {
-  int currentIndex = 0; // 0 = English, 1 = Arabic
-
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -28,7 +26,8 @@ class _CustomLanguageToggleSwitchState
     double borderRadius = toggleHeight / 2;
 
     var languageProvider = Provider.of<AppLanguageProvider>(context);
-
+    int currentIndex = languageProvider.appLanguage == 'en' ? 0 : 1;
+    // 0 = English, 1 = Arabic
     return Center(
       child: AnimatedToggleSwitch<int>.rolling(
         current: currentIndex,
@@ -63,3 +62,12 @@ class _CustomLanguageToggleSwitchState
     );
   }
 }
+
+/*
+  @override
+  void initState() {
+    super.initState();
+    var languageProvider = Provider.of<AppLanguageProvider>(context, listen: false);
+    currentIndex = languageProvider.isEnglish ? 0 : 1;
+  }
+ */
