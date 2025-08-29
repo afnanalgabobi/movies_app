@@ -1,5 +1,6 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
+
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -287,4 +288,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get confirm_new_password => 'Confirm new password';
+
+  @override
+  String get edit_profile => 'Edit Profile';
+
+  @override
+  String get exit => 'Exit';
 }

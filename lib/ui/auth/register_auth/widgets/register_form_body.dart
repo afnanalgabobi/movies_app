@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/l10n/app_localizations.dart';
-import 'package:movies_app/model/register_request.dart';
+import 'package:movies_app/model/register_model/register_request.dart';
 import 'package:movies_app/providers/app_Language_Provider.dart';
 import 'package:movies_app/ui/auth/register_auth/cubit/register_states.dart';
 import 'package:movies_app/ui/auth/register_auth/cubit/register_view_model.dart';

@@ -50,7 +50,8 @@ class AppThemes {
       titleLarge: AppStylesInter.bold20Black,
       titleMedium: AppStylesRoboto.regular16White,
       titleSmall: AppStylesRoboto.regular14White,
-    ),
+        displayLarge: AppStylesRoboto.bold20White,
+        displayMedium: AppStylesRoboto.bold36White),
   );
 
   static final ThemeData lightTheme = ThemeData(
@@ -98,6 +99,7 @@ class AppThemes {
       titleLarge: AppStylesInter.bold20White,
       titleMedium: AppStylesRoboto.regular16Black,
       titleSmall: AppStylesRoboto.regular14Black,
-    ),
+        displayLarge: AppStylesRoboto.bold20Black,
+        displayMedium: AppStylesRoboto.bold36Black),
   );
 }
