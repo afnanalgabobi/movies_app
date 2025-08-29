@@ -7,6 +7,7 @@ import 'package:movies_app/ui/widgets/custom_elevated_button.dart';
 import 'package:movies_app/ui/widgets/custom_text_form_field.dart';
 import 'package:movies_app/utils/app_assets.dart';
 import 'package:movies_app/utils/app_colors.dart';
+import 'package:movies_app/utils/app_routes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
@@ -43,7 +44,10 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
             DialogUtils.showMessage(
                 context: context,
                 message: state.message,
-                posAction: () {},
+                posAction: () {
+                  Navigator.pushNamed(
+                      context, AppRoutes.updateProfileScreenRouteName);
+                },
                 posActionName: "Ok");
 
             print("State : ${state.message}");
