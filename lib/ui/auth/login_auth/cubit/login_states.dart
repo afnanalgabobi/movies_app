@@ -1,4 +1,4 @@
-import 'package:movies_app/model/LoginResponse.dart';
+
 
 
 class LoginState{}
@@ -9,6 +9,7 @@ class LoginErrorState extends LoginState{
   LoginErrorState({required this.errorMessage});
 }
 class LoginSuccessState extends LoginState{
-  LoginResponse response;
-  LoginSuccessState({required this.response});
+  final String token;
+
+  LoginSuccessState({required this.token});
 }

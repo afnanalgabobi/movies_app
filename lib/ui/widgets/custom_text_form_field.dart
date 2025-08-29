@@ -54,7 +54,6 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   late bool isObscure = widget.isPassword;
   @override
   Widget build(BuildContext context) {
-    bool isObscure = widget.isPassword;
     return TextFormField(
       decoration: InputDecoration(
         errorMaxLines: 2,
