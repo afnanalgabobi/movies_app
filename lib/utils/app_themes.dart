@@ -32,7 +32,7 @@ class AppThemes {
     ),
     appBarTheme: AppBarTheme(
       backgroundColor: AppColors.blackColor,
-      iconTheme: IconThemeData(color: AppColors.yellowColor),
+      iconTheme: const IconThemeData(color: AppColors.yellowColor),
       elevation: 0,
       titleTextStyle: AppStylesRoboto.regular16Yellow,
       centerTitle: true,
@@ -70,7 +70,7 @@ class AppThemes {
       unselectedLabelColor: AppColors.transparentColor,
       tabAlignment: TabAlignment.center,
     ),
-    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: AppColors.transparentColor,
       type: BottomNavigationBarType.fixed,
       elevation: 0,
@@ -80,7 +80,7 @@ class AppThemes {
     ),
     appBarTheme: AppBarTheme(
       backgroundColor: AppColors.whiteColor,
-      iconTheme: IconThemeData(color: AppColors.yellowColor),
+      iconTheme: const IconThemeData(color: AppColors.yellowColor),
       elevation: 0,
       titleTextStyle: AppStylesRoboto.regular16Yellow,
       centerTitle: true,

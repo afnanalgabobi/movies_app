@@ -9,4 +9,5 @@ class AppRoutes {
   static const String onboardingScreenRouteName = 'onboarding_screen';
   static const String SearchTabRouteName = 'search_screen';
   static const String BrowseTabRouteName = 'browse_screen';
+  static const String resetPasswordScreenRouteName = 'reset_password_screen';
 }

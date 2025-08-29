@@ -240,6 +240,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get enter_your_pass => 'Please enter your password';
 
   @override
+  String get enter_your_old_pass => 'Please enter your old password';
+
+  @override
+  String get enter_your_new_pass => 'Please enter your new password';
+
+  @override
+  String get enter_your_confirm_new_pass =>
+      'Please enter your confirm new password';
+
+  @override
   String get pass_more_than_8 => 'Password Should Be More Than 8 Characters';
 
   @override
@@ -268,4 +278,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get welcome => 'Welcome';
+
+  @override
+  String get old_password => 'Old password';
+
+  @override
+  String get new_password => 'New password';
+
+  @override
+  String get confirm_new_password => 'Confirm new password';
 }

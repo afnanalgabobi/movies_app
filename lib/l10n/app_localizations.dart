@@ -548,6 +548,24 @@ abstract class AppLocalizations {
   /// **'Please enter your password'**
   String get enter_your_pass;
 
+  /// No description provided for @enter_your_old_pass.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your old password'**
+  String get enter_your_old_pass;
+
+  /// No description provided for @enter_your_new_pass.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your new password'**
+  String get enter_your_new_pass;
+
+  /// No description provided for @enter_your_confirm_new_pass.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your confirm new password'**
+  String get enter_your_confirm_new_pass;
+
   /// No description provided for @pass_more_than_8.
   ///
   /// In en, this message translates to:
@@ -601,6 +619,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Welcome'**
   String get welcome;
+
+  /// No description provided for @old_password.
+  ///
+  /// In en, this message translates to:
+  /// **'Old password'**
+  String get old_password;
+
+  /// No description provided for @new_password.
+  ///
+  /// In en, this message translates to:
+  /// **'New password'**
+  String get new_password;
+
+  /// No description provided for @confirm_new_password.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm new password'**
+  String get confirm_new_password;
 }
 
 class _AppLocalizationsDelegate

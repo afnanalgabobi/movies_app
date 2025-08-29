@@ -6,7 +6,7 @@ import '../../../../../data/avatarList.dart';
 class RegisterAvatarWidget extends StatefulWidget {
   final dynamic Function(int, CarouselPageChangedReason)? onPageChanged;
 
-  RegisterAvatarWidget({super.key, required this.onPageChanged});
+  const RegisterAvatarWidget({super.key, required this.onPageChanged});
 
   @override
   State<RegisterAvatarWidget> createState() => _RegisterAvatarWidgetState();

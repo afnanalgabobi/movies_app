@@ -6,7 +6,7 @@ import 'package:movies_app/utils/app_assets.dart';
 import 'package:movies_app/utils/app_routes.dart';
 
 class ForgetPasswordScreen extends StatefulWidget {
-  ForgetPasswordScreen({super.key});
+  const ForgetPasswordScreen({super.key});
 
   @override
   State<ForgetPasswordScreen> createState() => _ForgetPasswordScreenState();
@@ -15,7 +15,7 @@ class ForgetPasswordScreen extends StatefulWidget {
 class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   TextEditingController emailcontroller = TextEditingController();
 
-  var _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {

@@ -4,7 +4,7 @@ import 'package:movies_app/ui/auth/register_auth/widgets/register_avatar_widget.
 import 'package:movies_app/ui/auth/register_auth/widgets/register_form_body.dart';
 
 class RegisterScreen extends StatefulWidget {
-  RegisterScreen({super.key});
+  const RegisterScreen({super.key});
 
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();

@@ -6,7 +6,7 @@ import '../../../../utils/app_colors.dart';
 import '../../../widgets/custom_grid_view/custom_grid_view.dart';
 
 class BrowseTap extends StatefulWidget {
-  BrowseTap({super.key});
+  const BrowseTap({super.key});
 
   @override
   State<BrowseTap> createState() => _BrowseTapState();
@@ -58,7 +58,7 @@ class _BrowseTapState extends State<BrowseTap> {
                     mainAxisSpacing: 10,
                     itemCount: 10,
                 childAspectRatio: 2 / 3,
-                moviesList: [],
+                moviesList: const [],
               ),
                 ),
               ],

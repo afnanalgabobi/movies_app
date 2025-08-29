@@ -34,7 +34,7 @@ class _CustomLanguageToggleSwitchState
         current: currentIndex,
         borderWidth: 2,
         spacing: spacing,
-        values: [0, 1],
+        values: const [0, 1],
         // 0 = English, 1 = Arabic
         onChanged: (index) {
           setState(() => currentIndex = index);

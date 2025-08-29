@@ -74,6 +74,9 @@
   "enter_your_email": "Please enter your Email",
   "valid_email": "Please Enter A Valid Email",
   "enter_your_pass": "Please enter your password",
+  "enter_your_old_pass": "Please enter your old password",
+  "enter_your_new_pass": "Please enter your new password",
+  "enter_your_confirm_new_pass": "Please enter your confirm new password",
   "pass_more_than_8": "Password Should Be More Than 8 Characters",
   "pass_reg_ex": "Password must contain an uppercase letter, a number, and a special character",
   "enter_re_pass": "Please Re-Enter Your Password",
@@ -82,6 +85,10 @@
   "phone_length": "Phone Number Must be More Than 10 digit (e.g. 01123456789)",
   "phone_number_must_start_with": "Phone number must start with +20",
   "egyptian_mobile_number_example": "Enter a valid Egyptian mobile number (e.g. +201012345678)",
-  "welcome": "Welcome"
+  "welcome": "Welcome",
+  "old_password": "Old password",
+  "new_password": "New password",
+  "confirm_new_password": "Confirm new password"
+
 
 }
