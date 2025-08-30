@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../api/api_manager.dart';
-import '../../../../model/shared_preference.dart';
+import '../../../../model/user_model/shared_preference.dart';
 import 'login_states.dart';
 
 class LoginViewModel extends Cubit<LoginState> {
@@ -20,10 +20,12 @@ class LoginViewModel extends Cubit<LoginState> {
         final response = await ApiManager.loginAuth(
             emailController.text, passwordController.text);
 
-        if (response != null && response.message == "success") {
+        if (response != null && response.message == "Success Login") {
           final token = response.data ?? "";
           await AppPreferences.saveUserToken(token);
-          emit(LoginSuccessState(token: token));
+          print('Response message => ${response.message}');
+          print('Response token => ${response.data}');
+          emit(LoginSuccessState(response: response));
         } else {
           emit(LoginErrorState(
               errorMessage: response?.message ?? "Login failed"));

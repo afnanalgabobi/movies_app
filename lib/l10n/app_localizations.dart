@@ -637,6 +637,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Confirm new password'**
   String get confirm_new_password;
+
+  /// No description provided for @edit_profile.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Profile'**
+  String get edit_profile;
+
+  /// No description provided for @exit.
+  ///
+  /// In en, this message translates to:
+  /// **'Exit'**
+  String get exit;
 }
 
 class _AppLocalizationsDelegate

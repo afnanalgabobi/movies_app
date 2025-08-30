@@ -1,5 +1,4 @@
-
-
+import '../../../../model/LoginResponse.dart';
 
 class LoginState{}
 class LoginLoadingState extends LoginState{}
@@ -9,7 +8,8 @@ class LoginErrorState extends LoginState{
   LoginErrorState({required this.errorMessage});
 }
 class LoginSuccessState extends LoginState{
-  final String token;
+  //final String token;
+  LoginResponse response;
 
-  LoginSuccessState({required this.token});
+  LoginSuccessState({required this.response});
 }

@@ -88,5 +88,7 @@
   "confirm_new_password": " تأكيد كلمه السر الجديده",
   "enter_your_old_pass": "من فضلك أدخل كلمة المرور القديمة",
   "enter_your_new_pass": "من فضلك أدخل كلمة المرور الجديدة",
-  "enter_your_confirm_new_pass": "من فضلك أكد كلمة المرور الجديدة"
+  "enter_your_confirm_new_pass": "من فضلك أكد كلمة المرور الجديدة",
+  "edit_profile": "تعديل الملف الشخصي",
+  "exit": "خروج"
 }

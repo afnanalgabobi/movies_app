@@ -1,4 +1,4 @@
-import 'package:movies_app/model/user_data.dart';
+import '../../../../model/register_model/user_data.dart';
 
 abstract class RegisterStates {}
 
@@ -13,6 +13,5 @@ class RegisterSuccessState extends RegisterStates {
 
 class RegisterErrorState extends RegisterStates {
   final String error;
-
   RegisterErrorState(this.error);
 }

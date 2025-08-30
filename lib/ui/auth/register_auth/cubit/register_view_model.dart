@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies_app/model/register_request.dart';
+import 'package:movies_app/model/register_model/register_request.dart';
 import 'package:movies_app/ui/auth/register_auth/cubit/register_states.dart';
 
 import '../../../../api/api_manager.dart';

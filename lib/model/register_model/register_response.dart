@@ -1,19 +1,16 @@
-import 'package:movies_app/model/user_data.dart';
+import 'package:movies_app/model/register_model/user_data.dart';
 
 class RegisterResponse {
   final String? message;
   final UserData? user;
-  final String statusCode;
-
   const RegisterResponse({
-    required this.message,
-    required this.user, required this.statusCode});
+    required this.message, required this.user});
 
   factory RegisterResponse.fromJson(Map<String, dynamic> json) {
     return RegisterResponse(
       message: json['message'] as String,
       user: json['data'] != null ? UserData.fromJson(json['data']) : null,
-        statusCode: json['statusCode'] as String);
+    );
   }
 }
 

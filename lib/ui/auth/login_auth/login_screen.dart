@@ -34,10 +34,8 @@ class _LoginScreenState extends State<LoginScreen> {
             if (state is LoginLoadingState) {
               DialogUtils.showLoading(
                   context: context, loadingText: "Logging in...");
-            } else {
+            } else if (state is LoginSuccessState) {
               DialogUtils.hideLoading(context: context);
-            }
-            if (state is LoginSuccessState) {
               DialogUtils.showMessage(
                   context: context,
                   message: 'Login Successful',
@@ -50,11 +48,10 @@ class _LoginScreenState extends State<LoginScreen> {
               DialogUtils.showMessage(
                   context: context,
                   message: 'Failed ${state.errorMessage}',
-                  posActionName: 'Try Again');
+                  posActionName: 'ok');
             }
           },
           builder: (context, state) {
-            var cubit = LoginViewModel.get(context);
             return Scaffold(
               body: Padding(
                 padding: EdgeInsets.symmetric(

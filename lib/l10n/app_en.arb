@@ -88,7 +88,7 @@
   "welcome": "Welcome",
   "old_password": "Old password",
   "new_password": "New password",
-  "confirm_new_password": "Confirm new password"
-
-
+  "confirm_new_password": "Confirm new password",
+  "edit_profile": "Edit Profile",
+  "exit": "Exit"
 }
