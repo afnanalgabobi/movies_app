@@ -6,10 +6,9 @@ import '../../../utils/app_colors.dart';
 import '../../model/responsemovies/movie.dart';
 
 class CustomMoviesContainerItem extends StatelessWidget {
-  Movie movie;
-
-  CustomMoviesContainerItem(
-      {super.key, required this.movie});
+  Movie? movie;
+  bool isMovie;
+  CustomMoviesContainerItem({super.key, this.movie, this.isMovie = true});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +20,9 @@ class CustomMoviesContainerItem extends StatelessWidget {
       height: height * 0.3,
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage(movie.backgroundImage.toString()),
+          image: isMovie
+              ? AssetImage(movie!.backgroundImage.toString())
+              : AssetImage(AppAssets.containerImage),
           fit: BoxFit.fill,
         ),
         borderRadius: BorderRadius.circular(16),
@@ -42,7 +43,7 @@ class CustomMoviesContainerItem extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  movie.rating.toString(),
+                  isMovie ? movie!.rating.toString() : '7.7',
                   style: AppStylesRoboto.regular16White,
                 ),
                 SizedBox(

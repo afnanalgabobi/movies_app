@@ -67,7 +67,7 @@ class _RegisterFormBodyState extends State<RegisterFormBody> {
                     "${AppLocalizations.of(context)!.welcome} ${state.user.name}!")),
           );
           Navigator.pushReplacementNamed(
-              context, AppRoutes.homeScreenRouteName);
+              context, AppRoutes.loginScreenRouteName);
           // Navigate to home or login screen
         } else if (state is RegisterErrorState) {
           ScaffoldMessenger.of(context).showSnackBar(

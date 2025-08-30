@@ -43,7 +43,7 @@ class _ProfileTapScreenState extends State<ProfileTapScreen> {
         create: (context) => viewModel,
         child: BlocBuilder<ProfileViewModel, ProfileStates>(
           builder: (context, state) {
-            if (state is ProfileLoadingState) {
+            if (state is getProfileLoadingState) {
               return const SizedBox.expand(
                 child: Center(
                   child: CircularProgressIndicator(
@@ -51,9 +51,9 @@ class _ProfileTapScreenState extends State<ProfileTapScreen> {
                   ),
                 ),
               );
-            } else if (state is ProfileErrorState) {
+            } else if (state is getProfileErrorState) {
               return ErrorWidget(state.errorMessage);
-            } else if (state is ProfileSuccessState) {
+            } else if (state is getProfileSuccessState) {
               return Column(
                 children: [
                   Container(

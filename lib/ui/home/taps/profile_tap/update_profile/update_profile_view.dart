@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/data/avatarList.dart';
 import 'package:movies_app/l10n/app_localizations.dart';
+import 'package:movies_app/model/register_model/user_data.dart';
 import 'package:movies_app/ui/auth/register_auth/widgets/validation_methods.dart';
 import 'package:movies_app/ui/home/taps/profile_tap/widget/avatar_custom_bottom_sheet.dart';
 import 'package:movies_app/ui/widgets/custom_text_form_field.dart';
@@ -15,13 +17,12 @@ import '../../../../../utils/app_styles_roboto.dart';
 import '../../../../widgets/custom_elevated_button.dart';
 import '../cubit/profile_states.dart';
 import '../cubit/profile_view_model.dart';
-import '../model/profile_model.dart';
 import '../model/update_profile_request.dart';
 
 class UpdateProfilesScreen extends StatefulWidget {
-  const UpdateProfilesScreen({required this.profileModel, super.key});
+  const UpdateProfilesScreen({required this.userModel, super.key});
 
-  final ProfileModel profileModel;
+  final UserData userModel;
 
   @override
   State<UpdateProfilesScreen> createState() => _UpdateProfilesScreenState();
@@ -38,7 +39,7 @@ class _UpdateProfilesScreenState extends State<UpdateProfilesScreen> {
   @override
   void initState() {
     super.initState();
-    selectedAvatarIndex = widget.profileModel.avaterId ?? 0;
+    selectedAvatarIndex = widget.userModel.avaterId ?? 0;
   }
 
   @override
@@ -65,7 +66,7 @@ class _UpdateProfilesScreenState extends State<UpdateProfilesScreen> {
               message: 'Updating Successfully',
               posActionTitle: 'ok',
               posAction: () {
-                Navigator.pushNamed(context, AppRoutes.profileScreenRouteName);
+                Navigator.pushNamed(context, AppRoutes.profileTabRouteName);
               },
             );
           }
@@ -75,7 +76,7 @@ class _UpdateProfilesScreenState extends State<UpdateProfilesScreen> {
             horizontal: size.width * 0.037,
           ),
           child: Form(
-            key: _formKey,
+            key: viewModel.formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -107,18 +108,21 @@ class _UpdateProfilesScreenState extends State<UpdateProfilesScreen> {
                 ),
                 SizedBox(height: size.height * 0.02),
                 CustomTextFormField(
-                  controller: nameController,
+                  controller: viewModel.nameController,
                   hintText: AppLocalizations.of(context)!.name,
                   prefixIcon: Image.asset(AppAssets.nameIcon),
-                  keyboardType: TextInputType.emailAddress,
+                  textCapitalization: TextCapitalization.words,
                   validator: (email) =>
                       ValidationMethods.nameValidator(email, context),
                 ),
                 SizedBox(height: size.height * 0.03),
                 CustomTextFormField(
-                  controller: passwordController,
+                  controller: viewModel.phoneController,
                   hintText: AppLocalizations.of(context)!.password,
-                  prefixIcon: Image.asset(AppAssets.passwordIcon),
+                  prefixIcon: Image.asset(AppAssets.phoneIcon),
+                  textInputFormatter: FilteringTextInputFormatter.allow(
+                    RegExp(r'^\+?(010|011|012|015)?[0-9]{0,15}$'),
+                  ),
                   validator: (email) =>
                       ValidationMethods.nameValidator(email, context),
                 ),
@@ -154,7 +158,7 @@ class _UpdateProfilesScreenState extends State<UpdateProfilesScreen> {
                       DialogUtils.hideDialog(context);
                       DialogUtils.showDialogMessage(
                         context,
-                        message: state.message,
+                        message: state.successMessage,
                         posActionTitle: 'ok',
                         posAction: () {
                           Navigator.pushNamed(
@@ -183,13 +187,15 @@ class _UpdateProfilesScreenState extends State<UpdateProfilesScreen> {
                     if (_formKey.currentState!.validate()) {
                       await context.read<ProfileViewModel>().updateProfile(
                             UpdateProfileRequest(
-                              email: nameController.text,
+                              email: viewModel.emailController.text,
                               avaterId: selectedAvatarIndex,
+                              name: viewModel.nameController.text,
+                              phone: viewModel.phoneController.text,
                             ),
                           );
                       Navigator.pushReplacementNamed(
                         context,
-                        AppRoutes.profileScreenRouteName,
+                        AppRoutes.profileTabRouteName,
                       );
                     }
                   },

@@ -11,6 +11,7 @@ import 'package:movies_app/ui/home/home_screen.dart';
 import 'package:movies_app/ui/home/taps/browse_tap/browse_tap.dart';
 import 'package:movies_app/ui/home/taps/home_tap/cubit/category_index_cubit/category_index_cubit.dart';
 import 'package:movies_app/ui/home/taps/home_tap/cubit/history_cubit/history_cubit.dart';
+import 'package:movies_app/ui/home/taps/profile_tap/profile_tap.dart';
 import 'package:movies_app/ui/home/taps/search_tap/search_tap.dart';
 import 'package:movies_app/ui/update_profile/reset_passworf/views/reset_password_view.dart';
 import 'package:movies_app/ui/update_profile/update_profile.dart';
@@ -72,7 +73,7 @@ class MyApp extends StatelessWidget {
         AppRoutes.SearchTabRouteName: (context) => const SearchTap(),
         AppRoutes.BrowseTabRouteName: (context) => BrowseTap(),
         AppRoutes.resetPasswordScreenRouteName: (context) => ResetPasswordScreen(),
-
+        AppRoutes.profileTabRouteName: (context) => ProfileTapScreen()
       },
       locale: Locale(languageProvider.appLanguage),
       localizationsDelegates: AppLocalizations.localizationsDelegates,

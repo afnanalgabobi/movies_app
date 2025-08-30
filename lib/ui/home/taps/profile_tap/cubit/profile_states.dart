@@ -1,4 +1,4 @@
-import '../model/profile_model.dart';
+import 'package:movies_app/model/register_model/user_data.dart';
 
 abstract class ProfileStates {}
 
@@ -7,53 +7,40 @@ class ProfileInitial extends ProfileStates {}
 class UpdateProfileLoadingState extends ProfileStates {}
 
 class UpdateProfileSuccessState extends ProfileStates {
-  final String message;
+  final UserData user;
+  final String successMessage;
 
-  UpdateProfileSuccessState(this.message);
+  UpdateProfileSuccessState(this.user, this.successMessage);
 }
 
 class UpdateProfileErrorState extends ProfileStates {
   final String errorMessage;
-
   UpdateProfileErrorState(this.errorMessage);
 }
 
 class DeleteProfileLoadingState extends ProfileStates {}
-
 class DeleteProfileSuccessState extends ProfileStates {
-  final String message;
+  final String successMessage;
 
-  DeleteProfileSuccessState(this.message);
+  DeleteProfileSuccessState(this.successMessage);
 }
 
 class DeleteProfileErrorState extends ProfileStates {
   final String errorMessage;
-
   DeleteProfileErrorState(this.errorMessage);
 }
 
-class ProfileLoadingState extends ProfileStates {}
+class getProfileLoadingState extends ProfileStates {}
 
-class ProfileSuccessState extends ProfileStates {
-  final ProfileModel data;
+class getProfileSuccessState extends ProfileStates {
+  final UserData data;
 
-  ProfileSuccessState(this.data);
+  getProfileSuccessState(this.data);
 }
 
-class ProfileErrorState extends ProfileStates {
+class getProfileErrorState extends ProfileStates {
   final String errorMessage;
 
-  ProfileErrorState(this.errorMessage);
+  getProfileErrorState(this.errorMessage);
 }
 
-// class ResetLoading extends ProfileStates {}
-//
-// class ResetSuccess extends ProfileStates {
-//   final ResetResponse resetResponse;
-//   ResetSuccess(this.resetResponse);
-// }
-//
-// class ResetError extends ProfileStates {
-//   final String errorMessage;
-//   ResetError(this.errorMessage);
-// }

@@ -1,45 +1,78 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies_app/api/end_points.dart';
 import 'package:movies_app/ui/home/taps/profile_tap/cubit/profile_states.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../../api/profile_api_manager.dart';
-import '../model/delete_profile_response.dart';
-import '../model/profile_model.dart';
-import '../model/profile_response.dart';
 import '../model/update_profile_request.dart';
-import '../model/update_profile_response.dart';
 
 class ProfileViewModel extends Cubit<ProfileStates> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  int? avaterId;
+
+  var formKey = GlobalKey<FormState>();
   ProfileViewModel() : super(ProfileInitial());
 
   Future<void> getProfile() async {
-    emit(ProfileLoadingState());
     try {
-      final data = await ProfileApiManager.get(EndPoints.resetPasswordAuthApi);
-      emit(ProfileSuccessState(ProfileResponse.fromJson(data) as ProfileModel));
+      //todo: loading
+      emit(getProfileLoadingState());
+      final prefs = await SharedPreferences.getInstance();
+      String? token = prefs.getString('token');
+
+      if (token == null) {
+        emit(getProfileErrorState('User not authenticated'));
+        return;
+      }
+      var response = await ProfileApiManager.getProfileDetails(token: token);
+      //todo: success
+      emit(getProfileSuccessState(response.data));
     } catch (e) {
-      emit(ProfileErrorState(e.toString()));
+      //todo: error
+      emit(getProfileErrorState(e.toString()));
     }
   }
 
   Future<void> updateProfile(UpdateProfileRequest request) async {
-    emit(UpdateProfileLoadingState());
+    if (!(formKey.currentState?.validate() ?? false)) return;
+
     try {
-      final data = await ProfileApiManager.patch(request.toJson());
-      emit(UpdateProfileSuccessState(
-          UpdateProfileResponse.fromJson(data) as String));
+      //todo: loading
+      emit(UpdateProfileLoadingState());
+      final prefs = await SharedPreferences.getInstance();
+      String? token = prefs.getString('token');
+
+      if (token == null) {
+        emit(UpdateProfileErrorState('User not authenticated'));
+        return;
+      }
+      var response = await ProfileApiManager.updateProfile(request, token);
+      //todo: success
+      emit(UpdateProfileSuccessState(response.data, response.message));
     } catch (e) {
+      //todo: error
       emit(UpdateProfileErrorState(e.toString()));
     }
   }
 
   Future<void> deleteProfile() async {
-    emit(DeleteProfileLoadingState());
     try {
-      final data = await ProfileApiManager.delete();
-      emit(DeleteProfileSuccessState(
-          DeleteProfileResponse.fromJson(data) as String));
+      //todo: loading
+      emit(DeleteProfileLoadingState());
+      final prefs = await SharedPreferences.getInstance();
+      String? token = prefs.getString('token');
+
+      if (token == null) {
+        emit(DeleteProfileErrorState('User not authenticated'));
+        return;
+      }
+      var response = await ProfileApiManager.deleteProfile(token);
+      //todo: success
+      emit(DeleteProfileSuccessState(response.message));
     } catch (e) {
+      //todo: error
       emit(DeleteProfileErrorState(e.toString()));
     }
   }

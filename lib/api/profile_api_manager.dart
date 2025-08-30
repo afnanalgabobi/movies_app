@@ -1,8 +1,11 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'package:movies_app/ui/home/taps/profile_tap/model/delete_profile_response.dart';
 
 import '../model/reset_password_response.dart';
+import '../ui/home/taps/profile_tap/model/profile_response.dart';
+import '../ui/home/taps/profile_tap/model/update_profile_request.dart';
 import 'api_constants.dart';
 import 'end_points.dart';
 
@@ -11,51 +14,68 @@ class ProfileApiManager {
   static Uri profile_url =
       Uri.https(ApiConstants.baseAuthUrl, EndPoints.profileEndPoint);
 
-  static String? token;
-
-  /// Get request
-  static Future<Map<String, dynamic>> get(String endpoint) async {
-    final response = await http.get(
-      profile_url,
-      headers: {"Authorization": "Bearer $token"},
-    );
-    return _handleResponse(response);
+  static Future<ProfileResponse> getProfileDetails(
+      {required String token}) async {
+    try {
+      var response = await http.get(
+        profile_url,
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json',
+        },
+      );
+      var json = jsonDecode(response.body);
+      return ProfileResponse.fromJson(json);
+    } catch (e) {
+      throw Exception("Error in get Profile Details: $e");
+    }
   }
 
-  /// Post request
-  static Future<Map<String, dynamic>> post(
-      String endpoint, Map<String, dynamic> body) async {
-    final response = await http.post(
-      profile_url,
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer $token",
-      },
-      body: jsonEncode(body),
-    );
-    return _handleResponse(response);
+  static Future<ProfileResponse> updateProfile(
+      UpdateProfileRequest request, String token) async {
+    try {
+      print("Sending request to: $profile_url");
+      print("Body: ${jsonEncode(request.toJson())}");
+      var response = await http.patch(
+        profile_url,
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode(request.toJson()),
+      );
+      var json = jsonDecode(response.body);
+      return ProfileResponse.fromJson(json);
+    } catch (e) {
+      throw Exception("Error in update Profile: $e");
+    }
   }
 
-  /// Patch request
-  static Future<Map<String, dynamic>> patch(Map<String, dynamic> body) async {
-    final response = await http.patch(
-      profile_url,
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer $token",
-      },
-      body: jsonEncode(body),
-    );
-    return _handleResponse(response);
-  }
+  static Future<DeleteProfileResponse> deleteProfile(String token) async {
+    try {
+      print("Sending request to: $profile_url");
 
-  /// Delete request
-  static Future<Map<String, dynamic>> delete() async {
-    final response = await http.delete(
-      profile_url,
-      headers: {"Authorization": "Bearer $token"},
-    );
-    return _handleResponse(response);
+      var response = await http.delete(
+        profile_url,
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json',
+        },
+      );
+
+      print("Status Code: ${response.statusCode}");
+      print("Response Body: ${response.body}");
+
+      var json = jsonDecode(response.body);
+
+      if (response.statusCode >= 200 && response.statusCode < 300) {
+        return DeleteProfileResponse.fromJson(json);
+      } else {
+        throw Exception(json["message"] ?? "Register failed");
+      }
+    } catch (e) {
+      throw Exception("Error in delete Profile: $e");
+    }
   }
 
   static Future<ResetPasswordResponse?> resetPasswordAuth(
@@ -79,16 +99,6 @@ class ProfileApiManager {
       return ResetPasswordResponse.fromJson(json);
     } catch (e) {
       rethrow;
-    }
-  }
-
-  /// Handle API Response
-  static Map<String, dynamic> _handleResponse(http.Response response) {
-    final data = jsonDecode(response.body);
-    if (response.statusCode >= 200 && response.statusCode < 300) {
-      return data;
-    } else {
-      throw Exception(data["message"] ?? "Something went wrong");
     }
   }
 }

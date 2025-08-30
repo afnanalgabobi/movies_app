@@ -10,6 +10,7 @@ class CustomGridView extends StatelessWidget {
   int itemCount;
   double? childAspectRatio;
   List<Movie>? moviesList;
+  bool isMovie;
 
   CustomGridView(
       {super.key,
@@ -19,7 +20,7 @@ class CustomGridView extends StatelessWidget {
         required this.itemCount,
         this.childAspectRatio,
     this.moviesList,
-  });
+      this.isMovie = true});
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
@@ -32,7 +33,7 @@ class CustomGridView extends StatelessWidget {
       itemCount: itemCount,
       itemBuilder: (context, index) {
         return CustomMoviesContainerItem(
-          movie: moviesList![index],
+          isMovie: isMovie,
         );
       },
     );

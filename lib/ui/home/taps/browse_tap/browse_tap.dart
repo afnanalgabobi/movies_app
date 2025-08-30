@@ -58,7 +58,7 @@ class _BrowseTapState extends State<BrowseTap> {
                     mainAxisSpacing: 10,
                     itemCount: 10,
                 childAspectRatio: 2 / 3,
-                moviesList: const [],
+                isMovie: false,
               ),
                 ),
               ],

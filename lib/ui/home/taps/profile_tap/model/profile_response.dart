@@ -1,8 +1,8 @@
-import 'profile_model.dart';
+import '../../../../../model/register_model/user_data.dart';
 
 class ProfileResponse {
   final String message;
-  final ProfileModel data;
+  final UserData data;
 
   const ProfileResponse({
     required this.message,
@@ -12,7 +12,7 @@ class ProfileResponse {
   factory ProfileResponse.fromJson(Map<String, dynamic> json) {
     return ProfileResponse(
       message: json['message'] as String,
-      data: ProfileModel.fromJson(json['data'] as Map<String, dynamic>),
+      data: UserData.fromJson(json['data'] as Map<String, dynamic>),
     );
   }
 
