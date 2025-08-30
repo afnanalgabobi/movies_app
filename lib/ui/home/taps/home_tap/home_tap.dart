@@ -23,14 +23,12 @@ class HomeTap extends StatefulWidget {
 }
 
 class _HomeTapState extends State<HomeTap> {
-//  int currentCategoryIndex = 1;
   String? selectedCategory;
   MovieViewModel viewModel = MovieViewModel();
   CategoryMovieViewModel categoryMovieViewModel = CategoryMovieViewModel();
   @override
   void initState() {
     viewModel.getMoviesList();
-    // categoryMovieViewModel.getCategorytMoviesList(category: selectedCategory!);
     super.initState();
   }
 
@@ -45,7 +43,8 @@ class _HomeTapState extends State<HomeTap> {
               return Opacity(
                 opacity: .3,
                 child: Image.network(
-                  state.historymovie.last.mediumCoverImage!,
+                  state.backgroundmovie.mediumCoverImage!,
+                  // state.historymovie.last.mediumCoverImage!,
                   width: double.infinity,
                   height: double.infinity,
                   fit: BoxFit.cover,
