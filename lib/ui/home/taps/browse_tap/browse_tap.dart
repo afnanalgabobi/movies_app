@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:movies_app/ui/home/taps/browse_tap/widget/movie_tab_item.dart';
 import 'package:movies_app/utils/app_styles_inter.dart';
 
+import '../../../../model/responsemovies/movie.dart';
+import '../../../../utils/app_assets.dart';
 import '../../../../utils/app_colors.dart';
-import '../../../widgets/custom_grid_view/custom_grid_view.dart';
+import '../../../widgets/custom_gride_view/custom_gride_view.dart';
 
 class BrowseTap extends StatefulWidget {
-  const BrowseTap({super.key});
+   BrowseTap({super.key});
 
   @override
   State<BrowseTap> createState() => _BrowseTapState();
@@ -15,7 +17,15 @@ class BrowseTap extends StatefulWidget {
 class _BrowseTapState extends State<BrowseTap> {
   int selectedIndex=0;
   List<String>movieNameList=['Action','Adventure','Animation','Action','Adventure','Animation','Action','Adventure','Animation'];
-
+  List<Movie> browseList = [
+    Movie(title: 'name', rating: 7.5, backgroundImage: AppAssets.avatar2),
+    Movie(title: 'name', rating: 7.5, backgroundImage: AppAssets.avatar2),
+    Movie(title: 'name', rating: 7.5, backgroundImage: AppAssets.avatar2),
+    Movie(title: 'name', rating: 7.5, backgroundImage: AppAssets.avatar2),
+    Movie(title: 'name', rating: 7.5, backgroundImage: AppAssets.avatar2),
+    Movie(title: 'name', rating: 7.5, backgroundImage: AppAssets.avatar2),
+    Movie(title: 'name', rating: 7.5, backgroundImage: AppAssets.avatar2),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -52,13 +62,14 @@ class _BrowseTapState extends State<BrowseTap> {
                       , )),
                 SizedBox(height:size.height*0.02 ,),
                 Expanded(
-                  child: CustomGridView(
+                  child: CustomGrideView(
+                    moviesList: browseList,
                     crossAxisCount: 2,
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10,
-                    itemCount: 10,
-                childAspectRatio: 2 / 3,
-                isMovie: false,
+                    crossAxisSpacing: 20,
+                    mainAxisSpacing: 20,
+                //     itemCount: 10,
+                // childAspectRatio: 2 / 3,
+                // isMovie: false,
               ),
                 ),
               ],

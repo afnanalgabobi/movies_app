@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/providers/app_theme_provider.dart';
+import 'package:movies_app/ui/widgets/custom_gride_view/custom_gride_view.dart';
 import 'package:movies_app/utils/app_colors.dart';
 import 'package:provider/provider.dart';
-
+import '../../../../model/responsemovies/movie.dart';
 import '../../../../utils/app_assets.dart';
-import '../../../widgets/custom_grid_view/custom_grid_view.dart';
 import '../../../widgets/custom_text_form_field.dart';
 
 class SearchTap extends StatelessWidget {
-  const SearchTap({super.key});
-
+   SearchTap({super.key});
+  List<Movie> searchList = [
+    Movie(title: 'name', rating: 7.5, backgroundImage: AppAssets.avatar2),
+    Movie(title: 'name', rating: 7.5, backgroundImage: AppAssets.avatar2),
+    Movie(title: 'name', rating: 7.5, backgroundImage: AppAssets.avatar2),
+  ];
   @override
   Widget build(BuildContext context) {
     TextEditingController controller=TextEditingController();
@@ -26,13 +30,14 @@ class SearchTap extends StatelessWidget {
                   hintText: 'Movie',),
                 SizedBox(height:size.height*0.02 ,),
                 Expanded(
-                  child: CustomGridView(
+                  child: CustomGrideView(
+                    moviesList: searchList,
                     crossAxisCount: 2,
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10,
-                    itemCount: 10,
-                    childAspectRatio: 2/3,
-                isMovie: false,
+                    crossAxisSpacing: 20,
+                    mainAxisSpacing: 20,
+                //     itemCount: 10,
+                //     childAspectRatio: 2/3,
+                // isMovie: false,
               ),
                 ),
               ],

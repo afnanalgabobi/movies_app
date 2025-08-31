@@ -1,26 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/ui/widgets/custom_movies_container_item.dart';
+import 'package:movies_app/ui/widgets/custom_movies_container_item_network.dart';
 
 import '../../../model/responsemovies/movie.dart';
 
-class CustomGridView extends StatelessWidget {
+class CustomGrideView_Network extends StatelessWidget {
   int crossAxisCount;
   double crossAxisSpacing;
   double mainAxisSpacing;
-  int itemCount;
-  double? childAspectRatio;
-  List<Movie>? moviesList;
-  bool isMovie;
+  List<Movie> moviesList;
 
-  CustomGridView(
+  CustomGrideView_Network(
       {super.key,
-        required this.crossAxisCount,
-        required this.crossAxisSpacing,
-        required this.mainAxisSpacing,
-        required this.itemCount,
-        this.childAspectRatio,
-    this.moviesList,
-      this.isMovie = true});
+      required this.crossAxisCount,
+      required this.crossAxisSpacing,
+      required this.mainAxisSpacing,
+      required this.moviesList,
+      });
+
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
@@ -28,12 +25,13 @@ class CustomGridView extends StatelessWidget {
         crossAxisCount: crossAxisCount,
         crossAxisSpacing: crossAxisSpacing,
         mainAxisSpacing: mainAxisSpacing,
-        childAspectRatio: childAspectRatio?? 1/1,
+        childAspectRatio: 3/4,
+
       ),
-      itemCount: itemCount,
+      itemCount: moviesList.length,
       itemBuilder: (context, index) {
-        return CustomMoviesContainerItem(
-          isMovie: isMovie,
+        return CustomMoviesContainerItem_Network(
+         movie: moviesList[index],
         );
       },
     );
