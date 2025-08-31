@@ -5,6 +5,7 @@ import 'package:movies_app/model/responsemovies/movie.dart';
 import 'package:movies_app/ui/home/taps/home_tap/cubit/history_cubit/history_cubit.dart';
 import 'package:movies_app/utils/app_assets.dart';
 import 'package:movies_app/utils/app_colors.dart';
+import 'package:movies_app/utils/app_routes.dart';
 import 'package:movies_app/utils/app_styles_roboto.dart';
 
 class MovieWidget extends StatefulWidget {
@@ -22,6 +23,9 @@ class _MovieWidgetState extends State<MovieWidget> {
     return GestureDetector(
       onTap: () {
         context.read<HistoryCubit>().addMovie(widget.movie);
+        Future.delayed(const Duration(microseconds: 500),  () {
+          return Navigator.pushNamed(context,AppRoutes.movieDetailsScreenRouteName ,arguments: widget.movie);
+        });
         //print(widget.movie.id);
         //print(context.read<HistoryCubit>().historyList);
       },
