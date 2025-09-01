@@ -14,7 +14,6 @@ import 'package:movies_app/ui/home/taps/home_tap/cubit/category_index_cubit/cate
 import 'package:movies_app/ui/home/taps/home_tap/cubit/history_cubit/history_cubit.dart';
 import 'package:movies_app/ui/home/taps/home_tap/movie_details/movie_details.dart';
 import 'package:movies_app/ui/home/taps/profile_tap/profile_tap.dart';
-import 'package:movies_app/ui/home/taps/profile_tap/profile_view_model.dart';
 import 'package:movies_app/ui/home/taps/profile_tap/reset_passworf/views/reset_password_view.dart';
 import 'package:movies_app/ui/home/taps/profile_tap/update_profile/update_profile.dart';
 import 'package:movies_app/ui/home/taps/search_tap/search_tap.dart';
@@ -55,7 +54,7 @@ void main() async {
           ),
           BlocProvider(create: (context) => CategoryIndexCubit()),
           BlocProvider(create: (context) => HistoryCubit()),
-          BlocProvider(create: (context) => ProfileCubit()),
+          // BlocProvider(create: (context) => ProfileCubit()),
           //    BlocProvider(create: (context) => MovieViewModel()),
         ],
         child:  MyApp(),

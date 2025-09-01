@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/providers/app_theme_provider.dart';
-import 'package:movies_app/ui/widgets/custom_gride_view/custom_gride_view.dart';
+import 'package:movies_app/ui/widgets/custom_gride_view_network/custom_gride_view.dart';
 import 'package:movies_app/utils/app_colors.dart';
 import 'package:provider/provider.dart';
 import '../../../../model/responsemovies/movie.dart';
@@ -30,7 +30,7 @@ class SearchTap extends StatelessWidget {
                   hintText: 'Movie',),
                 SizedBox(height:size.height*0.02 ,),
                 Expanded(
-                  child: CustomGrideView(
+                  child: CustomGrideView_Network(
                     moviesList: searchList,
                     crossAxisCount: 2,
                     crossAxisSpacing: 20,
