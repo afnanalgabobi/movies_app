@@ -68,7 +68,7 @@ class _ProfileTapScreenState extends State<ProfileTapScreen> {
                           child: Row(
                             children: [
                               Column(
-                                spacing: size.height * 0.015,
+                                // spacing: size.height * 0.015,
                                 children: [
                                   SizedBox(
                                     height: size.height * 0.052,

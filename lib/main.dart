@@ -30,7 +30,7 @@ void main() async {
   final prefs = await SharedPreferences.getInstance();
   final savedLang = prefs.getString('language') ?? 'en';
   final savedTheme =
-  prefs.getString('theme') == 'dark' ? ThemeMode.dark : ThemeMode.light;
+      prefs.getString('theme') == 'dark' ? ThemeMode.dark : ThemeMode.light;
   Bloc.observer = MyBlocObserver();
   runApp(MultiProvider(
       providers: [
@@ -61,7 +61,7 @@ class MyApp extends StatelessWidget {
     var themeProvider = Provider.of<AppThemeProvider>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.onboardingScreenRouteName,
+      initialRoute: AppRoutes.homeScreenRouteName,
       routes: {
         AppRoutes.onboardingScreenRouteName: (context) => OnBoardingScreen(),
         AppRoutes.loginScreenRouteName: (context) => LoginScreen(),
@@ -72,7 +72,8 @@ class MyApp extends StatelessWidget {
         AppRoutes.homeScreenRouteName: (context) => HomeScreen(),
         AppRoutes.SearchTabRouteName: (context) => const SearchTap(),
         AppRoutes.BrowseTabRouteName: (context) => BrowseTap(),
-        AppRoutes.resetPasswordScreenRouteName: (context) => ResetPasswordScreen(),
+        AppRoutes.resetPasswordScreenRouteName: (context) =>
+            ResetPasswordScreen(),
         AppRoutes.profileTabRouteName: (context) => ProfileTapScreen()
       },
       locale: Locale(languageProvider.appLanguage),
