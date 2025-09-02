@@ -13,6 +13,7 @@ import 'package:movies_app/ui/home/taps/browse_tap/browse_tap.dart';
 import 'package:movies_app/ui/home/taps/home_tap/cubit/category_index_cubit/category_index_cubit.dart';
 import 'package:movies_app/ui/home/taps/home_tap/cubit/history_cubit/history_cubit.dart';
 import 'package:movies_app/ui/home/taps/home_tap/movie_details/movie_details.dart';
+import 'package:movies_app/ui/home/taps/profile_tap/cubit/profile_view_model.dart';
 import 'package:movies_app/ui/home/taps/profile_tap/profile_tap.dart';
 import 'package:movies_app/ui/home/taps/profile_tap/reset_passworf/views/reset_password_view.dart';
 import 'package:movies_app/ui/home/taps/profile_tap/update_profile/update_profile.dart';
@@ -34,6 +35,7 @@ void main() async {
   final savedTheme =
   prefs.getString('theme') == 'dark' ? ThemeMode.dark : ThemeMode.light;
   final historyCubit = HistoryCubit();
+  final profileCubit = ProfileCubit();
 
   Bloc.observer = MyBlocObserver();
   runApp(MultiProvider(
@@ -52,9 +54,12 @@ void main() async {
           BlocProvider.value(
           value: historyCubit, // reuse same instance everywhere
           ),
+          BlocProvider.value(
+          value: profileCubit, // reuse same instance everywhere
+          ),
           BlocProvider(create: (context) => CategoryIndexCubit()),
           BlocProvider(create: (context) => HistoryCubit()),
-          // BlocProvider(create: (context) => ProfileCubit()),
+          BlocProvider(create: (context) => ProfileCubit()),
           //    BlocProvider(create: (context) => MovieViewModel()),
         ],
         child:  MyApp(),

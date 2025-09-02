@@ -9,7 +9,8 @@ import '../../../../utils/app_assets.dart';
 import '../../../../utils/app_colors.dart';
 import '../../../../utils/app_routes.dart';
 import '../../../widgets/custom_elevated_button.dart';
-import 'profile_view_model.dart';
+import 'cubit/profile_states.dart';
+import 'cubit/profile_view_model.dart';
 
 class ProfileView extends StatefulWidget {
   ProfileView({super.key});
@@ -20,21 +21,24 @@ class ProfileView extends StatefulWidget {
 
 class _ProfileViewState extends State<ProfileView> {
   var avatarList = AvatarData.avatarList;
-  var viewModel = ProfileCubit();
 
   @override
   Widget build(BuildContext context) {
+
 
     List<Movie> watchList = [];
 
     List<Movie> historyList = context.read<HistoryCubit>().historyList;
 
-
     var height = MediaQuery.sizeOf(context).height;
     var width = MediaQuery.sizeOf(context).width;
+    var viewModel = context.read<ProfileCubit>();
+if(viewModel.currentProfile != null){
+    print(viewModel.currentProfile!.avaterId );}
 
-    return BlocBuilder<ProfileCubit, ProfileState>(
-        builder: (context, state) {
+    return BlocBuilder<ProfileCubit, ProfileStates>(
+
+    builder: (context, state) {
       if (state is ProfileLoading) {
         return const Center(
             child: CircularProgressIndicator(
@@ -42,10 +46,12 @@ class _ProfileViewState extends State<ProfileView> {
         ));
       } else if (state is ProfileLoaded) {
         print('ProfileLoaded');
-        print(state.user.name);
-        viewModel.currentProfile = state.user;
-
-        print(viewModel.currentProfile?.name);
+        print(state.user.avaterId);
+        print(viewModel.currentProfile!.avaterId);
+        // print(state.user.avatarId);
+        // viewModel.currentProfile = state.user;
+        print("viewModel.currentProfile?.avatarId ${context.read<ProfileCubit>()
+            .currentProfile!.avaterId}");
 
         return Scaffold(
           body: DefaultTabController(
@@ -67,7 +73,7 @@ class _ProfileViewState extends State<ProfileView> {
                                     radius: height * 0.06,
                                     backgroundColor: AppColors.transparentColor,
                                     child: Image.asset(
-                                        avatarList[state.user.avatarId])),
+                                        avatarList[viewModel.currentProfile!.avaterId])),
                                 Text(
                                   maxLines: 2,
                                   " ${state.user.name}",
@@ -83,7 +89,7 @@ class _ProfileViewState extends State<ProfileView> {
                               spacing: height * 0.02,
                               children: [
                                 Text(
-                                  '12',
+                                  watchList.length.toString(),
                                   style: Theme.of(context)
                                       .textTheme
                                       .headlineMedium,
@@ -102,7 +108,7 @@ class _ProfileViewState extends State<ProfileView> {
                               spacing: height * 0.02,
                               children: [
                                 Text(
-                                  '10',
+                                  historyList.length.toString(),
                                   style: Theme.of(context)
                                       .textTheme
                                       .headlineMedium,

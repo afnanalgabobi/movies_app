@@ -3,7 +3,7 @@ class UserData {
   final String email;
   final String password;
   final String phone;
-  final int avatarId;
+  final int avaterId;
   final String id;
   final DateTime? createdAt;
   final DateTime? updatedAt;
@@ -14,7 +14,7 @@ class UserData {
     required this.password,
     required this.name,
     required this.phone,
-    required this.avatarId,
+    required this.avaterId,
     required this.id,
     required this.createdAt,
     required this.updatedAt,
@@ -27,7 +27,7 @@ class UserData {
         name: json['name'].toString(),
         password: json['password'].toString(),
         phone: json['phone'].toString(),
-    avatarId: json['avatarId'] ?? 0,
+    avaterId: json['avaterId'] ??2 ,
         createdAt:
             DateTime.tryParse(json['createdAt'].toString()) ?? DateTime.now(),
         updatedAt:
@@ -38,7 +38,7 @@ class UserData {
         //   password: json['password'] as String,
         //   name: json['name'] as String,
         //   phone: json['phone'] as String,
-        //   avatarId: json['avatarId'] as int,
+        //   avaterId: json['avaterId'] as int,
         //   id: json['_id'] as String,
         //   createdAt: DateTime.parse(json['createdAt'] ),
         //   updatedAt: DateTime.parse(json['updatedAt'] ),
@@ -51,7 +51,7 @@ class UserData {
       'password': password,
       'name': name,
       'phone': phone,
-      'avaterId': avatarId,
+      'avaterId': avaterId,
       '_id': id,
       'createdAt': createdAt!.toIso8601String(),
       'updatedAt': updatedAt!.toIso8601String(),
@@ -62,7 +62,7 @@ class UserData {
   UserData copyWith({String? name, int? avatar, String? phone}) {
     return UserData(
       name: name ?? this.name,
-      avatarId: avatar ?? this.avatarId,
+      avaterId: avatar ?? this.avaterId,
       phone: phone ?? this.phone,
       email: email,
       id: this.id,

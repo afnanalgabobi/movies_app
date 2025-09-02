@@ -1,188 +1,118 @@
-import 'package:flutter/material.dart';
+import 'dart:convert';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:http/http.dart' as http;
+import 'package:movies_app/model/register_model/user_data.dart';
 import 'package:movies_app/ui/home/taps/profile_tap/cubit/profile_states.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import '../../../../../api/api_constants.dart';
+import '../../../../../api/end_points.dart';
+import '../../../../../model/user_model/shared_preference.dart';
 
-import '../../../../../api/profile_api_manager.dart';
-import '../model/update_profile_request.dart';
+class ProfileCubit extends Cubit<ProfileStates> {
+  int selectedAvatar = 2;
+  int selectedTab = 0;
 
-class ProfileViewModel extends Cubit<ProfileStates> {
-  TextEditingController emailController = TextEditingController();
-  TextEditingController nameController = TextEditingController();
-  TextEditingController phoneController = TextEditingController();
-  int? avaterId;
+  void changeAvatar(int newAvatar) {
+    selectedAvatar = newAvatar;
+  }
 
-  var formKey = GlobalKey<FormState>();
-  ProfileViewModel() : super(ProfileInitial());
+  void changeTab(int newTab) {
+    selectedTab = newTab;
+  }
 
-  Future<void> getProfile() async {
-    try {
-      //todo: loading
-      emit(getProfileLoadingState());
-      final prefs = await SharedPreferences.getInstance();
-      String? token = prefs.getString('token');
+  UserData? currentProfile;
 
-      if (token == null) {
-        emit(getProfileErrorState('User not authenticated'));
-        return;
-      }
-      var response = await ProfileApiManager.getProfileDetails(token: token);
-      //todo: success
-      emit(getProfileSuccessState(response.data));
-    } catch (e) {
-      //todo: error
-      emit(getProfileErrorState(e.toString()));
+  ProfileCubit() : super(ProfileInitial());
+  void getUserByToken() async {
+    var token = await AppPreferences.getUserToken();
+    print('My token => ${token}');
+    if (token == null) {
+      throw Exception("No token found, user not logged in");
+    }
+    Uri url = Uri.https(ApiConstants.baseAuthUrl, EndPoints.profileEndPoint);
+    var response = await http.get(
+      url,
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer $token",
+      },
+    );
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      currentProfile = UserData.fromJson(data['data']);
+    } else {
+      throw Exception("Failed to fetch user: ${response.body}");
     }
   }
 
-  Future<void> updateProfile(UpdateProfileRequest request) async {
-    if (!(formKey.currentState?.validate() ?? false)) return;
-
+  // loadProfile
+  Future<void> loadProfile() async {
+    // print('loadProfile');
+    getUserByToken();
+    emit(ProfileLoading());
     try {
-      //todo: loading
-      emit(UpdateProfileLoadingState());
-      final prefs = await SharedPreferences.getInstance();
-      String? token = prefs.getString('token');
-
-      if (token == null) {
-        emit(UpdateProfileErrorState('User not authenticated'));
-        return;
-      }
-      var response = await ProfileApiManager.updateProfile(request, token);
-      //todo: success
-      emit(UpdateProfileSuccessState(response.data, response.message));
+      // print('ProfileLoading');
+      await Future.delayed(const Duration(milliseconds: 1500));
+//       currentProfile = getUserByToken(token: myToken);
+      emit(ProfileLoaded(currentProfile!));
+      // print(currentProfile!.email);
     } catch (e) {
-      //todo: error
-      emit(UpdateProfileErrorState(e.toString()));
+      emit(ProfileError("field to load profile"));
     }
   }
 
-  Future<void> deleteProfile() async {
-    try {
-      //todo: loading
-      emit(DeleteProfileLoadingState());
-      final prefs = await SharedPreferences.getInstance();
-      String? token = prefs.getString('token');
+  Future<void> updateProfile(String name, int avatar, String phone) async {
+    if (currentProfile == null) {
+      print('user not found');
+      return;
+    }
 
-      if (token == null) {
-        emit(DeleteProfileErrorState('User not authenticated'));
-        return;
+    try {
+      var token = await AppPreferences.getUserToken();
+      print('on update : My token => ${token}');
+      print(currentProfile!.avaterId);
+      Uri url = Uri.https(ApiConstants.baseAuthUrl, EndPoints.profileEndPoint);
+
+      var response = await http.patch(url, headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer $token",
+      }, body:  jsonEncode({
+        "name": name,
+        "phone":phone,
+        "avaterId": avatar
+      }));
+      if (response.statusCode == 200) {
+        final updatedProfile = currentProfile!.copyWith(name: name, avatar: avatar, phone: phone);
+        currentProfile = updatedProfile;
+        print(currentProfile!.name);
+        print(currentProfile!.phone);
+        print(currentProfile!.avaterId.toString());
+        final json = jsonDecode(response.body);
+        print("✅ Profile updated: ${json['data']}");
+      } else {
+        print("❌ Failed: ${response.body}");
       }
-      var response = await ProfileApiManager.deleteProfile(token);
-      //todo: success
-      emit(DeleteProfileSuccessState(response.message));
     } catch (e) {
-      //todo: error
-      emit(DeleteProfileErrorState(e.toString()));
+      emit(ProfileError("Failed $e"));
     }
   }
 
-// Future<void> resetPassword(ResetRequest request) async {
-//   emit(ResetLoading());
+//
+// updateProfile
+// Future<void> updateProfile(String name,int avatar, String phone) async {
+//   if (currentProfile == null) {
+//     print('not found');
+//     return;
+//   }
+//   emit(ProfileLoading());
 //   try {
-//     final data = await apiManager.patch(request.toJson());
-//     emit(ResetSuccess(ResetResponse.fromJson(data)));
+//     await Future.delayed(const Duration(seconds: 1));
+//     final updated = currentProfile!.copyWith(name: name,avatar: avatar, phone: phone);
+//     currentProfile = updated;
+//     print(currentProfile!.phone);
+//     print('user is updatedddddddddd');
+//     emit(ProfileLoaded(updated));
 //   } catch (e) {
-//     emit(ResetError(e.toString()));
+//     emit(ProfileError("field to update profile"));
 //   }
-// }
+//   }
 }
-
-// class ProfileCubit extends Cubit<ProfileStates> {
-//   ProfileCubit() : super(ProfileInitial());
-//
-//   final String baseUrl = ApiConstants.baseAuthUrl;
-//   String? token;
-//
-//   /// Get profile
-//   Future<void> getProfile() async {
-//     emit(ProfileLoading());
-//     try {
-//       final response = await http.get(
-//         Uri.parse("$baseUrl${ApiConstants.profileEndPoint}"),
-//         headers: {"Authorization": "Bearer $token"},
-//       );
-//
-//       final data = jsonDecode(response.body);
-//
-//       if (response.statusCode == 200) {
-//         emit(ProfileSuccess(ProfileResponse.fromJson(data)));
-//       } else {
-//         emit(ProfileError(data["message"] ?? "Failed to load profile"));
-//       }
-//     } catch (e) {
-//       emit(ProfileError(e.toString()));
-//     }
-//   }
-//
-//   /// Update profile
-//   Future<void> updateProfile(UpdateProfileRequest request) async {
-//     emit(UpdateProfileLoading());
-//     try {
-//       final response = await http.patch(
-//         Uri.parse("$baseUrl${ApiConstants.profileEndPoint}"),
-//         headers: {
-//           "Content-Type": "application/json",
-//           "Authorization": "Bearer $token"
-//         },
-//         body: jsonEncode(request.toJson()),
-//       );
-//
-//       final data = jsonDecode(response.body);
-//
-//       if (response.statusCode == 200) {
-//         emit(UpdateProfileSuccess(UpdateProfileResponse.fromJson(data) as String));
-//       } else {
-//         emit(UpdateProfileError(data["message"] ?? "Failed to update profile"));
-//       }
-//     } catch (e) {
-//       emit(UpdateProfileError(e.toString()));
-//     }
-//   }
-//
-//   /// Delete profile
-//   Future<void> deleteProfile() async {
-//     emit(DeleteProfileLoading());
-//     try {
-//       final response = await http.delete(
-//         Uri.parse("$baseUrl${EndPoints.profileEndPoint}"),
-//         headers: {"Authorization": "Bearer $token"},
-//       );
-//
-//       final data = jsonDecode(response.body);
-//
-//       if (response.statusCode == 200) {
-//         emit(DeleteProfileSuccess(DeleteProfileResponse.fromJson(data) as String));
-//       } else {
-//         emit(DeleteProfileError(data["message"] ?? "Failed to delete profile"));
-//       }
-//     } catch (e) {
-//       emit(DeleteProfileError(e.toString()));
-//     }
-//   }
-//
-//   /// Reset password
-//   Future<void> resetPassword(ResetRequest request) async {
-//     emit(ResetLoading());
-//     try {
-//       final response = await http.patch(
-//         Uri.parse("$baseUrl${EndPoints.resetPasswordAuthApi}"),
-//         headers: {
-//           "Content-Type": "application/json",
-//           "Authorization": "Bearer $token"
-//         },
-//         body: jsonEncode(request.toJson()),
-//       );
-//
-//       final data = jsonDecode(response.body);
-//
-//       if (response.statusCode == 200) {
-//         emit(ResetSuccess(ResetResponse.fromJson(data)));
-//       } else {
-//         emit(ResetError(data["message"] ?? "Failed to reset password"));
-//       }
-//     } catch (e) {
-//       emit(ResetError(e.toString()));
-//     }
-//   }
-// }
