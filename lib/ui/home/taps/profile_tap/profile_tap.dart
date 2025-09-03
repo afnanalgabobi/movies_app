@@ -1,49 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies_app/data/avatarList.dart';
-import 'package:movies_app/l10n/app_localizations.dart';
-import 'package:movies_app/ui/home/taps/profile_tap/cubit/profile_states.dart';
-import 'package:movies_app/ui/home/taps/profile_tap/cubit/profile_view_model.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../../utils/app_assets.dart';
-import '../../../../utils/app_colors.dart';
-import '../../../../utils/app_routes.dart';
-import '../../../widgets/custom_elevated_button.dart';
-
-class ProfileTapScreen extends StatefulWidget {
-  const ProfileTapScreen({super.key});
+class ProfileTap extends StatefulWidget {
+  const ProfileTap({super.key});
 
   @override
-  State<ProfileTapScreen> createState() => _ProfileTapScreenState();
+  State<ProfileTap> createState() => _ProfileTapState();
 }
 
-class _ProfileTapScreenState extends State<ProfileTapScreen> {
-  int currentIndex = 0;
-  ProfileViewModel viewModel = ProfileViewModel();
-
-  _printTestToken() async {
-    final prefs = await SharedPreferences.getInstance();
-    String? token = prefs.getString('token');
-    print("Token => $token");
-  }
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    _printTestToken();
-  }
-
+class _ProfileTapState extends State<ProfileTap> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
-      body: BlocProvider<ProfileViewModel>(
+        /* body: BlocProvider<ProfileCubit>(
         create: (context) => viewModel,
-        child: BlocBuilder<ProfileViewModel, ProfileStates>(
+        child: BlocBuilder<ProfileCubit, ProfileStates>(
           builder: (context, state) {
-            if (state is getProfileLoadingState) {
+            if (state is ProfileLoading) {
               return const SizedBox.expand(
                 child: Center(
                   child: CircularProgressIndicator(
@@ -51,9 +24,9 @@ class _ProfileTapScreenState extends State<ProfileTapScreen> {
                   ),
                 ),
               );
-            } else if (state is getProfileErrorState) {
-              return ErrorWidget(state.errorMessage);
-            } else if (state is getProfileSuccessState) {
+            } else if (state is ProfileError) {
+              return ErrorWidget(state.message);
+            } else if (state is ProfileLoaded) {
               return Column(
                 children: [
                   Container(
@@ -68,7 +41,7 @@ class _ProfileTapScreenState extends State<ProfileTapScreen> {
                           child: Row(
                             children: [
                               Column(
-                                // spacing: size.height * 0.015,
+                             //   spacing: size.height * 0.015,
                                 children: [
                                   SizedBox(
                                     height: size.height * 0.052,
@@ -78,11 +51,11 @@ class _ProfileTapScreenState extends State<ProfileTapScreen> {
                                     width: size.width * 0.27,
                                     child: Image.asset(
                                       AvatarData
-                                          .avatarList[state.data.avaterId ?? 0],
+                                          .avatarList[state.user.avaterId],
                                       fit: BoxFit.contain,
                                     ),
                                   ),
-                                  Text(state.data.name ?? '',
+                                  Text(state.user.name ,
                                       style: Theme.of(context)
                                           .textTheme
                                           .displayLarge),
@@ -140,7 +113,7 @@ class _ProfileTapScreenState extends State<ProfileTapScreen> {
                                   onPressed: () {
                                     Navigator.pushNamed(context,
                                         AppRoutes.updateProfileScreenRouteName,
-                                        arguments: [state.data, viewModel]);
+                                        arguments: [state.user, viewModel]);
                                   },
                                   text: AppLocalizations.of(context)!
                                       .edit_profile,
@@ -239,7 +212,7 @@ class _ProfileTapScreenState extends State<ProfileTapScreen> {
             }
           },
         ),
-      ),
-    );
+      ),*/
+        );
   }
 }

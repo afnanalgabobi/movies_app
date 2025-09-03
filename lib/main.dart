@@ -11,10 +11,9 @@ import 'package:movies_app/ui/home/home_screen.dart';
 import 'package:movies_app/ui/home/taps/browse_tap/browse_tap.dart';
 import 'package:movies_app/ui/home/taps/home_tap/cubit/category_index_cubit/category_index_cubit.dart';
 import 'package:movies_app/ui/home/taps/home_tap/cubit/history_cubit/history_cubit.dart';
-import 'package:movies_app/ui/home/taps/profile_tap/profile_tap.dart';
+import 'package:movies_app/ui/home/taps/home_tap/movie_details/movie_details.dart';
+import 'package:movies_app/ui/home/taps/profile_tap/cubit/profile_view_model.dart';
 import 'package:movies_app/ui/home/taps/search_tap/search_tap.dart';
-import 'package:movies_app/ui/update_profile/reset_passworf/views/reset_password_view.dart';
-import 'package:movies_app/ui/update_profile/update_profile.dart';
 import 'package:movies_app/utils/app_routes.dart';
 import 'package:movies_app/utils/app_themes.dart';
 import 'package:movies_app/utils/my_bloc_observer.dart';
@@ -41,19 +40,27 @@ void main() async {
           create: (_) => AppThemeProvider()..setTheme(savedTheme),
         ),
         ChangeNotifierProvider(create: (context) => OnBoardingProvider()),
+        //   ChangeNotifierProvider(create: (context) => ProfileProvider()),
       ],
       child: MultiBlocProvider(
         providers: [
+          //  BlocProvider.value(
+          //   value: historyCubit, // reuse same instance everywhere
+          // ),
+          // BlocProvider.value(
+          //   value: profileCubit, // reuse same instance everywhere
+          // ),
           BlocProvider(create: (context) => CategoryIndexCubit()),
           BlocProvider(create: (context) => HistoryCubit()),
+          BlocProvider(create: (context) => ProfileCubit()),
           //    BlocProvider(create: (context) => MovieViewModel()),
         ],
-        child: const MyApp(),
+        child: MyApp(),
       )));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -68,13 +75,14 @@ class MyApp extends StatelessWidget {
         AppRoutes.registerScreenRouteName: (context) => RegisterScreen(),
         AppRoutes.forgetPasswordScreenRouteName: (context) =>
             ForgetPasswordScreen(),
-        AppRoutes.updateProfileScreenRouteName: (context) => UpdateProfile(),
+        //  AppRoutes.updateProfileScreenRouteName: (context) => UpdateProfile(),
         AppRoutes.homeScreenRouteName: (context) => HomeScreen(),
-        AppRoutes.SearchTabRouteName: (context) => const SearchTap(),
+        AppRoutes.SearchTabRouteName: (context) => SearchTap(),
         AppRoutes.BrowseTabRouteName: (context) => BrowseTap(),
-        AppRoutes.resetPasswordScreenRouteName: (context) =>
-            ResetPasswordScreen(),
-        AppRoutes.profileTabRouteName: (context) => ProfileTapScreen()
+        AppRoutes.movieDetailsScreenRouteName: (context) => MovieDetails(),
+        //   AppRoutes.resetPasswordScreenRouteName: (context) =>
+        //      ResetPasswordScreen(),
+        //  AppRoutes.profileTabRouteName: (context) => ProfileTapScreen()
       },
       locale: Locale(languageProvider.appLanguage),
       localizationsDelegates: AppLocalizations.localizationsDelegates,

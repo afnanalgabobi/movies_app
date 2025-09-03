@@ -1,3 +1,6 @@
+
+
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../model/responsemovies/movie.dart';
@@ -5,10 +8,10 @@ import '../../utils/app_assets.dart';
 import '../../utils/app_colors.dart';
 import '../../utils/app_styles_roboto.dart';
 
-class CustomMoviesContainerItem extends StatelessWidget {
+class CustomMoviesContainerItem_Network extends StatelessWidget {
   Movie movie;
 
-  CustomMoviesContainerItem(
+  CustomMoviesContainerItem_Network(
       {super.key, required this.movie});
 
   @override
@@ -21,7 +24,7 @@ class CustomMoviesContainerItem extends StatelessWidget {
       height: height * 0.3,
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage(movie.backgroundImage.toString()),
+          image: CachedNetworkImageProvider(movie.backgroundImage.toString()),
           fit: BoxFit.cover,
         ),
         borderRadius: BorderRadius.circular(16),

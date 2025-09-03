@@ -5,9 +5,9 @@ class UserData {
   final String phone;
   final int avaterId;
   final String id;
-  final DateTime createdAt;
-  final DateTime updatedAt;
-  final int v;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
+  final int? v;
 
   const UserData({
     required this.email,
@@ -22,15 +22,27 @@ class UserData {
   });
 
   factory UserData.fromJson(Map<String, dynamic> json) => UserData(
-        email: json['email'] as String,
-        password: json['password'] as String,
-        name: json['name'] as String,
-        phone: json['phone'] as String,
-        avaterId: json['avaterId'] as int,
-        id: json['_id'] as String,
-        createdAt: DateTime.parse(json['createdAt'] as String),
-        updatedAt: DateTime.parse(json['updatedAt'] as String),
-        v: json['__v'] as int,
+        id: json['_id'].toString(),
+        email: json['email'].toString(),
+        name: json['name'].toString(),
+        password: json['password'].toString(),
+        phone: json['phone'].toString(),
+    avaterId: json['avaterId'] ??2 ,
+        createdAt:
+            DateTime.tryParse(json['createdAt'].toString()) ?? DateTime.now(),
+        updatedAt:
+            DateTime.tryParse(json['updatedAt'].toString()) ?? DateTime.now(),
+        v: json['__v'] ?? 0,
+
+        //   email: json['email'] as String,
+        //   password: json['password'] as String,
+        //   name: json['name'] as String,
+        //   phone: json['phone'] as String,
+        //   avaterId: json['avaterId'] as int,
+        //   id: json['_id'] as String,
+        //   createdAt: DateTime.parse(json['createdAt'] ),
+        //   updatedAt: DateTime.parse(json['updatedAt'] ),
+        //   v: json['__v'] as int,
       );
 
   Map<String, dynamic> toJson() {
@@ -41,9 +53,23 @@ class UserData {
       'phone': phone,
       'avaterId': avaterId,
       '_id': id,
-      'createdAt': createdAt.toIso8601String(),
-      'updatedAt': updatedAt.toIso8601String(),
+      'createdAt': createdAt!.toIso8601String(),
+      'updatedAt': updatedAt!.toIso8601String(),
       '__v': v,
     };
+  }
+
+  UserData copyWith({String? name, int? avatar, String? phone}) {
+    return UserData(
+      name: name ?? this.name,
+      avaterId: avatar ?? this.avaterId,
+      phone: phone ?? this.phone,
+      email: email,
+      id: this.id,
+      password: this.password,
+      createdAt: this.createdAt,
+      updatedAt: this.updatedAt,
+      v: this.v,
+    );
   }
 }
