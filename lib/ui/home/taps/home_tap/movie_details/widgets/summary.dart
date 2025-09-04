@@ -12,7 +12,7 @@ class MovieSummary extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Padding(
-      padding: EdgeInsets.only(right: size.width * .02),
+      padding: EdgeInsets.symmetric(horizontal: size.width * .02),
       child: Column(
         children: [
           Text(
