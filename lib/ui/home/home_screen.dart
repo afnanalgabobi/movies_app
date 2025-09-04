@@ -20,8 +20,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   final List<Widget> taps = [
     HomeTap(),
-     SearchTap(),
-     BrowseTap(),
+    SearchTap(),
+    BrowseTap(),
     ProfileTap(),
   ];
 
@@ -69,9 +69,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   buildbottomnavigationbaritem(
       {required String label,
-        required String unselectedimage,
-        required int index,
-        required String selectedimage}) {
+      required String unselectedimage,
+      required int index,
+      required String selectedimage}) {
     return BottomNavigationBarItem(
       label: label,
       icon: Image.asset(

@@ -23,9 +23,12 @@ class _MovieWidgetState extends State<MovieWidget> {
     return GestureDetector(
       onTap: () {
         context.read<HistoryCubit>().addMovie(widget.movie);
-        Future.delayed(const Duration(microseconds: 500),  () {
-          return Navigator.pushNamed(context,AppRoutes.movieDetailsScreenRouteName ,arguments: widget.movie);
+        Future.delayed(const Duration(microseconds: 500), () {
+          return Navigator.pushNamed(
+              context, AppRoutes.movieDetailsScreenRouteName,
+              arguments: widget.movie.id);
         });
+
         //print(widget.movie.id);
         //print(context.read<HistoryCubit>().historyList);
       },

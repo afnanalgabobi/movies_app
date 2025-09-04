@@ -8,8 +8,7 @@ import '../../utils/app_styles_roboto.dart';
 class CustomMoviesContainerItem extends StatelessWidget {
   Movie movie;
 
-  CustomMoviesContainerItem(
-      {super.key, required this.movie});
+  CustomMoviesContainerItem({super.key, required this.movie});
 
   @override
   Widget build(BuildContext context) {

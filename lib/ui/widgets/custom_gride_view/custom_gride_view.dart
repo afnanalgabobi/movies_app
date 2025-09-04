@@ -8,13 +8,13 @@ class CustomGrideView extends StatelessWidget {
   double mainAxisSpacing;
   List<Movie> moviesList;
 
-  CustomGrideView(
-      {super.key,
-      required this.crossAxisCount,
-      required this.crossAxisSpacing,
-      required this.mainAxisSpacing,
-      required this.moviesList,
-      });
+  CustomGrideView({
+    super.key,
+    required this.crossAxisCount,
+    required this.crossAxisSpacing,
+    required this.mainAxisSpacing,
+    required this.moviesList,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -23,13 +23,12 @@ class CustomGrideView extends StatelessWidget {
         crossAxisCount: crossAxisCount,
         crossAxisSpacing: crossAxisSpacing,
         mainAxisSpacing: mainAxisSpacing,
-        childAspectRatio: 3/4,
-
+        childAspectRatio: 3 / 4,
       ),
       itemCount: moviesList.length,
       itemBuilder: (context, index) {
         return CustomMoviesContainerItem(
-         movie: moviesList[index],
+          movie: moviesList[index],
         );
       },
     );

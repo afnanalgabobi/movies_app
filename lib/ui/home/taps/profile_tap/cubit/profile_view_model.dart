@@ -72,16 +72,15 @@ class ProfileCubit extends Cubit<ProfileStates> {
       print(currentProfile!.avaterId);
       Uri url = Uri.https(ApiConstants.baseAuthUrl, EndPoints.profileEndPoint);
 
-      var response = await http.patch(url, headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer $token",
-      }, body:  jsonEncode({
-        "name": name,
-        "phone":phone,
-        "avaterId": avatar
-      }));
+      var response = await http.patch(url,
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer $token",
+          },
+          body: jsonEncode({"name": name, "phone": phone, "avaterId": avatar}));
       if (response.statusCode == 200) {
-        final updatedProfile = currentProfile!.copyWith(name: name, avatar: avatar, phone: phone);
+        final updatedProfile =
+            currentProfile!.copyWith(name: name, avatar: avatar, phone: phone);
         currentProfile = updatedProfile;
         print(currentProfile!.name);
         print(currentProfile!.phone);

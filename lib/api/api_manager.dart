@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:movies_app/api/api_constants.dart';
 import 'package:movies_app/api/end_points.dart';
 import 'package:movies_app/model/LoginResponse.dart';
+import 'package:movies_app/model/movie_details_response/movie_details_response.dart';
 import 'package:movies_app/model/reset_password_response.dart';
 import 'package:movies_app/model/responsemovies/responsemovies.dart';
 
@@ -106,6 +107,34 @@ class ApiManager {
         String responsebody = response.body;
         var json = jsonDecode(responsebody);
         return Responsemovies.fromJson(json);
+      } else {
+        print("Request failed with status: ${response.statusCode}");
+        print("Response Body: ${response.body}");
+        return null;
+      }
+    } catch (e) {
+      print(" Exception in getMoviesList: $e");
+      rethrow;
+    }
+  }
+
+  static Future<MovieDetailsResponse?> getMoviedetails({int? movieID}) async {
+    Uri url;
+    // https://yts.mx/api/v2/movie_details.json?movie_id=10
+
+    url = Uri.https(ApiConstants.baseMoviesUrl, EndPoints.moviedetailsEndPoints,
+        {"movie_id": movieID.toString()});
+    print("Request URL: $url");
+
+    try {
+      var response = await http.get(url);
+      print("Status Code: ${response.statusCode}");
+      if (response.statusCode == 200) {
+        String responsebody = response.body;
+
+        var json = jsonDecode(responsebody);
+
+        return MovieDetailsResponse.fromJson(json);
       } else {
         print("Request failed with status: ${response.statusCode}");
         print("Response Body: ${response.body}");

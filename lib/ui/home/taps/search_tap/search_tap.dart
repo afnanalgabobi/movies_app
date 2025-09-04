@@ -8,7 +8,7 @@ import '../../../widgets/custom_gride_view/custom_gride_view.dart';
 import '../../../widgets/custom_text_form_field.dart';
 
 class SearchTap extends StatelessWidget {
-   SearchTap({super.key});
+  SearchTap({super.key});
   List<Movie> searchList = [
     Movie(title: 'name', rating: 7.5, backgroundImage: AppAssets.avatar2),
     Movie(title: 'name', rating: 7.5, backgroundImage: AppAssets.avatar2),
@@ -16,34 +16,42 @@ class SearchTap extends StatelessWidget {
   ];
   @override
   Widget build(BuildContext context) {
-    TextEditingController controller=TextEditingController();
-    var size=MediaQuery.of(context).size;
-    var themeProvider=Provider.of<AppThemeProvider>(context);
+    TextEditingController controller = TextEditingController();
+    var size = MediaQuery.of(context).size;
+    var themeProvider = Provider.of<AppThemeProvider>(context);
     return SafeArea(
       child: Scaffold(
           body: Padding(
-            padding:  EdgeInsets.symmetric(horizontal: size.width*0.04),
-            child: Column(
-              children: [
-                CustomTextFormField(controller: controller,
-                  prefixIcon: Image.asset(AppAssets.searchIcon,color:themeProvider.isDarkMode()?AppColors.blackColor:AppColors.whiteColor,),
-                  hintText: 'Movie',),
-                SizedBox(height:size.height*0.02 ,),
-                Expanded(
-                  child: CustomGrideView(
-                    moviesList: searchList,
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 20,
-                    mainAxisSpacing: 20,
+        padding: EdgeInsets.symmetric(horizontal: size.width * 0.04),
+        child: Column(
+          children: [
+            CustomTextFormField(
+              controller: controller,
+              prefixIcon: Image.asset(
+                AppAssets.searchIcon,
+                color: themeProvider.isDarkMode()
+                    ? AppColors.blackColor
+                    : AppColors.whiteColor,
+              ),
+              hintText: 'Movie',
+            ),
+            SizedBox(
+              height: size.height * 0.02,
+            ),
+            Expanded(
+              child: CustomGrideView(
+                moviesList: searchList,
+                crossAxisCount: 2,
+                crossAxisSpacing: 20,
+                mainAxisSpacing: 20,
                 //     itemCount: 10,
                 //     childAspectRatio: 2/3,
                 // isMovie: false,
               ),
-                ),
-              ],
             ),
-          )
-      ),
+          ],
+        ),
+      )),
     );
   }
 }

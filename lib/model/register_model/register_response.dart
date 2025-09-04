@@ -3,8 +3,7 @@ import 'package:movies_app/model/register_model/user_data.dart';
 class RegisterResponse {
   final String? message;
   final UserData? user;
-  const RegisterResponse({
-    required this.message, required this.user});
+  const RegisterResponse({required this.message, required this.user});
 
   factory RegisterResponse.fromJson(Map<String, dynamic> json) {
     return RegisterResponse(
