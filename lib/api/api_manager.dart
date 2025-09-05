@@ -118,12 +118,17 @@ class ApiManager {
     }
   }
 
-  static Future<MovieDetailsResponse?> getMoviedetails({int? movieID}) async {
-    Uri url;
-    // https://yts.mx/api/v2/movie_details.json?movie_id=10
-
-    url = Uri.https(ApiConstants.baseMoviesUrl, EndPoints.moviedetailsEndPoints,
-        {"movie_id": movieID.toString()});
+  static Future<MovieDetailsResponse?> getMoviedetails(
+      {int? movieID = 0}) async {
+    final url = Uri.parse(
+        'https://yts.mx/api/v2/movie_details.json?movie_id=$movieID&with_images=true&with_cast=true');
+    // Uri url;
+    // // https://yts.mx/api/v2/movie_details.json?movie_id=10
+    // url = Uri.https(ApiConstants.baseMoviesUrl, EndPoints.moviedetailsEndPoints,
+    //     {"movie_id": movieID.toString(),
+    //       "with_images" : true,
+    //       "with_cast" : true
+    //     });
     print("Request URL: $url");
 
     try {
@@ -145,9 +150,9 @@ class ApiManager {
       rethrow;
     }
   }
-}
 
-static Future<Responsemovies?> getSuggestedMoviesList({String? movieId}) async {
+  static Future<Responsemovies?> getSuggestedMoviesList(
+      {String? movieId}) async {
     Uri url;
     if (movieId != null ) {
       url = Uri.https(ApiConstants.baseMoviesUrl, EndPoints.suggestedMoviesListEndPoints,
