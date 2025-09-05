@@ -1,12 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies_app/model/responsemovies/movie.dart';
 import 'package:movies_app/ui/home/taps/home_tap/cubit/history_cubit/history_cubit.dart';
 import 'package:movies_app/utils/app_assets.dart';
 import 'package:movies_app/utils/app_colors.dart';
 import 'package:movies_app/utils/app_routes.dart';
 import 'package:movies_app/utils/app_styles_roboto.dart';
+
+import '../../../../model/responsemovies/movie.dart';
 
 class MovieWidget extends StatefulWidget {
   MovieWidget({super.key, required this.movie});
@@ -26,7 +27,7 @@ class _MovieWidgetState extends State<MovieWidget> {
         Future.delayed(const Duration(microseconds: 500), () {
           return Navigator.pushNamed(
               context, AppRoutes.movieDetailsScreenRouteName,
-              arguments: widget.movie.id);
+              arguments: [widget.movie,widget.movie.id]);
         });
 
         //print(widget.movie.id);

@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/l10n/app_localizations.dart';
 import 'package:movies_app/model/movie_details_response/movie.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:movies_app/l10n/app_localizations.dart';
+import 'package:movies_app/utils/app_styles_roboto.dart';
+import '../../../../../../model/responsemovies/movie.dart';
 
 class MovieSummary extends StatelessWidget {
   final Movie movie;
-
   const MovieSummary({super.key, required this.movie});
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: size.width * .02),
+      padding: EdgeInsets.symmetric(horizontal: size.width * .04, vertical: size.height*0.02),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -38,10 +42,3 @@ class MovieSummary extends StatelessWidget {
   }
 }
 
-/*
-(viewModel.movie?.descriptionFull.isNotEmpty == true)
-                                ? viewModel.movie!.descriptionFull
-                                : (viewModel.movie?.descriptionIntro.isNotEmpty == true
-                                    ? viewModel.movie!.descriptionIntro
-                                    : 'No Summary Available'),
- */

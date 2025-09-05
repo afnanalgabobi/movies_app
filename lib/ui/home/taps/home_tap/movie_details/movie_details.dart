@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies_app/model/movie_details_response/movie.dart';
-import 'package:movies_app/ui/home/taps/home_tap/movie_details/cubit/movie_info_cubit/movie_info_statues.dart';
 import 'package:movies_app/ui/home/taps/home_tap/movie_details/cubit/movie_info_cubit/movie_info_view_model.dart';
 import 'package:movies_app/ui/home/taps/home_tap/movie_details/widgets/cast.dart';
 import 'package:movies_app/ui/home/taps/home_tap/movie_details/widgets/genres.dart';
 import 'package:movies_app/ui/home/taps/home_tap/movie_details/widgets/movie_info.dart';
 import 'package:movies_app/ui/home/taps/home_tap/movie_details/widgets/screen_shots.dart';
+import 'package:movies_app/ui/home/taps/home_tap/movie_details/widgets/similar_movies.dart';
 import 'package:movies_app/ui/home/taps/home_tap/movie_details/widgets/summary.dart';
 import 'package:movies_app/utils/app_colors.dart';
+
+import '../../../../../model/responsemovies/movie.dart';
 
 class MovieDetails extends StatefulWidget {
   MovieDetails({super.key});
@@ -20,17 +20,18 @@ class MovieDetails extends StatefulWidget {
 class _MovieDetailsState extends State<MovieDetails> {
   MovieInfoViewModel viewModel = MovieInfoViewModel();
   int? movieId;
-
+  var myMovie;
   @override
   void initState() {
     super.initState();
 
     // نستنى لما الwidget يخلص build ونقرأ arguments
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final args = ModalRoute.of(context)!.settings.arguments;
-      if (args != null && args is int) {
+      final args = ModalRoute.of(context)!.settings.arguments as List;
+      if (args != null && args[1] is int) {
         setState(() {
-          movieId = args;
+          myMovie = args[0];
+          movieId = args[1];
         });
         viewModel.getMoviesInfo(movieID: movieId!);
       } else {
@@ -41,8 +42,6 @@ class _MovieDetailsState extends State<MovieDetails> {
 
   @override
   Widget build(BuildContext context) {
-    movieId = ModalRoute.of(context)!.settings.arguments as int;
-    var wight = MediaQuery.sizeOf(context).width;
     var size = MediaQuery.sizeOf(context);
     return Scaffold(
       backgroundColor: AppColors.transparentColor,
