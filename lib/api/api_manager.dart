@@ -116,6 +116,38 @@ class ApiManager {
       rethrow;
     }
   }
+
+  static Future<Responsemovies?> getSuggestedMoviesList({String? movieId}) async {
+    Uri url;
+    if (movieId != null ) {
+      url = Uri.https(ApiConstants.baseMoviesUrl, EndPoints.suggestedMoviesListEndPoints,
+          {"movie_id": movieId});
+    } else {
+      url = Uri.https(
+        ApiConstants.baseMoviesUrl,
+        EndPoints.suggestedMoviesListEndPoints,
+      );
+    }
+    try {
+      var response = await http.get(url);
+      if (response.statusCode == 200) {
+        String responsebody = response.body;
+        var json = jsonDecode(responsebody);
+        return Responsemovies.fromJson(json);
+      } else {
+        print("Request failed with status: ${response.statusCode}");
+        print("Response Body: ${response.body}");
+        return null;
+      }
+    } catch (e) {
+      print(" Exception in getMoviesList: $e");
+      rethrow;
+    }
+  }
+
+
+
+
 }
 // static Future<Map<String, dynamic>> saveUser(String email, String password) async {
 //   final token = "your_access_token_here";
