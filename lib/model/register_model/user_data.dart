@@ -27,7 +27,7 @@ class UserData {
         name: json['name'].toString(),
         password: json['password'].toString(),
         phone: json['phone'].toString(),
-    avaterId: json['avaterId'] ??2 ,
+        avaterId: json['avaterId'] ?? 2,
         createdAt:
             DateTime.tryParse(json['createdAt'].toString()) ?? DateTime.now(),
         updatedAt:

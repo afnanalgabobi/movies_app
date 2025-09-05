@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/ui/home/taps/home_tap/cubit/history_cubit/history_cubit.dart';
 import 'package:movies_app/ui/widgets/custom_gride_view_network/custom_gride_view.dart';
+
 import '../../../../data/avatarList.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../../model/responsemovies/movie.dart';
@@ -24,8 +25,6 @@ class _ProfileViewState extends State<ProfileView> {
 
   @override
   Widget build(BuildContext context) {
-
-
     List<Movie> watchList = [];
 
     List<Movie> historyList = context.read<HistoryCubit>().historyList;
@@ -33,12 +32,11 @@ class _ProfileViewState extends State<ProfileView> {
     var height = MediaQuery.sizeOf(context).height;
     var width = MediaQuery.sizeOf(context).width;
     var viewModel = context.read<ProfileCubit>();
-if(viewModel.currentProfile != null){
-    print(viewModel.currentProfile!.avaterId );}
+    if (viewModel.currentProfile != null) {
+      print(viewModel.currentProfile!.avaterId);
+    }
 
-    return BlocBuilder<ProfileCubit, ProfileStates>(
-
-    builder: (context, state) {
+    return BlocBuilder<ProfileCubit, ProfileStates>(builder: (context, state) {
       if (state is ProfileLoading) {
         return const Center(
             child: CircularProgressIndicator(
@@ -50,8 +48,8 @@ if(viewModel.currentProfile != null){
         print(viewModel.currentProfile!.avaterId);
         // print(state.user.avatarId);
         // viewModel.currentProfile = state.user;
-        print("viewModel.currentProfile?.avatarId ${context.read<ProfileCubit>()
-            .currentProfile!.avaterId}");
+        print(
+            "viewModel.currentProfile?.avatarId ${context.read<ProfileCubit>().currentProfile!.avaterId}");
 
         return Scaffold(
           body: DefaultTabController(
@@ -67,13 +65,13 @@ if(viewModel.currentProfile != null){
                         children: [
                           Expanded(
                             child: Column(
-                              spacing: height * 0.01,
+                              //    spacing: height * 0.01,
                               children: [
                                 CircleAvatar(
                                     radius: height * 0.06,
                                     backgroundColor: AppColors.transparentColor,
-                                    child: Image.asset(
-                                        avatarList[viewModel.currentProfile!.avaterId])),
+                                    child: Image.asset(avatarList[
+                                        viewModel.currentProfile!.avaterId])),
                                 Text(
                                   maxLines: 2,
                                   " ${state.user.name}",
@@ -86,7 +84,7 @@ if(viewModel.currentProfile != null){
                           ),
                           Expanded(
                             child: Column(
-                              spacing: height * 0.02,
+//spacing: height * 0.02,
                               children: [
                                 Text(
                                   watchList.length.toString(),
@@ -105,7 +103,7 @@ if(viewModel.currentProfile != null){
                           ),
                           Expanded(
                             child: Column(
-                              spacing: height * 0.02,
+                              //       spacing: height * 0.02,
                               children: [
                                 Text(
                                   historyList.length.toString(),
@@ -127,7 +125,7 @@ if(viewModel.currentProfile != null){
                       Padding(
                         padding: EdgeInsets.all(height * 0.02),
                         child: Row(
-                          spacing: 16,
+                          //  spacing: 16,
                           children: [
                             Expanded(
                                 flex: 2,
@@ -135,7 +133,7 @@ if(viewModel.currentProfile != null){
                                   onPressed: () {
                                     Navigator.pushNamed(context,
                                         AppRoutes.updateProfileScreenRouteName,
-                                        arguments: [state.user,viewModel]);
+                                        arguments: [state.user, viewModel]);
                                   },
                                   text: 'edit',
                                   // AppLocalizations.of(context)!
@@ -156,7 +154,7 @@ if(viewModel.currentProfile != null){
                                     iconWidget: Image.asset(AppAssets.exitIcon),
                                     text: 'exit'
                                     // AppLocalizations.of(context)!.exit
-                                ))
+                                    ))
                           ],
                         ),
                       ),
@@ -200,38 +198,45 @@ if(viewModel.currentProfile != null){
                           ],
                         ),
                       ),
-                      SizedBox(height: height * 0.02,),
-                      Expanded(child:
-                      viewModel.selectedTab == 0
-                          ? watchList.isEmpty
-                              ? Container(
-                                  color: Theme.of(context).dividerColor,
-                                  child: Center(
-                                    child: Image.asset(AppAssets.emptyImage),
-                                  ),
-                                )
-                              : Padding(
-                                padding:  EdgeInsets.symmetric(horizontal: width * 0.04),
-                                child: CustomGrideView_Network(
-                                crossAxisCount: 3,
-                                crossAxisSpacing: 20,
-                                mainAxisSpacing: 20, moviesList: watchList,
-                                                                ),
-                              )
-                          : historyList.isEmpty
-                              ? Container(
-                                  color: Theme.of(context).dividerColor,
-                                  child: Center(
-                                    child: Image.asset(AppAssets.emptyImage),
-                                  ))
-                              : Padding(
-                        padding:  EdgeInsets.symmetric(horizontal: width * 0.04),
-                                child: CustomGrideView_Network(
-                                crossAxisCount: 3,
-                                crossAxisSpacing: 20,
-                                mainAxisSpacing: 20, moviesList: historyList
-                                                                ),
-                              ))
+                      SizedBox(
+                        height: height * 0.02,
+                      ),
+                      Expanded(
+                          child: viewModel.selectedTab == 0
+                              ? watchList.isEmpty
+                                  ? Container(
+                                      color: Theme.of(context).dividerColor,
+                                      child: Center(
+                                        child:
+                                            Image.asset(AppAssets.emptyImage),
+                                      ),
+                                    )
+                                  : Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: width * 0.04),
+                                      child: CustomGrideView_Network(
+                                        crossAxisCount: 3,
+                                        crossAxisSpacing: 20,
+                                        mainAxisSpacing: 20,
+                                        moviesList: watchList,
+                                      ),
+                                    )
+                              : historyList.isEmpty
+                                  ? Container(
+                                      color: Theme.of(context).dividerColor,
+                                      child: Center(
+                                        child:
+                                            Image.asset(AppAssets.emptyImage),
+                                      ))
+                                  : Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: width * 0.04),
+                                      child: CustomGrideView_Network(
+                                          crossAxisCount: 3,
+                                          crossAxisSpacing: 20,
+                                          mainAxisSpacing: 20,
+                                          moviesList: historyList),
+                                    ))
                     ]))),
           ),
         );

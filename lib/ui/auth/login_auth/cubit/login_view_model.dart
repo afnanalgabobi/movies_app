@@ -26,10 +26,8 @@ class LoginViewModel extends Cubit<LoginState> {
           print('Response message => ${response.message}');
           print('Response token => ${response.data}');
           emit(LoginSuccessState(response: response));
-         var mytoken =  await AppPreferences.getUserToken();
+          var mytoken = await AppPreferences.getUserToken();
           print('My token => ${mytoken}');
-
-
         } else {
           emit(LoginErrorState(
               errorMessage: response?.message ?? "Login failed"));

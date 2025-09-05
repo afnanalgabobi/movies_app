@@ -63,12 +63,11 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             colorBorderSide: Theme.of(context).hoverColor),
         focusedBorder: builtDecorationBorder(
             colorBorderSide: Theme.of(context).hoverColor),
-        errorBorder:
-        builtDecorationBorder(colorBorderSide: AppColors.redColor),
+        errorBorder: builtDecorationBorder(colorBorderSide: AppColors.redColor),
         focusedErrorBorder:
-        builtDecorationBorder(colorBorderSide: AppColors.redColor),
-        errorStyle: AppStylesRoboto.regular14White
-            .copyWith(color: AppColors.redColor),
+            builtDecorationBorder(colorBorderSide: AppColors.redColor),
+        errorStyle:
+            AppStylesRoboto.regular14White.copyWith(color: AppColors.redColor),
         hintText: widget.hintText,
         hintStyle: widget.hintStyle ?? Theme.of(context).textTheme.titleMedium,
         labelText: widget.labelText,
@@ -76,16 +75,16 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         prefixIcon: widget.prefixIcon,
         suffixIcon: widget.isPassword
             ? IconButton(
-          onPressed: () {
-            setState(() {
-              isObscure = !isObscure;
-            });
-          },
-          icon: Icon(
-            isObscure ? Icons.visibility_off : Icons.visibility,
-            color: AppColors.whiteColor,
-          ),
-        )
+                onPressed: () {
+                  setState(() {
+                    isObscure = !isObscure;
+                  });
+                },
+                icon: Icon(
+                  isObscure ? Icons.visibility_off : Icons.visibility,
+                  color: AppColors.whiteColor,
+                ),
+              )
             : null,
       ),
       maxLines: widget.maxLines ?? 1,
@@ -106,8 +105,8 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       inputFormatters: widget.textInputFormatter == null
           ? []
           : [
-        widget.textInputFormatter!,
-      ],
+              widget.textInputFormatter!,
+            ],
     );
   }
 

@@ -52,7 +52,9 @@ class CustomBottomSheet extends StatelessWidget {
                     style: Theme.of(context).textTheme.labelMedium,
                     textAlign: TextAlign.center,
                   ),
-                  SizedBox(height: height*0.01,),
+                  SizedBox(
+                    height: height * 0.01,
+                  ),
                   Text(
                     subTitle ?? '',
                     style: themeProvider.isDarkMode()
@@ -60,7 +62,9 @@ class CustomBottomSheet extends StatelessWidget {
                         : Theme.of(context).textTheme.headlineMedium,
                     textAlign: TextAlign.center,
                   ),
-                  SizedBox(height: height*0.02,),
+                  SizedBox(
+                    height: height * 0.02,
+                  ),
                   CustomElevatedButton(
                     onPressed: () {
                       nextButton != 6
@@ -73,7 +77,9 @@ class CustomBottomSheet extends StatelessWidget {
                         : AppLocalizations.of(context)!.finish,
                     textStyle: Theme.of(context).textTheme.labelSmall,
                   ),
-                  SizedBox(height: height*0.02,),
+                  SizedBox(
+                    height: height * 0.02,
+                  ),
                   nextButton != 1 && nextButton != 2 && backButton != -1
                       ? CustomElevatedButton(
                           onPressed: () {
