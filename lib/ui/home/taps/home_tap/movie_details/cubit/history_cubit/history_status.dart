@@ -1,0 +1,12 @@
+import 'package:movies_app/model/responsemovies/movie.dart';
+
+abstract class HistoryStatus {}
+
+class InitialHistoryStatus extends HistoryStatus {}
+
+class UpdatedHistoryStatus extends HistoryStatus {
+  List<Movie> historymovie;
+  Movie backgroundmovie;
+  UpdatedHistoryStatus(
+      {required this.historymovie, required this.backgroundmovie});
+}

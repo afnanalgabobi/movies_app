@@ -26,7 +26,7 @@ class MovieDetails extends StatelessWidget {
             children: [
               MovieInfo(), // Mawada
               ScreenShots(), //Alia
-              // SimilarMovies(movie: movie,), // Afnan
+              SimilarMovies(movie: movie,), // Afnan
               Summary(), // Noran
               Cast(), // Fatima
               Genres(),// Noran
