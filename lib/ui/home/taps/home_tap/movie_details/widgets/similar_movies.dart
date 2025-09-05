@@ -8,8 +8,8 @@ import '../../../../../../model/responsemovies/movie.dart';
 import '../../../../../../utils/app_colors.dart';
 
 class SimilarMovies extends StatefulWidget {
-  Movie movie;
-  SimilarMovies({super.key, required this.movie});
+  int? movieId;
+  SimilarMovies({super.key, required this.movieId});
   @override
   State<SimilarMovies> createState() => _SimilarMoviesState();
 }
@@ -19,7 +19,7 @@ class _SimilarMoviesState extends State<SimilarMovies> {
 
   // @override
   void initState() {
-    suggestedViewModel.getSuggestedMoviesList(movieId: widget.movie.id.toString());
+    suggestedViewModel.getSuggestedMoviesList(movieId: widget.movieId.toString());
     super.initState();
   }
   @override
@@ -50,10 +50,10 @@ class _SimilarMoviesState extends State<SimilarMovies> {
                   Text(state.errorMassage!),
                   ElevatedButton(
                       onPressed: () {
-                        print(widget.movie.id.toString());
+                        print(widget.movieId.toString());
                         // context.read<SuggestedMovieViewModel>().getSuggestedMoviesList(movieId: widget.movie.id);
                         suggestedViewModel.getSuggestedMoviesList(
-                            movieId: widget.movie.id.toString());
+                            movieId: widget.movieId.toString());
                       },
                       child: const Text('try again')),
                 ],
@@ -62,7 +62,7 @@ class _SimilarMoviesState extends State<SimilarMovies> {
 
               List<Movie> suggestedMoviesList = state.suggestedMovieList!;
               print(suggestedMoviesList[0].title);
-              print(widget.movie.id);
+              print(widget.movieId);
 
               return SizedBox(
                   height: height * 0.5,

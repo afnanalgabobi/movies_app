@@ -145,7 +145,7 @@ class ApiManager {
       rethrow;
     }
   }
-}
+
 
 static Future<Responsemovies?> getSuggestedMoviesList({String? movieId}) async {
     Uri url;
@@ -161,8 +161,8 @@ static Future<Responsemovies?> getSuggestedMoviesList({String? movieId}) async {
     try {
       var response = await http.get(url);
       if (response.statusCode == 200) {
-        String responsebody = response.body;
-        var json = jsonDecode(responsebody);
+        String responseBody = response.body;
+        var json = jsonDecode(responseBody);
         return Responsemovies.fromJson(json);
       } else {
         print("Request failed with status: ${response.statusCode}");
@@ -170,7 +170,7 @@ static Future<Responsemovies?> getSuggestedMoviesList({String? movieId}) async {
         return null;
       }
     } catch (e) {
-      print(" Exception in getMoviesList: $e");
+      print(" Exception in getSuggestedMoviesList: $e");
       rethrow;
     }
   }

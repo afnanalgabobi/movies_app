@@ -7,10 +7,12 @@ import 'package:movies_app/ui/home/taps/home_tap/movie_details/widgets/cast.dart
 import 'package:movies_app/ui/home/taps/home_tap/movie_details/widgets/genres.dart';
 import 'package:movies_app/ui/home/taps/home_tap/movie_details/widgets/movie_info.dart';
 import 'package:movies_app/ui/home/taps/home_tap/movie_details/widgets/screen_shots.dart';
+import 'package:movies_app/ui/home/taps/home_tap/movie_details/widgets/similar_movies.dart';
 import 'package:movies_app/ui/home/taps/home_tap/movie_details/widgets/summary.dart';
 import 'package:movies_app/utils/app_colors.dart';
 
 class MovieDetails extends StatefulWidget {
+
   MovieDetails({super.key});
 
   @override
@@ -102,24 +104,12 @@ class _MovieDetailsState extends State<MovieDetails> {
               },
             ),
             ScreenShots(), //Alia
-            // SimilarMovies(movie: movie,), // Afnan
+            SimilarMovies(movieId: movieId,), // Afnan
             Summary(), // Noran
             Cast(), // Fatima
             Genres(), // Noran
           ],
-        child: Padding(
-          padding:  EdgeInsets.symmetric(horizontal: height * 0.02),
-          child: Column(
-            spacing: height * 0.02,
-            children: [
-              MovieInfo(), // Mawada
-              ScreenShots(), //Alia
-              SimilarMovies(movie: movie,), // Afnan
-              Summary(), // Noran
-              Cast(), // Fatima
-              Genres(),// Noran
-            ],
-          ),
+
         ),
       ),
     );
