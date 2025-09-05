@@ -90,5 +90,7 @@
   "enter_your_new_pass": "من فضلك أدخل كلمة المرور الجديدة",
   "enter_your_confirm_new_pass": "من فضلك أكد كلمة المرور الجديدة",
   "edit_profile": "تعديل الملف الشخصي",
-  "exit": "خروج"
+  "exit": "خروج",
+  "summery" : "ملخص",
+  "geners" : "الأنواع"
 }
