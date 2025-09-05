@@ -20,6 +20,7 @@ class MovieDetails extends StatefulWidget {
 class _MovieDetailsState extends State<MovieDetails> {
   MovieInfoViewModel viewModel = MovieInfoViewModel();
   int? movieId;
+
   @override
   void initState() {
     super.initState();
@@ -42,6 +43,7 @@ class _MovieDetailsState extends State<MovieDetails> {
   Widget build(BuildContext context) {
     movieId = ModalRoute.of(context)!.settings.arguments as int;
     var wight = MediaQuery.sizeOf(context).width;
+    var size = MediaQuery.sizeOf(context);
     return Scaffold(
       backgroundColor: AppColors.transparentColor,
       body: SingleChildScrollView(
@@ -92,20 +94,39 @@ class _MovieDetailsState extends State<MovieDetails> {
                           child: const Text('try again')),
                     ],
                   );
-                } else if (state is SuccessMovieinfoStatues) {
+                } else if (state is SuccessMovieInfoStatues) {
                   Movie movie = state.movie!;
-                  return MovieInfo(
-                    movie: movie,
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      MovieInfo(
+                        movie: movie,
+                      ),
+                      SizedBox(
+                        height: size.height * .02,
+                      ),
+                      const ScreenShots(), //Alia
+                      SizedBox(
+                        height: size.height * .02,
+                      ),
+                      // SimilarMovies(movie: movie,), // Afnan
+                      MovieSummary(movie: movie), // Nouran
+                      SizedBox(
+                        height: size.height * .02,
+                      ),
+                      const Cast(), // Fatima
+                      SizedBox(
+                        height: size.height * .02,
+                      ),
+                      Genres(
+                        movie: movie,
+                      ), // Nouran
+                    ],
                   );
                 }
                 return Container(); // unreachable
               },
             ),
-            ScreenShots(), //Alia
-            // SimilarMovies(movie: movie,), // Afnan
-            Summary(), // Noran
-            Cast(), // Fatima
-            Genres(), // Noran
           ],
         child: Padding(
           padding:  EdgeInsets.symmetric(horizontal: height * 0.02),

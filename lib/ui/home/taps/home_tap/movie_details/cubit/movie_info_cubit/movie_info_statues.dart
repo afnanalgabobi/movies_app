@@ -11,7 +11,7 @@ class ErrorMovieInfoStatues extends MovieInfoStatues {
   ErrorMovieInfoStatues({required this.errorMassage});
 }
 
-class SuccessMovieinfoStatues extends MovieInfoStatues {
+class SuccessMovieInfoStatues extends MovieInfoStatues {
   Movie? movie;
-  SuccessMovieinfoStatues({required this.movie});
+  SuccessMovieInfoStatues({required this.movie});
 }
