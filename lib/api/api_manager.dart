@@ -1,15 +1,13 @@
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
 import 'package:movies_app/api/api_constants.dart';
 import 'package:movies_app/api/end_points.dart';
 import 'package:movies_app/model/LoginResponse.dart';
-import 'package:movies_app/model/movie_details_response/movie_details_response.dart';
 import 'package:movies_app/model/reset_password_response.dart';
-import 'package:movies_app/model/responsemovies/responsemovies.dart';
-
+import '../model/movie_details_response/movie_details_response.dart';
 import '../model/register_model/register_request.dart';
 import '../model/register_model/register_response.dart';
+import '../model/responsemovies/responsemovies.dart';
 
 class ApiManager {
   static Future<RegisterResponse> registerAuth(RegisterRequest request) async {
@@ -122,8 +120,13 @@ class ApiManager {
     Uri url;
     // https://yts.mx/api/v2/movie_details.json?movie_id=10
 
-    url = Uri.https(ApiConstants.baseMoviesUrl, EndPoints.moviedetailsEndPoints,
-        {"movie_id": movieID.toString()});
+    url = Uri.https(ApiConstants.baseMoviesUrl, EndPoints.moviesDetailsEndPoints,
+        {
+          "movie_id": movieID.toString(),
+          "with_images":true.toString()
+        });
+
+
     print("Request URL: $url");
 
     try {
@@ -173,6 +176,31 @@ static Future<Responsemovies?> getSuggestedMoviesList({String? movieId}) async {
       print(" Exception in getSuggestedMoviesList: $e");
       rethrow;
     }
+  }
+
+  static Future<MovieDetailsResponse?> getScreenshots({int? movieId, bool? withImages}) async{
+   print("movieId>> => ${movieId}");
+    Uri url=Uri.https(ApiConstants.baseMoviesUrl,EndPoints.moviesDetailsEndPoints,
+        {
+          "movie_id": movieId.toString(),
+          "with_images":withImages.toString()
+        });
+    try{
+      var response= await http.get(url);
+      if(response.statusCode==200){
+        var responseBody=response.body;
+        var json= jsonDecode(responseBody);
+        return MovieDetailsResponse.fromJson(json);
+      }else{
+        print("Request failed with status: ${response.statusCode}");
+        print("Response Body: ${response.body}");
+        return null;
+      }
+    }catch (e){
+      print(" Exception in getMoviesList: $e");
+      rethrow;
+    }
+
   }
 }
 // static Future<Map<String, dynamic>> saveUser(String email, String password) async {

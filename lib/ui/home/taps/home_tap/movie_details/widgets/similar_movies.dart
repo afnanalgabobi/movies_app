@@ -8,8 +8,8 @@ import '../../../../../../model/responsemovies/movie.dart';
 import '../../../../../../utils/app_colors.dart';
 
 class SimilarMovies extends StatefulWidget {
-  int? movieId;
-  SimilarMovies({super.key, required this.movieId});
+  final Movie movie;
+ const SimilarMovies({super.key, required this.movie});
   @override
   State<SimilarMovies> createState() => _SimilarMoviesState();
 }
@@ -17,65 +17,67 @@ class SimilarMovies extends StatefulWidget {
 class _SimilarMoviesState extends State<SimilarMovies> {
   SuggestedMovieViewModel suggestedViewModel = SuggestedMovieViewModel();
 
+
   // @override
   void initState() {
-    suggestedViewModel.getSuggestedMoviesList(movieId: widget.movieId.toString());
+    suggestedViewModel.getSuggestedMoviesList(movieId: widget.movie.id.toString());
     super.initState();
   }
   @override
   Widget build(BuildContext context) {
+
     var height = MediaQuery.sizeOf(context).height;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Text(AppLocalizations.of(context)!.similar),
-        SizedBox(
-          height: height * 0.02,
-        ),
-        BlocBuilder<SuggestedMovieViewModel, SuggestedMovieStatues>(
-          bloc: suggestedViewModel,
-          builder: (context, state) {
-            if (state is LoadingSuggestedMovieStatues) {
-              return Padding(
-                padding:  EdgeInsets.all(height * 0.02),
-                child: const Center(
-                  child: CircularProgressIndicator(
-                    color: AppColors.yellowColor,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Text(AppLocalizations.of(context)!.similar, style: Theme.of(context).textTheme.headlineMedium),
+          BlocBuilder<SuggestedMovieViewModel, SuggestedMovieStatues>(
+            bloc: suggestedViewModel,
+            builder: (context, state) {
+              if (state is LoadingSuggestedMovieStatues) {
+                return Padding(
+                  padding:  EdgeInsets.all(height * 0.02),
+                  child: const Center(
+                    child: CircularProgressIndicator(
+                      color: AppColors.yellowColor,
+                    ),
                   ),
-                ),
-              );
-            } else if (state is ErrorSuggestedMovieStatues) {
-              return Column(
-                children: [
-                  Text(state.errorMassage!),
-                  ElevatedButton(
-                      onPressed: () {
-                        print(widget.movieId.toString());
-                        // context.read<SuggestedMovieViewModel>().getSuggestedMoviesList(movieId: widget.movie.id);
-                        suggestedViewModel.getSuggestedMoviesList(
-                            movieId: widget.movieId.toString());
-                      },
-                      child: const Text('try again')),
-                ],
-              );
-            } else if (state is SuccessSuggestedMovieStatues) {
+                );
+              } else if (state is ErrorSuggestedMovieStatues) {
+                return Column(
+                  children: [
+                    Text(state.errorMassage!),
+                    ElevatedButton(
+                        onPressed: () {
+                          print(widget.movie.id.toString());
+                          // context.read<SuggestedMovieViewModel>().getSuggestedMoviesList(movieId: widget.movie.id);
+                          suggestedViewModel.getSuggestedMoviesList(
+                              movieId: widget.movie.id.toString());
+                        },
+                        child: const Text('try again')),
+                  ],
+                );
+              } else if (state is SuccessSuggestedMovieStatues) {
 
-              List<Movie> suggestedMoviesList = state.suggestedMovieList!;
-              print(suggestedMoviesList[0].title);
-              print(widget.movieId);
+                List<Movie> suggestedMoviesList = state.suggestedMovieList!;
+                print(suggestedMoviesList[0].title);
+                print(widget.movie!.id);
 
-              return SizedBox(
-                  height: height * 0.5,
-                  child: CustomGrideView_Network(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 20,
-                      mainAxisSpacing: 20,
-                      moviesList: suggestedMoviesList));
-            }
-            return Container(); // unreachable
-          },
-        ),
-      ],
+                return SizedBox(
+                    height: height * 0.5,
+                    child: CustomGrideView_Network(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 20,
+                        mainAxisSpacing: 20,
+                        moviesList: suggestedMoviesList));
+              }
+              return Container(); // unreachable
+            },
+          ),
+        ],
+      ),
     );
   }
 }

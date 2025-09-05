@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies_app/model/movie_details_response/movie.dart';
-import 'package:movies_app/ui/home/taps/home_tap/movie_details/cubit/movie_info_cubit/movie_info_statues.dart';
 import 'package:movies_app/ui/home/taps/home_tap/movie_details/cubit/movie_info_cubit/movie_info_view_model.dart';
 import 'package:movies_app/ui/home/taps/home_tap/movie_details/widgets/cast.dart';
 import 'package:movies_app/ui/home/taps/home_tap/movie_details/widgets/genres.dart';
@@ -11,8 +8,9 @@ import 'package:movies_app/ui/home/taps/home_tap/movie_details/widgets/similar_m
 import 'package:movies_app/ui/home/taps/home_tap/movie_details/widgets/summary.dart';
 import 'package:movies_app/utils/app_colors.dart';
 
-class MovieDetails extends StatefulWidget {
+import '../../../../../model/responsemovies/movie.dart';
 
+class MovieDetails extends StatefulWidget {
   MovieDetails({super.key});
 
   @override
@@ -22,16 +20,18 @@ class MovieDetails extends StatefulWidget {
 class _MovieDetailsState extends State<MovieDetails> {
   MovieInfoViewModel viewModel = MovieInfoViewModel();
   int? movieId;
+  var myMovie;
   @override
   void initState() {
     super.initState();
 
     // نستنى لما الwidget يخلص build ونقرأ arguments
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final args = ModalRoute.of(context)!.settings.arguments;
-      if (args != null && args is int) {
+      final args = ModalRoute.of(context)!.settings.arguments as List;
+      if (args != null && args[1] is int) {
         setState(() {
-          movieId = args;
+          myMovie = args[0];
+          movieId = args[1];
         });
         viewModel.getMoviesInfo(movieID: movieId!);
       } else {
@@ -42,76 +42,40 @@ class _MovieDetailsState extends State<MovieDetails> {
 
   @override
   Widget build(BuildContext context) {
-    movieId = ModalRoute.of(context)!.settings.arguments as int;
-    var wight = MediaQuery.sizeOf(context).width;
+    var size = MediaQuery.sizeOf(context);
     return Scaffold(
       backgroundColor: AppColors.transparentColor,
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            /*  CustomAppBar(
-              title: '',
-              leading: GestureDetector(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: const ImageIcon(
-                  AssetImage(
-                    AppAssets.arrowBackIcon,
-                  ),
-                  color: AppColors.whiteColor,
-                ),
-              ),
-              actions: [
-                Padding(
-                  padding: EdgeInsets.only(right: wight * .02),
-                  child: const ImageIcon(
-                    AssetImage(
-                      AppAssets.markIcon,
-                    ),
-                    color: AppColors.whiteColor,
-                  ),
-                )
-              ],
-            ),*/ // mawada
-            BlocBuilder<MovieInfoViewModel, MovieInfoStatues>(
-              bloc: viewModel,
-              builder: (context, state) {
-                if (state is LoadingMovieInfoStatues) {
-                  return const Center(
-                    child: CircularProgressIndicator(
-                      color: AppColors.yellowColor,
-                    ),
-                  );
-                } else if (state is ErrorMovieInfoStatues) {
-                  return Column(
-                    children: [
-                      Text(state.errorMassage!),
-                      ElevatedButton(
-                          onPressed: () {
-                            viewModel.getMoviesInfo(movieID: movieId!);
-                          },
-                          child: const Text('try again')),
-                    ],
-                  );
-                } else if (state is SuccessMovieinfoStatues) {
-                  Movie movie = state.movie!;
-                  return MovieInfo(
-                    movie: movie,
-                  );
-                }
-                return Container(); // unreachable
-              },
-            ),
-            ScreenShots(), //Alia
-            SimilarMovies(movieId: movieId,), // Afnan
-            Summary(), // Noran
-            Cast(), // Fatima
-            Genres(), // Noran
-          ],
-
-        ),
-      ),
+          child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          MovieInfo(
+            viewModel: viewModel,
+            movieId: movieId,
+          ), // mawada
+          SizedBox(
+            height: size.height * .02,
+          ),
+           ScreenShots(movieId: movieId,), //Alia
+          SizedBox(
+            height: size.height * .02,
+          ),
+          SimilarMovies(
+            movie: myMovie,
+          ), // Afnan
+          MovieSummary(movie: myMovie), // Nouran
+          SizedBox(
+            height: size.height * .02,
+          ),
+          const Cast(), // Fatima
+          SizedBox(
+            height: size.height * .02,
+          ),
+          Genres(
+            movie: myMovie,
+          ), // Nouran
+        ],
+      )),
     );
   }
 }
