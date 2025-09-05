@@ -107,6 +107,19 @@ class _MovieDetailsState extends State<MovieDetails> {
             Cast(), // Fatima
             Genres(), // Noran
           ],
+        child: Padding(
+          padding:  EdgeInsets.symmetric(horizontal: height * 0.02),
+          child: Column(
+            spacing: height * 0.02,
+            children: [
+              MovieInfo(), // Mawada
+              ScreenShots(), //Alia
+              SimilarMovies(movie: movie,), // Afnan
+              Summary(), // Noran
+              Cast(), // Fatima
+              Genres(),// Noran
+            ],
+          ),
         ),
       ),
     );
