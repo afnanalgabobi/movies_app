@@ -46,36 +46,100 @@ class _MovieDetailsState extends State<MovieDetails> {
     return Scaffold(
       backgroundColor: AppColors.transparentColor,
       body: SingleChildScrollView(
-          child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          MovieInfo(
-            viewModel: viewModel,
-            movieId: movieId,
-          ), // mawada
-          SizedBox(
-            height: size.height * .02,
-          ),
-           ScreenShots(movieId: movieId,), //Alia
-          SizedBox(
-            height: size.height * .02,
-          ),
-          SimilarMovies(
-            movie: myMovie,
-          ), // Afnan
-          MovieSummary(movie: myMovie), // Nouran
-          SizedBox(
-            height: size.height * .02,
-          ),
-          const Cast(), // Fatima
-          SizedBox(
-            height: size.height * .02,
-          ),
-          Genres(
-            movie: myMovie,
-          ), // Nouran
-        ],
-      )),
+        child: Column(
+          children: [
+            /*  CustomAppBar(
+              title: '',
+              leading: GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: const ImageIcon(
+                  AssetImage(
+                    AppAssets.arrowBackIcon,
+                  ),
+                  color: AppColors.whiteColor,
+                ),
+              ),
+              actions: [
+                Padding(
+                  padding: EdgeInsets.only(right: wight * .02),
+                  child: const ImageIcon(
+                    AssetImage(
+                      AppAssets.markIcon,
+                    ),
+                    color: AppColors.whiteColor,
+                  ),
+                )
+              ],
+            ),*/ // mawada
+            BlocBuilder<MovieInfoViewModel, MovieInfoStatues>(
+              bloc: viewModel,
+              builder: (context, state) {
+                if (state is LoadingMovieInfoStatues) {
+                  return const Center(
+                    child: CircularProgressIndicator(
+                      color: AppColors.yellowColor,
+                    ),
+                  );
+                } else if (state is ErrorMovieInfoStatues) {
+                  return Column(
+                    children: [
+                      Text(state.errorMassage!),
+                      ElevatedButton(
+                          onPressed: () {
+                            viewModel.getMoviesInfo(movieID: movieId!);
+                          },
+                          child: const Text('try again')),
+                    ],
+                  );
+                } else if (state is SuccessMovieInfoStatues) {
+                  Movie movie = state.movie!;
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      MovieInfo(
+                        movie: movie,
+                      ),
+                      SizedBox(
+                        height: size.height * .02,
+                      ),
+                      const ScreenShots(), //Alia
+                      SizedBox(
+                        height: size.height * .02,
+                      ),
+                      // SimilarMovies(movie: movie,), // Afnan
+                      MovieSummary(movie: movie), // Nouran
+                      SizedBox(
+                        height: size.height * .02,
+                      ),
+                      Cast(movie: movie), // Fatima
+                      SizedBox(
+                        height: size.height * .02,
+                      ),
+                      Genres(
+                        movie: movie,
+                      ), // Nouran
+                    ],
+                  );
+                }
+                return Container(); // unreachable
+              },
+            ),
+          ],
+          // child: Padding(
+          //   padding:  EdgeInsets.symmetric(horizontal: height * 0.02),
+          //   child: Column(
+          //     spacing: height * 0.02,
+          //     children: [
+          //       MovieInfo(), // Mawada
+          //       ScreenShots(), //Alia
+          //       SimilarMovies(movie: movie,), // Afnan
+          //       Summary(), // Noran
+          //       Cast(), // Fatima
+          //       Genres(),// Noran
+        ),
+      ),
     );
   }
 }

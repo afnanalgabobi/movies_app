@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+import 'package:movies_app/l10n/app_localizations.dart';
+import 'package:movies_app/model/movie_details_response/movie.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_app/l10n/app_localizations.dart';
@@ -14,21 +17,28 @@ class MovieSummary extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: size.width * .04, vertical: size.height*0.02),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             AppLocalizations.of(context)!.summary,
-            style: Theme.of(context).textTheme.headlineMedium,
+            style: Theme.of(context).textTheme.bodyLarge,
           ),
           SizedBox(
             height: size.height * .02,
           ),
           Text(
-            movie.descriptionFull ??  'There is no description',
-            style: Theme.of(context).textTheme.headlineSmall,
+            (movie.descriptionIntro != null &&
+                    movie.descriptionIntro!.trim().isNotEmpty)
+                ? movie.descriptionIntro!
+                : (movie.descriptionFull != null &&
+                        movie.descriptionFull!.trim().isNotEmpty)
+                    ? movie.descriptionFull!
+                    : 'No summary available',
+            style: Theme.of(context).textTheme.titleMedium,
           ),
         ],
       ),
     );
   }
 }
+

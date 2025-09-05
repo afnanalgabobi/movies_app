@@ -1,3 +1,4 @@
+import 'cast_response.dart';
 import '../../ui/home/taps/home_tap/movie_details/widgets/cast.dart';
 import 'torrent.dart';
 
@@ -27,10 +28,12 @@ class Movie {
   List<Torrent>? torrents;
   String? dateUploaded;
   int? dateUploadedUnix;
+  List<CastResponse>? cast;
   String? mediumScreenshotImage1;
   String? mediumScreenshotImage2;
   String? mediumScreenshotImage3;
   List<Cast>? cast;
+
 
   Movie({
     this.id,
@@ -58,11 +61,12 @@ class Movie {
     this.torrents,
     this.dateUploaded,
     this.dateUploadedUnix,
+      this.cast,
     this.mediumScreenshotImage1,
     this.mediumScreenshotImage2,
     this.mediumScreenshotImage3,
-    this.cast,
   });
+
 
   factory Movie.fromJson(Map<String, dynamic> json) => Movie(
         id: json['id'] as int?,
@@ -104,12 +108,13 @@ class Movie {
             .toList(),
         dateUploaded: json['date_uploaded'] as String?,
         dateUploadedUnix: json['date_uploaded_unix'] as int?,
+        cast: (json['cast'] as List<dynamic>?)
+                ?.map((element) => CastResponse.fromJson(element))
+                .toList() ??
+            [],
     mediumScreenshotImage1: json['mediumScreenshotImage1'] as String?,
     mediumScreenshotImage2: json['mediumScreenshotImage2'] as String?,
     mediumScreenshotImage3: json['mediumScreenshotImage3'] as String?,
-    cast: json['cast'] as List<Cast>?
-
-
   );
 
   Map<String, dynamic> toJson() => {
@@ -138,11 +143,10 @@ class Movie {
         'torrents': torrents?.map((e) => e.toJson()).toList(),
         'date_uploaded': dateUploaded,
         'date_uploaded_unix': dateUploadedUnix,
+        'cast': cast
     'mediumScreenshotImage1': mediumScreenshotImage1,
     'mediumScreenshotImage2': mediumScreenshotImage2,
     'mediumScreenshotImage3': mediumScreenshotImage3,
-    'cast':cast
-
       };
 
   @override

@@ -123,9 +123,9 @@ class ApiManager {
     url = Uri.https(ApiConstants.baseMoviesUrl, EndPoints.moviesDetailsEndPoints,
         {
           "movie_id": movieID.toString(),
-          "with_images":true.toString()
+          "with_images": true.toString(),
+          "with_cast" : true.toString()
         });
-
 
     print("Request URL: $url");
 
@@ -149,8 +149,8 @@ class ApiManager {
     }
   }
 
-
-static Future<Responsemovies?> getSuggestedMoviesList({String? movieId}) async {
+  static Future<Responsemovies?> getSuggestedMoviesList(
+      {String? movieId}) async {
     Uri url;
     if (movieId != null ) {
       url = Uri.https(ApiConstants.baseMoviesUrl, EndPoints.suggestedMoviesListEndPoints,
