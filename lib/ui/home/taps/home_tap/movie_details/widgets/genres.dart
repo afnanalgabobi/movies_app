@@ -15,7 +15,7 @@ class Genres extends StatelessWidget {
     final listGenres = movie.genres;
     Size size = MediaQuery.of(context).size;
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: size.width * .02),
+      padding: EdgeInsets.symmetric(horizontal: size.width * 0.03),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
