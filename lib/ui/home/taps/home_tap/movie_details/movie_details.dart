@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/ui/home/taps/home_tap/movie_details/cubit/movie_info_cubit/movie_info_view_model.dart';
 import 'package:movies_app/ui/home/taps/home_tap/movie_details/widgets/cast.dart';
 import 'package:movies_app/ui/home/taps/home_tap/movie_details/widgets/genres.dart';
 import 'package:movies_app/ui/home/taps/home_tap/movie_details/widgets/movie_info.dart';
 import 'package:movies_app/ui/home/taps/home_tap/movie_details/widgets/screen_shots.dart';
-import 'package:movies_app/ui/home/taps/home_tap/movie_details/widgets/similar_movies.dart';
 import 'package:movies_app/ui/home/taps/home_tap/movie_details/widgets/summary.dart';
 import 'package:movies_app/utils/app_colors.dart';
 
-import '../../../../../model/responsemovies/movie.dart';
+import '../../../../../../model/movie_details_response/movie.dart';
+import 'cubit/movie_info_cubit/movie_info_statues.dart';
 
 class MovieDetails extends StatefulWidget {
   MovieDetails({super.key});
@@ -19,7 +20,7 @@ class MovieDetails extends StatefulWidget {
 
 class _MovieDetailsState extends State<MovieDetails> {
   MovieInfoViewModel viewModel = MovieInfoViewModel();
-  int? movieId;
+  late int movieId;
   var myMovie;
   @override
   void initState() {
@@ -33,7 +34,7 @@ class _MovieDetailsState extends State<MovieDetails> {
           myMovie = args[0];
           movieId = args[1];
         });
-        viewModel.getMoviesInfo(movieID: movieId!);
+        viewModel.getMoviesInfo(movieID: movieId);
       } else {
         print("❌ Invalid or missing movieId in arguments: $args");
       }
@@ -88,7 +89,7 @@ class _MovieDetailsState extends State<MovieDetails> {
                       Text(state.errorMassage!),
                       ElevatedButton(
                           onPressed: () {
-                            viewModel.getMoviesInfo(movieID: movieId!);
+                            viewModel.getMoviesInfo(movieID: movieId);
                           },
                           child: const Text('try again')),
                     ],
@@ -99,12 +100,13 @@ class _MovieDetailsState extends State<MovieDetails> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       MovieInfo(
-                        movie: movie,
+                        viewModel: viewModel,
+                        movieId: movieId,
                       ),
                       SizedBox(
                         height: size.height * .02,
                       ),
-                      const ScreenShots(), //Alia
+                      ScreenShots(movie: movie, movieId: movieId), //Alia
                       SizedBox(
                         height: size.height * .02,
                       ),
