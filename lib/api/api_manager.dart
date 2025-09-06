@@ -1,9 +1,11 @@
 import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 import 'package:movies_app/api/api_constants.dart';
 import 'package:movies_app/api/end_points.dart';
 import 'package:movies_app/model/LoginResponse.dart';
 import 'package:movies_app/model/reset_password_response.dart';
+
 import '../model/movie_details_response/movie_details_response.dart';
 import '../model/register_model/register_request.dart';
 import '../model/register_model/register_response.dart';
@@ -118,7 +120,8 @@ class ApiManager {
 
   static Future<MovieDetailsResponse?> getMoviedetails({int? movieID}) async {
     Uri url;
-    // https://yts.mx/api/v2/movie_details.json?movie_id=10
+    // final url = Uri.parse(
+    //     'https://yts.mx/api/v2/movie_details.json?movie_id=$movieId&with_images=true&with_cast=true');
 
     url = Uri.https(ApiConstants.baseMoviesUrl, EndPoints.moviesDetailsEndPoints,
         {
@@ -178,13 +181,18 @@ class ApiManager {
     }
   }
 
-  static Future<MovieDetailsResponse?> getScreenshots({int? movieId, bool? withImages}) async{
+  static Future<MovieDetailsResponse?> getScreenshots({int? movieId}) async {
    print("movieId>> => ${movieId}");
-    Uri url=Uri.https(ApiConstants.baseMoviesUrl,EndPoints.moviesDetailsEndPoints,
-        {
-          "movie_id": movieId.toString(),
-          "with_images":withImages.toString()
-        });
+
+   // final url = Uri.parse(
+   //     'https://yts.mx/api/v2/movie_details.json?movie_id=$movieId&with_images=true&with_cast=true');
+   Uri url = Uri.https(
+       ApiConstants.baseMoviesUrl, EndPoints.moviesDetailsEndPoints,
+       {
+         "movie_id": movieId.toString(),
+         "with_images": true.toString(),
+         "with_cast": true.toString()
+       });
     try{
       var response= await http.get(url);
       if(response.statusCode==200){

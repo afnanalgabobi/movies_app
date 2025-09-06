@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/api/api_manager.dart';
+
 import 'movie_info_statues.dart';
 
 class MovieInfoViewModel extends Cubit<MovieInfoStatues> {
@@ -14,6 +15,9 @@ class MovieInfoViewModel extends Cubit<MovieInfoStatues> {
         emit(ErrorMovieInfoStatues(errorMassage: response.statusMessage));
       } else {
         emit(SuccessMovieInfoStatues(movie: response.data!.movie));
+        print(
+            "description_intro => ${response?.data?.movie?.descriptionIntro}");
+        print("description_full  => ${response?.data?.movie?.descriptionFull}");
       }
     } catch (e) {
       emit(ErrorMovieInfoStatues(errorMassage: e.toString()));
