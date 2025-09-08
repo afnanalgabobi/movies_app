@@ -5,6 +5,7 @@ import 'package:movies_app/ui/home/taps/home_tap/movie_details/widgets/cast.dart
 import 'package:movies_app/ui/home/taps/home_tap/movie_details/widgets/genres.dart';
 import 'package:movies_app/ui/home/taps/home_tap/movie_details/widgets/movie_info.dart';
 import 'package:movies_app/ui/home/taps/home_tap/movie_details/widgets/screen_shots.dart';
+import 'package:movies_app/ui/home/taps/home_tap/movie_details/widgets/similar_movies.dart';
 import 'package:movies_app/ui/home/taps/home_tap/movie_details/widgets/summary.dart';
 import 'package:movies_app/utils/app_colors.dart';
 
@@ -110,7 +111,7 @@ class _MovieDetailsState extends State<MovieDetails> {
                       SizedBox(
                         height: size.height * .02,
                       ),
-                      // SimilarMovies(movie: movie,), // Afnan
+                      SimilarMovies(movie: myMovie,), // Afnan
                       MovieSummary(movie: movie), // Nouran
                       SizedBox(
                         height: size.height * .02,
