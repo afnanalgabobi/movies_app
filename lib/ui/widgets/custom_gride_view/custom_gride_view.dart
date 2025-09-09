@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/ui/home/taps/home_tap/movie_widget.dart';
-
 import '../../../model/responsemovies/movie.dart';
+import '../../../model/movie_details_response/movie.dart';
+import '../custom_movies_container_item.dart';
 
 class CustomGrideView extends StatelessWidget {
   int crossAxisCount;
@@ -29,6 +30,12 @@ class CustomGrideView extends StatelessWidget {
       itemCount: moviesList.length,
       itemBuilder: (context, index) {
         return MovieWidget(movie: moviesList[index]);
+//         return CustomMoviesContainerItem(
+//           imagePath: moviesList[index].backgroundImage ?? '',
+//           movieId: moviesList[index].imdbCode,
+//           rating: moviesList[index].rating,
+//           movie: moviesList[index],
+        );
       },
     );
   }

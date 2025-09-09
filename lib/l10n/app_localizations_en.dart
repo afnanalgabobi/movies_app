@@ -293,4 +293,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get exit => 'Exit';
+
+  @override
+  String get summery => 'Summery';
+
+  @override
+  String get geners => 'Geners';
+
+  @override
+  String get movie => 'Movie';
 }

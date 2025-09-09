@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/api/api_manager.dart';
-import 'package:movies_app/ui/home/taps/home_tap/movie_details/cubit/movie_info_cubit/movie_info_statues.dart';
+
+import 'movie_info_statues.dart';
 
 class MovieInfoViewModel extends Cubit<MovieInfoStatues> {
   MovieInfoViewModel() : super(InitialMovieInfoStatues());
@@ -13,7 +14,10 @@ class MovieInfoViewModel extends Cubit<MovieInfoStatues> {
       if (response!.status == 'error') {
         emit(ErrorMovieInfoStatues(errorMassage: response.statusMessage));
       } else {
-        emit(SuccessMovieinfoStatues(movie: response.data!.movie));
+        emit(SuccessMovieInfoStatues(movie: response.data!.movie));
+        print(
+            "description_intro => ${response?.data?.movie?.descriptionIntro}");
+        print("description_full  => ${response?.data?.movie?.descriptionFull}");
       }
     } catch (e) {
       emit(ErrorMovieInfoStatues(errorMassage: e.toString()));

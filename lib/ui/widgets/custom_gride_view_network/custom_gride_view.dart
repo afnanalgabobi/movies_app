@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app/ui/widgets/custom_movies_container_item.dart';
 import 'package:movies_app/ui/widgets/custom_movies_container_item_network.dart';
 
-import '../../../model/responsemovies/movie.dart';
+import '../../../model/movie_details_response/movie.dart';
 
 class CustomGrideView_Network extends StatelessWidget {
   int crossAxisCount;

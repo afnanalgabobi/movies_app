@@ -649,6 +649,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Exit'**
   String get exit;
+
+  /// No description provided for @summery.
+  ///
+  /// In en, this message translates to:
+  /// **'Summery'**
+  String get summery;
+
+  /// No description provided for @geners.
+  ///
+  /// In en, this message translates to:
+  /// **'Geners'**
+  String get geners;
+
+  /// No description provided for @movie.
+  ///
+  /// In en, this message translates to:
+  /// **'Movie'**
+  String get movie;
 }
 
 class _AppLocalizationsDelegate

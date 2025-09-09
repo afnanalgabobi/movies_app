@@ -90,5 +90,9 @@
   "new_password": "New password",
   "confirm_new_password": "Confirm new password",
   "edit_profile": "Edit Profile",
-  "exit": "Exit"
+  "exit": "Exit",
+  "summery" : "Summery",
+  "geners": "Geners",
+  "movie": "Movie"
+
 }

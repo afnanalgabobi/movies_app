@@ -13,6 +13,10 @@ import 'package:movies_app/ui/home/taps/home_tap/cubit/category_index_cubit/cate
 import 'package:movies_app/ui/home/taps/home_tap/cubit/history_cubit/history_cubit.dart';
 import 'package:movies_app/ui/home/taps/home_tap/movie_details/movie_details.dart';
 import 'package:movies_app/ui/home/taps/profile_tap/cubit/profile_view_model.dart';
+import 'package:movies_app/ui/home/taps/profile_tap/profile_tap.dart';
+import 'package:movies_app/ui/home/taps/profile_tap/reset_passworf/views/reset_password_view.dart';
+import 'package:movies_app/ui/home/taps/profile_tap/update_profile/update_profile.dart';
+import 'package:movies_app/ui/home/taps/search_tap/search_tab_view_model/search_tab_cubit.dart';
 import 'package:movies_app/ui/home/taps/search_tap/search_tap.dart';
 import 'package:movies_app/utils/app_routes.dart';
 import 'package:movies_app/utils/app_themes.dart';
@@ -53,6 +57,9 @@ void main() async {
           BlocProvider(create: (context) => CategoryIndexCubit()),
           BlocProvider(create: (context) => HistoryCubit()),
           BlocProvider(create: (context) => ProfileCubit()),
+          BlocProvider(
+            create: (context) => SearchTabCubit(),
+          )
           //    BlocProvider(create: (context) => MovieViewModel()),
         ],
         child: MyApp(),
@@ -75,14 +82,14 @@ class MyApp extends StatelessWidget {
         AppRoutes.registerScreenRouteName: (context) => RegisterScreen(),
         AppRoutes.forgetPasswordScreenRouteName: (context) =>
             ForgetPasswordScreen(),
-        //  AppRoutes.updateProfileScreenRouteName: (context) => UpdateProfile(),
+         AppRoutes.updateProfileScreenRouteName: (context) => UpdateProfile(),
         AppRoutes.homeScreenRouteName: (context) => HomeScreen(),
         AppRoutes.SearchTabRouteName: (context) => SearchTap(),
         AppRoutes.BrowseTabRouteName: (context) => BrowseTap(),
         AppRoutes.movieDetailsScreenRouteName: (context) => MovieDetails(),
-        //   AppRoutes.resetPasswordScreenRouteName: (context) =>
-        //      ResetPasswordScreen(),
-        //  AppRoutes.profileTabRouteName: (context) => ProfileTapScreen()
+          AppRoutes.resetPasswordScreenRouteName: (context) =>
+              ResetPasswordScreen(),
+         AppRoutes.profileTabRouteName: (context) => ProfileTap()
       },
       locale: Locale(languageProvider.appLanguage),
       localizationsDelegates: AppLocalizations.localizationsDelegates,

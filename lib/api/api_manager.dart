@@ -4,10 +4,10 @@ import 'package:http/http.dart' as http;
 import 'package:movies_app/api/api_constants.dart';
 import 'package:movies_app/api/end_points.dart';
 import 'package:movies_app/model/LoginResponse.dart';
-import 'package:movies_app/model/movie_details_response/movie_details_response.dart';
 import 'package:movies_app/model/reset_password_response.dart';
-import 'package:movies_app/model/responsemovies/responsemovies.dart';
 
+import '../model/movie_details_response/movie.dart';
+import '../model/movie_details_response/movie_details_response.dart';
 import '../model/register_model/register_request.dart';
 import '../model/register_model/register_response.dart';
 
@@ -90,7 +90,7 @@ class ApiManager {
     }
   }
 
-  static Future<Responsemovies?> getMoviesList({String? category}) async {
+  static Future<MovieDetailsResponse?> getMoviesList({String? category}) async {
     Uri url;
     if (category != null && category.isNotEmpty) {
       url = Uri.https(ApiConstants.baseMoviesUrl, EndPoints.moviesListEndPoints,
@@ -106,7 +106,7 @@ class ApiManager {
       if (response.statusCode == 200) {
         String responsebody = response.body;
         var json = jsonDecode(responsebody);
-        return Responsemovies.fromJson(json);
+        return MovieDetailsResponse.fromJson(json);
       } else {
         print("Request failed with status: ${response.statusCode}");
         print("Response Body: ${response.body}");
@@ -120,10 +120,16 @@ class ApiManager {
 
   static Future<MovieDetailsResponse?> getMoviedetails({int? movieID}) async {
     Uri url;
-    // https://yts.mx/api/v2/movie_details.json?movie_id=10
+    // final url = Uri.parse(
+    //     'https://yts.mx/api/v2/movie_details.json?movie_id=$movieId&with_images=true&with_cast=true');
 
-    url = Uri.https(ApiConstants.baseMoviesUrl, EndPoints.moviedetailsEndPoints,
-        {"movie_id": movieID.toString()});
+    url = Uri.https(
+        ApiConstants.baseMoviesUrl, EndPoints.moviesDetailsEndPoints, {
+      "movie_id": movieID.toString(),
+      "with_images": true.toString(),
+      "with_cast": true.toString()
+    });
+
     print("Request URL: $url");
 
     try {
@@ -145,7 +151,88 @@ class ApiManager {
       rethrow;
     }
   }
+
+  static Future<MovieDetailsResponse?> getSuggestedMoviesList(
+      {String? movieId}) async {
+    Uri url;
+    if (movieId != null) {
+      url = Uri.https(ApiConstants.baseMoviesUrl,
+          EndPoints.suggestedMoviesListEndPoints, {"movie_id": movieId});
+    } else {
+      url = Uri.https(
+        ApiConstants.baseMoviesUrl,
+        EndPoints.suggestedMoviesListEndPoints,
+      );
+    }
+    try {
+      var response = await http.get(url);
+      if (response.statusCode == 200) {
+        String responseBody = response.body;
+        var json = jsonDecode(responseBody);
+        return MovieDetailsResponse.fromJson(json);
+      } else {
+        print("Request failed with status: ${response.statusCode}");
+        print("Response Body: ${response.body}");
+        return null;
+      }
+    } catch (e) {
+      print(" Exception in getSuggestedMoviesList: $e");
+      rethrow;
+    }
+  }
+
+  static Future<MovieDetailsResponse?> getScreenshots({int? movieId}) async {
+    print("movieId>> => ${movieId}");
+
+    // final url = Uri.parse(
+    //     'https://yts.mx/api/v2/movie_details.json?movie_id=$movieId&with_images=true&with_cast=true');
+    Uri url = Uri.https(
+        ApiConstants.baseMoviesUrl, EndPoints.moviesDetailsEndPoints, {
+      "movie_id": movieId.toString(),
+      "with_images": true.toString(),
+      "with_cast": true.toString()
+    });
+    try {
+      var response = await http.get(url);
+      if (response.statusCode == 200) {
+        var responseBody = response.body;
+        var json = jsonDecode(responseBody);
+        return MovieDetailsResponse.fromJson(json);
+      } else {
+        print("Request failed with status: ${response.statusCode}");
+        print("Response Body: ${response.body}");
+        return null;
+      }
+    } catch (e) {
+      print(" Exception in getMoviesList: $e");
+      rethrow;
+    }
+  }
+
+  static Future<List<Movie>?> getMoviesByQuery(String query, int page) async {
+    Uri uri = Uri.https(
+      ApiConstants.baseMoviesUrl,
+      EndPoints.moviesListEndPoints,
+      {
+        'query_term': query,
+        'sort_by': 'date_added',
+        'page': page.toString(),
+      },
+    );
+
+    final response = await http.get(uri);
+    final jsonResponse = jsonDecode(response.body);
+    final MovieDetailsResponse data =
+        MovieDetailsResponse.fromJson(jsonResponse);
+
+    if (data.status == 'ok' && response.statusCode == 200) {
+      return data.data?.moviesList ?? [];
+    } else {
+      throw data.statusMessage ?? 'Unknown error';
+    }
+  }
 }
+
 // static Future<Map<String, dynamic>> saveUser(String email, String password) async {
 //   final token = "your_access_token_here";
 //   Uri url = Uri.https(ApiConstants.baseUrl, EndPoints.loginAuthApi);

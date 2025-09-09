@@ -292,4 +292,13 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get exit => 'خروج';
+
+  @override
+  String get summery => 'ملخص';
+
+  @override
+  String get geners => 'الأنواع';
+
+  @override
+  String get movie => 'فيلم';
 }
