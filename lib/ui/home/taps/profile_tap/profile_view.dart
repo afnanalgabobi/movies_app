@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/ui/home/taps/home_tap/cubit/history_cubit/history_cubit.dart';
 import 'package:movies_app/ui/widgets/custom_gride_view_network/custom_gride_view.dart';
+
 import '../../../../data/avatarList.dart';
 import '../../../../l10n/app_localizations.dart';
-import '../../../../model/responsemovies/movie.dart';
+import '../../../../model/movie_details_response/movie.dart';
 import '../../../../utils/app_assets.dart';
 import '../../../../utils/app_colors.dart';
 import '../../../../utils/app_routes.dart';

@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies_app/model/responsemovies/movie.dart';
 import 'package:movies_app/ui/home/taps/home_tap/cubit/history_cubit/history_status.dart';
+
+import '../../../../../../../model/movie_details_response/movie.dart';
 
 class HistoryCubit extends Cubit<HistoryStatus> {
   HistoryCubit() : super(InitialHistoryStatus());

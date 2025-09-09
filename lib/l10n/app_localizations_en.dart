@@ -299,4 +299,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get geners => 'Geners';
+
+  @override
+  String get movie => 'Movie';
 }

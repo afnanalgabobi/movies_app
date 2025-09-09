@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../model/responsemovies/movie.dart';
+
+import '../../../model/movie_details_response/movie.dart';
 import '../custom_movies_container_item.dart';
 
 class CustomGrideView extends StatelessWidget {
@@ -28,6 +29,9 @@ class CustomGrideView extends StatelessWidget {
       itemCount: moviesList.length,
       itemBuilder: (context, index) {
         return CustomMoviesContainerItem(
+          imagePath: moviesList[index].backgroundImage ?? '',
+          movieId: moviesList[index].imdbCode,
+          rating: moviesList[index].rating,
           movie: moviesList[index],
         );
       },

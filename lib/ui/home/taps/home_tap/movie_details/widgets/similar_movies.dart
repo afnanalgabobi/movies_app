@@ -4,7 +4,8 @@ import 'package:movies_app/l10n/app_localizations.dart';
 import 'package:movies_app/ui/home/taps/home_tap/movie_details/cubit/suggested_movie_cubit/suggested_movie_statues.dart';
 import 'package:movies_app/ui/home/taps/home_tap/movie_details/cubit/suggested_movie_cubit/suggested_movie_view_model.dart';
 import 'package:movies_app/ui/widgets/custom_gride_view_network/custom_gride_view.dart';
-import '../../../../../../model/responsemovies/movie.dart';
+
+import '../../../../../../model/movie_details_response/movie.dart';
 import '../../../../../../utils/app_colors.dart';
 
 class SimilarMovies extends StatefulWidget {

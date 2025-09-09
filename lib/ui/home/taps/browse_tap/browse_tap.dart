@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/ui/home/taps/browse_tap/widget/movie_tab_item.dart';
 import 'package:movies_app/utils/app_styles_inter.dart';
-import '../../../../model/responsemovies/movie.dart';
+
+import '../../../../model/movie_details_response/movie.dart';
 import '../../../../utils/app_assets.dart';
 import '../../../../utils/app_colors.dart';
 import '../../../widgets/custom_gride_view/custom_gride_view.dart';
