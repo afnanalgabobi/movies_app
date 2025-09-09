@@ -1,4 +1,4 @@
-import 'package:movies_app/model/responsemovies/movie.dart';
+import '../../../../../../model/movie_details_response/movie.dart';
 
 abstract class MovieStatues {}
 

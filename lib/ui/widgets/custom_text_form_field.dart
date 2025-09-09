@@ -24,6 +24,8 @@ class CustomTextFormField extends StatefulWidget {
   TextInputFormatter? textInputFormatter;
   TextCapitalization textCapitalization;
   final void Function(String)? onChanged;
+  void Function(PointerDownEvent)? onTapOutside;
+  Color? cursorColor;
 
   CustomTextFormField({
     super.key,
@@ -44,6 +46,8 @@ class CustomTextFormField extends StatefulWidget {
     this.textInputFormatter,
     this.textCapitalization = TextCapitalization.none,
     this.onChanged,
+    this.onTapOutside,
+    this.cursorColor,
   });
 
   @override

@@ -4,7 +4,6 @@ import 'package:movies_app/providers/app_Language_Provider.dart';
 import 'package:movies_app/providers/app_theme_provider.dart';
 import 'package:movies_app/providers/onBoarding_Provider.dart';
 import 'package:movies_app/ui/OnBoarding/onBoarding_screen.dart';
-import 'package:movies_app/ui/ResetPassword/reset_password_view.dart';
 import 'package:movies_app/ui/auth/forget_password_screen.dart';
 import 'package:movies_app/ui/auth/login_auth/login_screen.dart';
 import 'package:movies_app/ui/auth/register_auth/register_screen.dart';
@@ -17,6 +16,7 @@ import 'package:movies_app/ui/home/taps/profile_tap/cubit/profile_view_model.dar
 import 'package:movies_app/ui/home/taps/profile_tap/profile_tap.dart';
 import 'package:movies_app/ui/home/taps/profile_tap/reset_passworf/views/reset_password_view.dart';
 import 'package:movies_app/ui/home/taps/profile_tap/update_profile/update_profile.dart';
+import 'package:movies_app/ui/home/taps/search_tap/search_tab_view_model/search_tab_cubit.dart';
 import 'package:movies_app/ui/home/taps/search_tap/search_tap.dart';
 import 'package:movies_app/utils/app_routes.dart';
 import 'package:movies_app/utils/app_themes.dart';
@@ -57,6 +57,9 @@ void main() async {
           BlocProvider(create: (context) => CategoryIndexCubit()),
           BlocProvider(create: (context) => HistoryCubit()),
           BlocProvider(create: (context) => ProfileCubit()),
+          BlocProvider(
+            create: (context) => SearchTabCubit(),
+          )
           //    BlocProvider(create: (context) => MovieViewModel()),
         ],
         child: MyApp(),
@@ -72,7 +75,7 @@ class MyApp extends StatelessWidget {
     var themeProvider = Provider.of<AppThemeProvider>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.onboardingScreenRouteName,
+      initialRoute: AppRoutes.homeScreenRouteName,
       routes: {
         AppRoutes.onboardingScreenRouteName: (context) => OnBoardingScreen(),
         AppRoutes.loginScreenRouteName: (context) => LoginScreen(),

@@ -661,6 +661,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Geners'**
   String get geners;
+
+  /// No description provided for @movie.
+  ///
+  /// In en, this message translates to:
+  /// **'Movie'**
+  String get movie;
 }
 
 class _AppLocalizationsDelegate

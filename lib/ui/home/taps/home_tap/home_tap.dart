@@ -2,7 +2,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/l10n/app_localizations.dart';
-import 'package:movies_app/model/responsemovies/movie.dart';
 import 'package:movies_app/ui/home/taps/home_tap/cubit/category_index_cubit/category_index_cubit.dart';
 import 'package:movies_app/ui/home/taps/home_tap/cubit/category_movie_cubit/category_movie_statues.dart';
 import 'package:movies_app/ui/home/taps/home_tap/cubit/category_movie_cubit/category_movie_view_model.dart';
@@ -14,6 +13,8 @@ import 'package:movies_app/ui/home/taps/home_tap/movie_widget.dart';
 import 'package:movies_app/utils/app_assets.dart';
 import 'package:movies_app/utils/app_colors.dart';
 import 'package:movies_app/utils/app_styles_roboto.dart';
+
+import '../../../../model/movie_details_response/movie.dart';
 
 class HomeTap extends StatefulWidget {
   const HomeTap({super.key});
