@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/l10n/app_localizations.dart';
+import 'package:movies_app/providers/app_theme_provider.dart';
 import 'package:movies_app/ui/home/taps/home_tap/cubit/category_index_cubit/category_index_cubit.dart';
 import 'package:movies_app/ui/home/taps/home_tap/cubit/category_movie_cubit/category_movie_statues.dart';
 import 'package:movies_app/ui/home/taps/home_tap/cubit/category_movie_cubit/category_movie_view_model.dart';
@@ -13,6 +14,7 @@ import 'package:movies_app/ui/home/taps/home_tap/movie_widget.dart';
 import 'package:movies_app/utils/app_assets.dart';
 import 'package:movies_app/utils/app_colors.dart';
 import 'package:movies_app/utils/app_styles_roboto.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../model/movie_details_response/movie.dart';
 
@@ -36,6 +38,7 @@ class _HomeTapState extends State<HomeTap> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    var themeProvider=Provider.of<AppThemeProvider>(context);
     return Stack(
       children: [
         BlocBuilder<HistoryCubit, HistoryStatus>(
@@ -61,7 +64,8 @@ class _HomeTapState extends State<HomeTap> {
             body: SafeArea(
               child: SingleChildScrollView(
                 child: Column(children: [
-                  Image.asset(AppAssets.availableNowImage),
+                  Image.asset(AppAssets.availableNowImage, color: themeProvider.isDarkMode()?
+                  AppColors.whiteColor:AppColors.blackColor,),
                   BlocBuilder<MovieViewModel, MovieStatues>(
                     bloc: viewModel,
                     builder: (context, state) {
@@ -125,14 +129,19 @@ class _HomeTapState extends State<HomeTap> {
                       return Container(); // unreachable
                     },
                   ),
-                  Image.asset(AppAssets.watchNowImage),
+                  Image.asset(AppAssets.watchNowImage,
+                    color: themeProvider.isDarkMode()?
+                    AppColors.whiteColor:AppColors.blackColor,
+                  ),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: size.width * .02),
                     child: Row(
                       children: [
                         Text(
-                          selectedCategory ?? '',
-                          style: AppStylesRoboto.regular20White,
+                            selectedCategory ?? '',
+                          style:
+                          themeProvider.isDarkMode()?
+                          AppStylesRoboto.regular20White:AppStylesRoboto.regular20Black,
                         ),
                         const Spacer(),
                         Text(

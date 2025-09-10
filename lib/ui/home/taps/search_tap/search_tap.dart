@@ -61,11 +61,12 @@ class _SearchTapState extends State<SearchTap> {
                   prefixIcon: Image.asset(
                     AppAssets.searchIcon,
                     color: themeProvider.isDarkMode()
-                        ? AppColors.blackColor
-                        : AppColors.whiteColor,
+                        ? AppColors.whiteColor
+                        : AppColors.blackColor,
                   ),
                   hintText: AppLocalizations.of(context)!.movie,
-                  hintStyle: AppStylesRoboto.regular16White,
+                  hintStyle: themeProvider.isDarkMode()
+                      ? AppStylesRoboto.regular16White:AppStylesRoboto.regular16Black,
                   onTapOutside: (event) => FocusScope.of(context).unfocus(),
                   cursorColor: AppColors.whiteColor,
                 ),

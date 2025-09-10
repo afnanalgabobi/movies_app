@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_app/model/user_model/shared_preference.dart';
 import 'package:movies_app/providers/app_Language_Provider.dart';
 import 'package:movies_app/providers/app_theme_provider.dart';
 import 'package:movies_app/providers/onBoarding_Provider.dart';
@@ -29,11 +30,18 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'l10n/app_localizations.dart';
 
+int? initScreen;
+bool? isLoggedIn;
 void main() async {
   Bloc.observer = MyBlocObserver();
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = MyBlocObserver();
   final prefs = await SharedPreferences.getInstance();
+  isLoggedIn = prefs.getBool(AppPreferences.keySaveLoggedIn) ?? false;
+  initScreen = prefs.getInt('initScreen');
+  if(initScreen==null){
+    await prefs.setInt('initScreen', 1);
+  }
   final savedLang = prefs.getString('language') ?? 'en';
   final savedTheme =
       prefs.getString('theme') == 'dark' ? ThemeMode.dark : ThemeMode.light;
@@ -78,7 +86,7 @@ class MyApp extends StatelessWidget {
     var themeProvider = Provider.of<AppThemeProvider>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.homeScreenRouteName,
+      initialRoute: getInitialRoute(),
       routes: {
         AppRoutes.onboardingScreenRouteName: (context) => OnBoardingScreen(),
         AppRoutes.loginScreenRouteName: (context) => LoginScreen(),
@@ -101,5 +109,16 @@ class MyApp extends StatelessWidget {
       darkTheme: AppThemes.darkTheme,
       themeMode: themeProvider.appTheme,
     );
+  }
+  String getInitialRoute() {
+    if (initScreen == 0 || initScreen == null) {
+      print('initScreen value: $initScreen');
+      return AppRoutes.onboardingScreenRouteName;
+    } else if (isLoggedIn == true) {
+      print('isLoggedIn value: $isLoggedIn');
+      return AppRoutes.homeScreenRouteName;
+    } else {
+      return AppRoutes.loginScreenRouteName;
+    }
   }
 }

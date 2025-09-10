@@ -14,7 +14,7 @@ class CastItem extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(12),
       alignment: Alignment.center,
-      height: size.height * 0.1,
+      height: size.height * 0.11,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16), color: AppColors.grayColor),
       child: Row(
