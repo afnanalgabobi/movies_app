@@ -55,4 +55,9 @@ class AppAssets {
   static const String watchNowImage = 'assets/images/watch_now_image.png';
   static const String eyeoffIcon = "assets/images/icon eye off.png";
   static const String containerImage = 'assets/images/container_image.png';
+
+
+  static const String homeIcon='assets/images/home_icon.png';
+  static const String languageIcon='assets/images/language_icon.png';
+  static const String themeIcon='assets/images/theme_icon.png';
 }

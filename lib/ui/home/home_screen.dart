@@ -7,6 +7,9 @@ import 'package:movies_app/ui/home/taps/profile_tap/profile_tap.dart';
 import 'package:movies_app/ui/home/taps/search_tap/search_tap.dart';
 import 'package:movies_app/utils/app_assets.dart';
 import 'package:movies_app/utils/app_colors.dart';
+import 'package:movies_app/utils/app_routes.dart';
+
+import 'drawer/home_drawer.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -29,6 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: taps[selectedIndex],
+      appBar: AppBar(),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(16.0),
         child: ClipRRect(
@@ -64,6 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
+      drawer: HomeDrawer(onDrawerItemClick: onDrawerItemClick,),
     );
   }
 
@@ -85,5 +90,13 @@ class _HomeScreenState extends State<HomeScreen> {
       selectedIndex = index;
       context.read<CategoryIndexCubit>().increaseIndex();
     });
+  }
+
+  void onDrawerItemClick(){
+    Navigator.popAndPushNamed(context, AppRoutes.homeScreenRouteName);
+    setState(() {
+
+    });
+
   }
 }

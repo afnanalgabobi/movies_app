@@ -10,6 +10,7 @@ import 'package:movies_app/utils/app_styles_inter.dart';
 import '../../../../model/movie_details_response/movie.dart';
 import '../../../../utils/app_colors.dart';
 import '../../../widgets/custom_gride_view/custom_gride_view.dart';
+//import '../../../widgets/custom_gride_view/custom_gride_view.dart';
 
 class BrowseTap extends StatefulWidget {
   BrowseTap({super.key});

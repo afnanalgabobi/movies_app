@@ -301,4 +301,10 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get movie => 'فيلم';
+
+  @override
+  String get movies_app => 'تطبيق الافلام';
+
+  @override
+  String get go_to_home => 'اذهب الى الرئيسية';
 }

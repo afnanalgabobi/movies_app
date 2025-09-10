@@ -59,135 +59,137 @@ class _HomeTapState extends State<HomeTap> {
         Scaffold(
             backgroundColor: AppColors.transparentColor,
             body: SafeArea(
-              child: Column(children: [
-                Image.asset(AppAssets.availableNowImage),
-                BlocBuilder<MovieViewModel, MovieStatues>(
-                  bloc: viewModel,
-                  builder: (context, state) {
-                    if (state is LoadingMovieStatues) {
-                      return const Center(
-                        child: CircularProgressIndicator(
+              child: SingleChildScrollView(
+                child: Column(children: [
+                  Image.asset(AppAssets.availableNowImage),
+                  BlocBuilder<MovieViewModel, MovieStatues>(
+                    bloc: viewModel,
+                    builder: (context, state) {
+                      if (state is LoadingMovieStatues) {
+                        return const Center(
+                          child: CircularProgressIndicator(
+                            color: AppColors.yellowColor,
+                          ),
+                        );
+                      } else if (state is ErrorMovieStatues) {
+                        return Column(
+                          children: [
+                            Text(state.errorMassage!),
+                            ElevatedButton(
+                                onPressed: () {
+                                  viewModel.getMoviesList();
+                                },
+                                child: const Text('try again')),
+                          ],
+                        );
+                      } else if (state is SuccessMovieStatues) {
+                        List<Movie> moviesList = state.listmovies!;
+                        // to sorted list by
+                        var sortedMoviesList = [...moviesList];
+                        sortedMoviesList.sort((a, b) {
+                          final dateA = a.dateUploadedUnix ?? 0;
+                          final dateB = b.dateUploadedUnix ?? 0;
+                          return dateB.compareTo(dateA);
+                        });
+                        // get category
+                        final categories = state.listmovies!
+                            .map((movie) => movie.genres?.first ?? '')
+                            .toSet()
+                            .toList();
+                        var index = context
+                            .read<CategoryIndexCubit>()
+                            .currentCategoryIndex;
+                        if (index >= categories.length) {
+                          index = 0;
+                        }
+                        selectedCategory = categories[index];
+                
+                        WidgetsBinding.instance.addPostFrameCallback((_) {
+                          categoryMovieViewModel.getCategorytMoviesList(
+                              category: selectedCategory!);
+                        });
+                        return CarouselSlider.builder(
+                          options: CarouselOptions(
+                            height: size.height * .3,
+                            enlargeCenterPage: true,
+                            viewportFraction: 0.35,
+                          ),
+                          itemCount: sortedMoviesList.length,
+                          itemBuilder: (BuildContext context, int itemIndex,
+                                  int pageViewIndex) =>
+                              MovieWidget(
+                            movie: sortedMoviesList[itemIndex],
+                          ),
+                        );
+                      }
+                      return Container(); // unreachable
+                    },
+                  ),
+                  Image.asset(AppAssets.watchNowImage),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: size.width * .02),
+                    child: Row(
+                      children: [
+                        Text(
+                          selectedCategory ?? '',
+                          style: AppStylesRoboto.regular20White,
+                        ),
+                        const Spacer(),
+                        Text(
+                          AppLocalizations.of(context)!.seeMore,
+                          style: AppStylesRoboto.regular16Yellow,
+                        ),
+                        const Icon(
+                          Icons.arrow_right_outlined,
                           color: AppColors.yellowColor,
                         ),
-                      );
-                    } else if (state is ErrorMovieStatues) {
-                      return Column(
-                        children: [
-                          Text(state.errorMassage!),
-                          ElevatedButton(
-                              onPressed: () {
-                                viewModel.getMoviesList();
-                              },
-                              child: const Text('try again')),
-                        ],
-                      );
-                    } else if (state is SuccessMovieStatues) {
-                      List<Movie> moviesList = state.listmovies!;
-                      // to sorted list by
-                      var sortedMoviesList = [...moviesList];
-                      sortedMoviesList.sort((a, b) {
-                        final dateA = a.dateUploadedUnix ?? 0;
-                        final dateB = b.dateUploadedUnix ?? 0;
-                        return dateB.compareTo(dateA);
-                      });
-                      // get category
-                      final categories = state.listmovies!
-                          .map((movie) => movie.genres?.first ?? '')
-                          .toSet()
-                          .toList();
-                      var index = context
-                          .read<CategoryIndexCubit>()
-                          .currentCategoryIndex;
-                      if (index >= categories.length) {
-                        index = 0;
-                      }
-                      selectedCategory = categories[index];
-
-                      WidgetsBinding.instance.addPostFrameCallback((_) {
-                        categoryMovieViewModel.getCategorytMoviesList(
-                            category: selectedCategory!);
-                      });
-                      return CarouselSlider.builder(
-                        options: CarouselOptions(
-                          height: size.height * .3,
-                          enlargeCenterPage: true,
-                          viewportFraction: 0.35,
-                        ),
-                        itemCount: sortedMoviesList.length,
-                        itemBuilder: (BuildContext context, int itemIndex,
-                                int pageViewIndex) =>
-                            MovieWidget(
-                          movie: sortedMoviesList[itemIndex],
-                        ),
-                      );
-                    }
-                    return Container(); // unreachable
-                  },
-                ),
-                Image.asset(AppAssets.watchNowImage),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: size.width * .02),
-                  child: Row(
-                    children: [
-                      Text(
-                        selectedCategory ?? '',
-                        style: AppStylesRoboto.regular20White,
-                      ),
-                      const Spacer(),
-                      Text(
-                        AppLocalizations.of(context)!.seeMore,
-                        style: AppStylesRoboto.regular16Yellow,
-                      ),
-                      const Icon(
-                        Icons.arrow_right_outlined,
-                        color: AppColors.yellowColor,
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-                BlocBuilder<CategoryMovieViewModel, CategoryMovieStatues>(
-                  bloc: categoryMovieViewModel,
-                  builder: (context, state) {
-                    if (state is LoadingCategoryMovieStatues) {
-                      return const CircularProgressIndicator(
-                        color: AppColors.yellowColor,
-                      );
-                    } else if (state is ErorrCategoryMovieStatues) {
-                      return Column(
-                        children: [
-                          Text(state.errormessage!),
-                          ElevatedButton(
-                              onPressed: () {}, child: const Text('try again')),
-                        ],
-                      );
-                    } else if (state is SuccessCategoryMovieStatues) {
-                      List<Movie> moviecategorylist = state.listmovies!;
-                      return SizedBox(
-                        height: size.height * .16,
-                        child: ListView.separated(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: moviecategorylist.length,
-                          itemBuilder: (context, index) {
-                            return Padding(
-                              padding: EdgeInsets.only(left: size.width * .02),
-                              child: MovieWidget(
-                                movie: moviecategorylist[index],
-                              ),
-                              //  MovieWidget(),
-                            );
-                          },
-                          separatorBuilder: (context, index) {
-                            return SizedBox(
-                              width: size.width * .009,
-                            );
-                          },
-                        ),
-                      );
-                    }
-                    return Container();
-                  },
-                ),
-              ]),
+                  BlocBuilder<CategoryMovieViewModel, CategoryMovieStatues>(
+                    bloc: categoryMovieViewModel,
+                    builder: (context, state) {
+                      if (state is LoadingCategoryMovieStatues) {
+                        return const CircularProgressIndicator(
+                          color: AppColors.yellowColor,
+                        );
+                      } else if (state is ErorrCategoryMovieStatues) {
+                        return Column(
+                          children: [
+                            Text(state.errormessage!),
+                            ElevatedButton(
+                                onPressed: () {}, child: const Text('try again')),
+                          ],
+                        );
+                      } else if (state is SuccessCategoryMovieStatues) {
+                        List<Movie> moviecategorylist = state.listmovies!;
+                        return SizedBox(
+                          height: size.height * .16,
+                          child: ListView.separated(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: moviecategorylist.length,
+                            itemBuilder: (context, index) {
+                              return Padding(
+                                padding: EdgeInsets.only(left: size.width * .02,),
+                                child: MovieWidget(
+                                  movie: moviecategorylist[index],
+                                ),
+                                //  MovieWidget(),
+                              );
+                            },
+                            separatorBuilder: (context, index) {
+                              return SizedBox(
+                                width: size.width * .009,
+                              );
+                            },
+                          ),
+                        );
+                      }
+                      return Container();
+                    },
+                  ),
+                ]),
+              ),
             ))
       ],
     );

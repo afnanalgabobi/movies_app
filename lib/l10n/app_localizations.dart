@@ -667,6 +667,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Movie'**
   String get movie;
+
+  /// No description provided for @movies_app.
+  ///
+  /// In en, this message translates to:
+  /// **'Movies App'**
+  String get movies_app;
+
+  /// No description provided for @go_to_home.
+  ///
+  /// In en, this message translates to:
+  /// **'Go To Home'**
+  String get go_to_home;
 }
 
 class _AppLocalizationsDelegate

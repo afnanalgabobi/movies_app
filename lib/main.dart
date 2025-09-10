@@ -11,7 +11,10 @@ import 'package:movies_app/ui/home/home_screen.dart';
 import 'package:movies_app/ui/home/taps/browse_tap/browse_tap.dart';
 import 'package:movies_app/ui/home/taps/home_tap/cubit/category_index_cubit/category_index_cubit.dart';
 import 'package:movies_app/ui/home/taps/home_tap/cubit/history_cubit/history_cubit.dart';
+import 'package:movies_app/ui/home/taps/home_tap/cubit/movie_cubit/movie_view_model.dart';
+import 'package:movies_app/ui/home/taps/home_tap/movie_details/cubit/screenshots_cubit/screenshots_view_model.dart';
 import 'package:movies_app/ui/home/taps/home_tap/movie_details/movie_details.dart';
+import 'package:movies_app/ui/home/taps/home_tap/movie_details/widgets/screen_shots.dart';
 import 'package:movies_app/ui/home/taps/profile_tap/cubit/profile_view_model.dart';
 import 'package:movies_app/ui/home/taps/profile_tap/profile_tap.dart';
 import 'package:movies_app/ui/home/taps/profile_tap/reset_passworf/views/reset_password_view.dart';
@@ -96,7 +99,7 @@ class MyApp extends StatelessWidget {
       supportedLocales: AppLocalizations.supportedLocales,
       theme: AppThemes.lightTheme,
       darkTheme: AppThemes.darkTheme,
-      themeMode: ThemeMode.dark,
+      themeMode: themeProvider.appTheme,
     );
   }
 }
