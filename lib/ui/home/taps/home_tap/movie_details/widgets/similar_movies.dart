@@ -26,14 +26,14 @@ class _SimilarMoviesState extends State<SimilarMovies> {
   }
   @override
   Widget build(BuildContext context) {
-
     var height = MediaQuery.sizeOf(context).height;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(AppLocalizations.of(context)!.similar, style: Theme.of(context).textTheme.headlineMedium),
+          Text(AppLocalizations.of(context)!.similar,
+              style: Theme.of(context).textTheme.bodyLarge),
           BlocBuilder<SuggestedMovieViewModel, SuggestedMovieStatues>(
             bloc: suggestedViewModel,
             builder: (context, state) {

@@ -46,7 +46,6 @@ class _MovieDetailsState extends State<MovieDetails> {
   Widget build(BuildContext context) {
     var size = MediaQuery.sizeOf(context);
     return Scaffold(
-      backgroundColor: AppColors.transparentColor,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -108,10 +107,10 @@ class _MovieDetailsState extends State<MovieDetails> {
                         height: size.height * .02,
                       ),
                       ScreenShots(movie: movie, movieId: movieId), //Alia
+                      SimilarMovies(movie: myMovie,), // Afnan
                       SizedBox(
                         height: size.height * .02,
                       ),
-                      SimilarMovies(movie: myMovie,), // Afnan
                       MovieSummary(movie: movie), // Nouran
                       SizedBox(
                         height: size.height * .02,

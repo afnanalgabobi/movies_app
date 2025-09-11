@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:movies_app/l10n/app_localizations.dart';
 import 'package:movies_app/utils/app_colors.dart';
 import 'package:movies_app/utils/app_styles_roboto.dart';
@@ -21,7 +21,7 @@ class Genres extends StatelessWidget {
         children: [
           Text(
             AppLocalizations.of(context)!.genres,
-            style: AppStylesRoboto.bold24White,
+            style: Theme.of(context).textTheme.bodyLarge,
           ),
           SizedBox(
             height: size.height * .02,
