@@ -107,7 +107,7 @@ class _HomeTapState extends State<HomeTap> {
                           index = 0;
                         }
                         selectedCategory = categories[index];
-                
+
                         WidgetsBinding.instance.addPostFrameCallback((_) {
                           categoryMovieViewModel.getCategorytMoviesList(
                               category: selectedCategory!);
@@ -138,7 +138,7 @@ class _HomeTapState extends State<HomeTap> {
                     child: Row(
                       children: [
                         Text(
-                            selectedCategory ?? '',
+                          selectedCategory ?? '',
                           style:
                           themeProvider.isDarkMode()?
                           AppStylesRoboto.regular20White:AppStylesRoboto.regular20Black,

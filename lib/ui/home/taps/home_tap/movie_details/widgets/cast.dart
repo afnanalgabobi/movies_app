@@ -33,7 +33,10 @@ class Cast extends StatelessWidget {
               separatorBuilder: (context, index) => SizedBox(
                     height: size.height * 0.008,
                   ),
-              itemCount: 4),
+            itemCount: movie.cast?.length == null
+                ? 0
+                : (movie.cast!.length > 4 ? 4 : movie.cast!.length),
+          ),
         ],
       ),
     );

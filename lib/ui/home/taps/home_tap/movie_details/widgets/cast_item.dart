@@ -2,6 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_app/model/movie_details_response/cast_response.dart';
 import 'package:movies_app/utils/app_colors.dart';
+import 'package:provider/provider.dart';
+
+import '../../../../../../providers/app_theme_provider.dart';
 
 class CastItem extends StatelessWidget {
   CastResponse castResponse;
@@ -11,12 +14,15 @@ class CastItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    var themeProvider = Provider.of<AppThemeProvider>(context);
     return Container(
       padding: EdgeInsets.all(12),
       alignment: Alignment.center,
       height: size.height * 0.11,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16), color: AppColors.grayColor),
+          border: Border.all(color: AppColors.grayColor, width: 2),
+          borderRadius: BorderRadius.circular(16),
+          color: Theme.of(context).cardColor),
       child: Row(
         children: [
           SizedBox(
