@@ -93,6 +93,8 @@
   "exit": "Exit",
   "summery" : "Summery",
   "geners": "Geners",
-  "movie": "Movie"
+  "movie": "Movie",
+    "movies_app":"Movies App",
+    "go_to_home":"Go To Home"
 
 }

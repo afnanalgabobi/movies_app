@@ -302,4 +302,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get movie => 'Movie';
+
+  @override
+  String get movies_app => 'Movies App';
+
+  @override
+  String get go_to_home => 'Go To Home';
 }
