@@ -35,36 +35,39 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(16), //
-          child: BottomNavigationBar(
-            onTap: onItemTapped,
-            showSelectedLabels: false,
-            showUnselectedLabels: false,
-            type: BottomNavigationBarType.fixed,
-            backgroundColor: AppColors.grayColor,
-            items: [
-              buildbottomnavigationbaritem(
-                  label: 'home',
-                  unselectedimage: AppAssets.homeTabUnselected,
-                  selectedimage: AppAssets.homeTabSelected,
-                  index: 0),
-              buildbottomnavigationbaritem(
-                  label: 'search',
-                  unselectedimage: AppAssets.searchTabUnselected,
-                  selectedimage: AppAssets.searchTabSelected,
-                  index: 1),
-              buildbottomnavigationbaritem(
-                  label: 'brows',
-                  unselectedimage: AppAssets.browseTabUnselected,
-                  selectedimage: AppAssets.browseTabSelected,
-                  index: 2),
-              buildbottomnavigationbaritem(
-                  label: 'profile',
-                  unselectedimage: AppAssets.profileTabUnselected,
-                  selectedimage: AppAssets.profileTabSelected,
-                  index: 3),
-            ],
+        child: SizedBox(
+          height: 60,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(16), //
+            child: BottomNavigationBar(
+              onTap: onItemTapped,
+              showSelectedLabels: false,
+              showUnselectedLabels: false,
+              type: BottomNavigationBarType.fixed,
+              backgroundColor: AppColors.grayColor,
+              items: [
+                buildbottomnavigationbaritem(
+                    label: 'home',
+                    unselectedimage: AppAssets.homeTabUnselected,
+                    selectedimage: AppAssets.homeTabSelected,
+                    index: 0),
+                buildbottomnavigationbaritem(
+                    label: 'search',
+                    unselectedimage: AppAssets.searchTabUnselected,
+                    selectedimage: AppAssets.searchTabSelected,
+                    index: 1),
+                buildbottomnavigationbaritem(
+                    label: 'brows',
+                    unselectedimage: AppAssets.browseTabUnselected,
+                    selectedimage: AppAssets.browseTabSelected,
+                    index: 2),
+                buildbottomnavigationbaritem(
+                    label: 'profile',
+                    unselectedimage: AppAssets.profileTabUnselected,
+                    selectedimage: AppAssets.profileTabSelected,
+                    index: 3),
+              ],
+            ),
           ),
         ),
       ),

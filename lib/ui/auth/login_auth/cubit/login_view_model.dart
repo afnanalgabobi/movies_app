@@ -23,6 +23,7 @@ class LoginViewModel extends Cubit<LoginState> {
         if (response != null && response.message == "Success Login") {
           final token = response.data ?? "";
           await AppPreferences.saveUserToken(token);
+          await AppPreferences.saveLoginStatus();
           print('Response message => ${response.message}');
           print('Response token => ${response.data}');
           emit(LoginSuccessState(response: response));

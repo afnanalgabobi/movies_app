@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class AppPreferences {
   static const String _keyToken = "TOKEN";
   static const String _keyIsLoggedIn = "IS_LOGGED_IN";
+  static const String keySaveLoggedIn = "SAVE_LOGGED_IN";
 
   static Future<void> saveUserToken(String token) async {
     final prefs = await SharedPreferences.getInstance();
@@ -23,5 +24,10 @@ class AppPreferences {
   static Future<void> logout() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.clear();
+  }
+
+  static Future<void> saveLoginStatus() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(keySaveLoggedIn, true);
   }
 }

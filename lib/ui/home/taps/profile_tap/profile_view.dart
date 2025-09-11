@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies_app/model/user_model/shared_preference.dart';
 import 'package:movies_app/ui/home/taps/home_tap/cubit/history_cubit/history_cubit.dart';
 import 'package:movies_app/ui/widgets/custom_gride_view_network/custom_gride_view.dart';
 
@@ -136,9 +137,7 @@ class _ProfileViewState extends State<ProfileView> {
                                             AppRoutes.updateProfileScreenRouteName,
                                             arguments: [state.user, viewModel]);
                                       },
-                                      text: 'edit',
-                                      // AppLocalizations.of(context)!
-                                      //     .edit_profile,
+                                      text: AppLocalizations.of(context)!.edit_profile,
                                       textStyle:
                                       Theme.of(context).textTheme.headlineLarge,
                                     )),
@@ -147,14 +146,16 @@ class _ProfileViewState extends State<ProfileView> {
                                     child: CustomElevatedButton(
                                         backgroundColor: AppColors.redColor,
                                         borderColor: AppColors.transparentColor,
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          AppPreferences.logout();
+                                          Navigator.popAndPushNamed(context, AppRoutes.loginScreenRouteName);
+                                        },
                                         textStyle: Theme.of(context)
                                             .textTheme
                                             .headlineMedium,
                                         icon: true,
                                         iconWidget: Image.asset(AppAssets.exitIcon),
-                                        text: 'exit'
-                                      // AppLocalizations.of(context)!.exit
+                                        text: AppLocalizations.of(context)!.exit
                                     ))
                               ],
                             ),
