@@ -6,12 +6,11 @@ import 'package:movies_app/api/end_points.dart';
 import 'package:movies_app/model/LoginResponse.dart';
 import 'package:movies_app/model/reset_password_response.dart';
 import 'package:movies_app/model/responsemovies/movie.dart';
-import 'package:movies_app/model/responsemovies/responsemovies.dart';
-
 import '../model/movie_details_response/movie.dart';
 import '../model/movie_details_response/movie_details_response.dart';
 import '../model/register_model/register_request.dart';
 import '../model/register_model/register_response.dart';
+import '../model/responsemovies/responsemovies.dart';
 
 class ApiManager {
 

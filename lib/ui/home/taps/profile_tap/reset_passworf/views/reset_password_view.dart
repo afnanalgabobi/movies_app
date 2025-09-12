@@ -8,6 +8,7 @@ import 'package:movies_app/utils/app_assets.dart';
 import 'package:movies_app/utils/app_colors.dart';
 import 'package:movies_app/utils/app_routes.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../../../../../model/user_model/shared_preference.dart';
 import '../cubit/reset_password_view_model.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
@@ -21,8 +22,10 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   ResetPasswordViewModel resetPasswordViewModel = ResetPasswordViewModel();
 
   _printTestToken() async {
-    final prefs = await SharedPreferences.getInstance();
-    String? token = prefs.getString('token');
+    // final prefs = await SharedPreferences.getInstance();
+    // String? token = prefs.getString('token');
+    var token = await AppPreferences.getUserToken();
+
     print("Token => $token");
   }
 
@@ -41,16 +44,20 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
       child: BlocConsumer<ResetPasswordViewModel, ResetPasswordState>(
         listener: (context, state) {
           if (state is ResetPasswordLSuccess) {
-            DialogUtils.showMessage(
-                context: context,
-                message: state.message,
-                posAction: () {
-                  Navigator.pushNamed(
-                      context, AppRoutes.updateProfileScreenRouteName);
-                },
-                posActionName: "Ok");
 
-            print("State : ${state.message}");
+                  Future.delayed(
+                    Duration(microseconds: 500),
+                        () {
+                      DialogUtils.showMessage(
+                        context:context,
+                        message:  state.message,
+                        posActionName: 'ok',
+                        posAction: (){
+                          Navigator.pop(context);
+                        },);
+                    },
+                  );
+
           } else {
             if (state is ResetPasswordLError) {
               DialogUtils.showMessage(

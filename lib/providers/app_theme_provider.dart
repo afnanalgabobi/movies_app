@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../model/user_model/shared_preference.dart';
+
 class AppThemeProvider extends ChangeNotifier {
   ThemeMode appTheme = ThemeMode.dark;
 
@@ -27,6 +29,7 @@ class AppThemeProvider extends ChangeNotifier {
   void loadTheme() async {
     final prefs = await SharedPreferences.getInstance();
     String? savedTheme = prefs.getString('appTheme');
+
     if (savedTheme == 'dark') {
       appTheme = ThemeMode.dark;
     } else {

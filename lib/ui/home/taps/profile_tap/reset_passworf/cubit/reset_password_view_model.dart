@@ -2,6 +2,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:movies_app/api/api_manager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../../../../../model/user_model/shared_preference.dart';
 part 'reset_password_state.dart';
 
 class ResetPasswordViewModel extends Cubit<ResetPasswordState> {
@@ -18,8 +20,10 @@ class ResetPasswordViewModel extends Cubit<ResetPasswordState> {
 
     emit(ResetPasswordLoading());
     try {
-      final prefs = await SharedPreferences.getInstance();
-      String? token = prefs.getString('token');
+      // final prefs = await SharedPreferences.getInstance();
+      // String? token = prefs.getString('token');
+      //
+      var token = await AppPreferences.getUserToken();
 
       if (token == null) {
         emit(ResetPasswordLError(errorMessage: 'User not authenticated'));

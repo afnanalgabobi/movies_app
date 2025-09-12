@@ -4,7 +4,6 @@ import 'package:movies_app/providers/app_Language_Provider.dart';
 import 'package:movies_app/providers/app_theme_provider.dart';
 import 'package:movies_app/providers/onBoarding_Provider.dart';
 import 'package:movies_app/ui/OnBoarding/onBoarding_screen.dart';
-import 'package:movies_app/ui/ResetPassword/reset_password_view.dart';
 import 'package:movies_app/ui/auth/forget_password_screen.dart';
 import 'package:movies_app/ui/auth/login_auth/login_screen.dart';
 import 'package:movies_app/ui/auth/register_auth/register_screen.dart';
