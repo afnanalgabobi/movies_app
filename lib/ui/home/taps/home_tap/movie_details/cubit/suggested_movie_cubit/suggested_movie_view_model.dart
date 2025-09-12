@@ -16,7 +16,8 @@ class SuggestedMovieViewModel extends Cubit<SuggestedMovieStatues> {
       if (response!.status == 'error') {
         emit(ErrorSuggestedMovieStatues(errorMassage: response.statusMessage));
       } else {
-        emit(SuccessSuggestedMovieStatues(suggestedMovieList: response.data!.movies));
+        emit(SuccessSuggestedMovieStatues(
+            suggestedMovieList: response.data!.moviesList));
       }
     } catch (e) {
       emit(ErrorSuggestedMovieStatues(errorMassage: e.toString()));

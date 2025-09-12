@@ -92,6 +92,9 @@
   "edit_profile": "Edit Profile",
   "exit": "Exit",
   "summery" : "Summery",
-  "geners" : "Geners"
+  "geners": "Geners",
+  "movie": "Movie",
+    "movies_app":"Movies App",
+    "go_to_home":"Go To Home"
 
 }

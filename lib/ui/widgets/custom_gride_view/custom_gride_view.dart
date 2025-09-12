@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../model/movie_details_response/movie.dart';
+import '../../../model/responsemovies/movie.dart';
 import '../custom_movies_container_item.dart';
 
 class CustomGrideView extends StatelessWidget {

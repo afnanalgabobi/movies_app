@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
+
 import '../../model/movie_details_response/movie.dart';
 import '../../utils/app_assets.dart';
 import '../../utils/app_colors.dart';

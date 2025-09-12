@@ -10,4 +10,5 @@ class AppRoutes {
   static const String profileTabRouteName = 'profile_screen';
   static const String BrowseTabRouteName = 'browse_screen';
   static const String resetPasswordScreenRouteName = 'reset_password_screen';
+ // static const String screenshotScreenRouteName = 'screenshot_screen';
 }

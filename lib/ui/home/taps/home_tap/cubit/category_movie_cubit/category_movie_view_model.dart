@@ -13,7 +13,8 @@ class CategoryMovieViewModel extends Cubit<CategoryMovieStatues> {
       if (response!.status == 'error') {
         emit(ErorrCategoryMovieStatues(errormessage: response.statusMessage));
       } else {
-        emit(SuccessCategoryMovieStatues(listmovies: response.data!.movies));
+        emit(
+            SuccessCategoryMovieStatues(listmovies: response.data!.moviesList));
       }
     } catch (e) {
       emit(ErorrCategoryMovieStatues(errormessage: e.toString()));

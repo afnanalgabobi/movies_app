@@ -12,32 +12,40 @@ import 'package:movies_app/ui/home/home_screen.dart';
 import 'package:movies_app/ui/home/taps/browse_tap/browse_tap.dart';
 import 'package:movies_app/ui/home/taps/home_tap/cubit/category_index_cubit/category_index_cubit.dart';
 import 'package:movies_app/ui/home/taps/home_tap/cubit/history_cubit/history_cubit.dart';
-import 'package:movies_app/ui/home/taps/home_tap/cubit/movie_cubit/movie_view_model.dart';
-import 'package:movies_app/ui/home/taps/home_tap/movie_details/cubit/movie_info_cubit/movie_info_view_model.dart';
 import 'package:movies_app/ui/home/taps/home_tap/movie_details/cubit/watch_list_cubit/watchList_cubit.dart';
 import 'package:movies_app/ui/home/taps/home_tap/movie_details/movie_details.dart';
 import 'package:movies_app/ui/home/taps/profile_tap/cubit/profile_view_model.dart';
 import 'package:movies_app/ui/home/taps/profile_tap/profile_tap.dart';
 import 'package:movies_app/ui/home/taps/profile_tap/reset_passworf/views/reset_password_view.dart';
 import 'package:movies_app/ui/home/taps/profile_tap/update_profile/update_profile.dart';
+import 'package:movies_app/ui/home/taps/search_tap/search_tab_view_model/search_tab_cubit.dart';
 import 'package:movies_app/ui/home/taps/search_tap/search_tap.dart';
 import 'package:movies_app/utils/app_routes.dart';
 import 'package:movies_app/utils/app_themes.dart';
 import 'package:movies_app/utils/my_bloc_observer.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'l10n/app_localizations.dart';
 
+import 'l10n/app_localizations.dart';
+import 'model/user_model/shared_preference.dart';
+int? initScreen;
+bool? isLoggedIn;
 void main() async {
   Bloc.observer = MyBlocObserver();
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = MyBlocObserver();
   final prefs = await SharedPreferences.getInstance();
+  isLoggedIn = prefs.getBool(AppPreferences.keySaveLoggedIn) ?? false;
+  initScreen = prefs.getInt('initScreen');
+  if(initScreen==null){
+    await prefs.setInt('initScreen', 1);
+  }
   final savedLang = prefs.getString('language') ?? 'en';
   final savedTheme =
       prefs.getString('theme') == 'dark' ? ThemeMode.dark : ThemeMode.light;
   Bloc.observer = MyBlocObserver();
   var watchListCubit = WatchListCubit();
+
   runApp(MultiProvider(
       providers: [
         ChangeNotifierProvider(
@@ -53,7 +61,7 @@ void main() async {
         providers: [
            BlocProvider.value(
             value: watchListCubit, // reuse same instance everywhere
-          ),  
+          ),
           // BlocProvider.value(
           //   value: historyCubit, // reuse same instance everywhere
           // ),
@@ -65,6 +73,10 @@ void main() async {
           BlocProvider(create: (context) => ProfileCubit()),
           // BlocProvider(create: (context) => WatchListCubit()),
              BlocProvider(create: (context) => MovieInfoViewModel()),
+          BlocProvider(
+            create: (context) => SearchTabCubit(),
+          )
+          //    BlocProvider(create: (context) => MovieViewModel()),
         ],
         child: MyApp(),
       )));
@@ -79,7 +91,7 @@ class MyApp extends StatelessWidget {
     var themeProvider = Provider.of<AppThemeProvider>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: AppRoutes.onboardingScreenRouteName,
+      initialRoute: getInitialRoute(),
       routes: {
         AppRoutes.onboardingScreenRouteName: (context) => OnBoardingScreen(),
         AppRoutes.loginScreenRouteName: (context) => LoginScreen(),
@@ -102,5 +114,16 @@ class MyApp extends StatelessWidget {
       darkTheme: AppThemes.darkTheme,
       themeMode: ThemeMode.dark,
     );
+  }
+  String getInitialRoute() {
+    if (initScreen == 0 || initScreen == null) {
+      print('initScreen value: $initScreen');
+      return AppRoutes.onboardingScreenRouteName;
+    } else if (isLoggedIn == true) {
+      print('isLoggedIn value: $isLoggedIn');
+      return AppRoutes.homeScreenRouteName;
+    } else {
+      return AppRoutes.loginScreenRouteName;
+    }
   }
 }

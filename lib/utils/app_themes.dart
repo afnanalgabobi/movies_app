@@ -22,6 +22,14 @@ class AppThemes {
       unselectedLabelColor: AppColors.transparentColor,
       tabAlignment: TabAlignment.center,
     ),
+    navigationBarTheme: const NavigationBarThemeData(
+      backgroundColor: AppColors.grayColor,
+      elevation: 0,
+      indicatorColor: AppColors.transparentColor,
+      overlayColor: WidgetStatePropertyAll(AppColors.transparentColor),
+      labelPadding: EdgeInsets.all(0),
+      labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
+    ),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: AppColors.transparentColor,
       type: BottomNavigationBarType.fixed,
@@ -70,6 +78,14 @@ class AppThemes {
       labelColor: AppColors.yellowColor,
       unselectedLabelColor: AppColors.transparentColor,
       tabAlignment: TabAlignment.center,
+    ),
+    navigationBarTheme: const NavigationBarThemeData(
+      backgroundColor: AppColors.whiteColor,
+      elevation: 0,
+      indicatorColor: AppColors.transparentColor,
+      overlayColor: WidgetStatePropertyAll(AppColors.transparentColor),
+      labelPadding: EdgeInsets.all(0),
+      labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
     ),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: AppColors.transparentColor,
