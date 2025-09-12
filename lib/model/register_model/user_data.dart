@@ -59,6 +59,7 @@ class UserData {
     };
   }
 
+// for update user info
   UserData copyWith({String? name, int? avatar, String? phone}) {
     return UserData(
       name: name ?? this.name,

@@ -7,22 +7,21 @@ class SuggestedMovieViewModel extends Cubit<SuggestedMovieStatues> {
   // hold data
 
   // handel Logic
- void getSuggestedMoviesList( {required String? movieId}) async {
+  void getSuggestedMoviesList( {required String? movieId}) async {
     if(movieId !=null)
     {
       try {
-      emit(LoadingSuggestedMovieStatues());
-      var response = await ApiManager.getSuggestedMoviesList(movieId: movieId);
-      if (response!.status == 'error') {
-        emit(ErrorSuggestedMovieStatues(errorMassage: response.statusMessage));
-      } else {
-        emit(SuccessSuggestedMovieStatues(
-            suggestedMovieList: response.data!.moviesList));
-      }
-    } catch (e) {
-      emit(ErrorSuggestedMovieStatues(errorMassage: e.toString()));
-    }}
+        emit(LoadingSuggestedMovieStatues());
+        var response = await ApiManager.getSuggestedMoviesList(movieId: movieId);
+        if (response!.status == 'error') {
+          emit(ErrorSuggestedMovieStatues(errorMassage: response.statusMessage));
+        } else {
+          emit(SuccessSuggestedMovieStatues(suggestedMovieList: response.data!.movies));
+        }
+      } catch (e) {
+        emit(ErrorSuggestedMovieStatues(errorMassage: e.toString()));
+      }}
     else   emit(ErrorSuggestedMovieStatues(errorMassage: 'error'));
 
- }
+  }
 }

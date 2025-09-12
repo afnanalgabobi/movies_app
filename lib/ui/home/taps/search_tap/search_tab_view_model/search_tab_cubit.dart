@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/api/api_manager.dart';
 import 'package:movies_app/ui/home/taps/search_tap/search_tab_view_model/search_tab_states.dart';
 import '../../../../../model/movie_details_response/movie.dart';
+import '../../../../../model/responsemovies/movie.dart';
 
 class SearchTabCubit extends Cubit<SearchTabStates> {
   final ScrollController scrollController = ScrollController();
@@ -29,16 +30,18 @@ class SearchTabCubit extends Cubit<SearchTabStates> {
       emit(SearchLoadingState());
     }
     try {
-      final result =
-          await ApiManager.getMoviesByQuery(searchController.text, page) ?? [];
+      var response = await ApiManager.getMoviesByQuery(searchController.text, page);
 
-      movies.addAll(result);
+      // final result =
+          // await ApiManager.getMoviesByQuery(searchController.text, page) ?? [];
+
+      movies.addAll(response!.data!.movies ?? []);
       if (movies.isEmpty) {
         emit(SearchEmptyState());
         return;
       }
 
-      emit(SearchSuccessState(result));
+      emit(SearchSuccessState(response!.data!.movies ?? []));
     } catch (e) {
       emit(SearchErrorState(e.toString()));
     }

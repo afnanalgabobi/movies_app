@@ -111,7 +111,7 @@ class _MovieDetailsState extends State<MovieDetails> {
                       SizedBox(
                         height: size.height * .02,
                       ),
-                      SimilarMovies(movie: myMovie,), // Afnan
+                      SimilarMovies(movie: movie,), // Afnan
                       MovieSummary(movie: movie), // Nouran
                       SizedBox(
                         height: size.height * .02,

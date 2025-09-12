@@ -1,4 +1,4 @@
-import 'torrent.dart';
+import '../movie_details_response/torrent.dart';
 
 class Movie {
   int? id;

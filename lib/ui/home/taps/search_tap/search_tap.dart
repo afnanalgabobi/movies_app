@@ -5,11 +5,13 @@ import 'package:movies_app/providers/app_theme_provider.dart';
 import 'package:movies_app/ui/home/taps/search_tap/search_tab_view_model/search_tab_cubit.dart';
 import 'package:movies_app/ui/home/taps/search_tap/search_tab_view_model/search_tab_states.dart';
 import 'package:movies_app/ui/widgets/custom_movies_container_item.dart';
+import 'package:movies_app/ui/widgets/custom_movies_container_item_network.dart';
 import 'package:movies_app/utils/app_colors.dart';
 import 'package:movies_app/utils/app_styles_roboto.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../model/movie_details_response/movie.dart';
+import '../../../../model/responsemovies/movie.dart';
 import '../../../../utils/app_assets.dart';
 import '../../../widgets/custom_text_form_field.dart';
 
@@ -142,9 +144,9 @@ class _SearchTapState extends State<SearchTap> {
                           }
                           final movie = moviesList[index];
                           return CustomMoviesContainerItem(
-                            movieId: movie.imdbCode,
-                            imagePath: movie.mediumCoverImage ?? '',
-                            rating: movie.rating,
+                            // movieId: movie.imdbCode,
+                            // imagePath: movie.mediumCoverImage ?? '',
+                            // rating: movie.rating,
                             movie: movie,
                           );
                         },

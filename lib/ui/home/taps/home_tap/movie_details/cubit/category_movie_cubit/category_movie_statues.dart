@@ -12,6 +12,6 @@ class ErorrCategoryMovieStatues extends CategoryMovieStatues {
 }
 
 class SuccessCategoryMovieStatues extends CategoryMovieStatues {
-  List<Movie>? listmovies;
+  List<MovieModel>? listmovies;
   SuccessCategoryMovieStatues({required this.listmovies});
 }

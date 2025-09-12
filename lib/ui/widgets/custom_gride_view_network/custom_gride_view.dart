@@ -7,7 +7,7 @@ class CustomGrideView_Network extends StatelessWidget {
   int crossAxisCount;
   double crossAxisSpacing;
   double mainAxisSpacing;
-  List<Movie> moviesList;
+  List<MovieModel> moviesList;
 
   CustomGrideView_Network({
     super.key,

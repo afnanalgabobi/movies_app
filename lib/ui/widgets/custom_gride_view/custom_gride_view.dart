@@ -6,7 +6,7 @@ class CustomGrideView extends StatelessWidget {
   int crossAxisCount;
   double crossAxisSpacing;
   double mainAxisSpacing;
-  List<MovieModel> moviesList;
+  List<Movie> moviesList;
 
   CustomGrideView({
     super.key,

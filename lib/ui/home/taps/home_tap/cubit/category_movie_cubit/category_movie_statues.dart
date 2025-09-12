@@ -1,4 +1,5 @@
 import '../../../../../../model/movie_details_response/movie.dart';
+import '../../../../../../model/responsemovies/movie.dart';
 
 abstract class CategoryMovieStatues {}
 

@@ -219,7 +219,7 @@ class _ProfileViewState extends State<ProfileView> {
                                   : Padding(
                                 padding: EdgeInsets.symmetric(
                                     horizontal: width * 0.04),
-                                child: CustomGrideView(
+                                child: CustomGrideView_Network(
                                   crossAxisCount: 3,
                                   crossAxisSpacing: 20,
                                   mainAxisSpacing: 20,
@@ -236,7 +236,7 @@ class _ProfileViewState extends State<ProfileView> {
                                   : Padding(
                                 padding: EdgeInsets.symmetric(
                                     horizontal: width * 0.04),
-                                child: CustomGrideView_Network(
+                                child: CustomGrideView(
                                     crossAxisCount: 3,
                                     crossAxisSpacing: 20,
                                     mainAxisSpacing: 20,
@@ -253,7 +253,6 @@ class _ProfileViewState extends State<ProfileView> {
   }
   void exit() async {
     await viewModel.exit();
-
     Future.delayed(
       Duration(microseconds: 500),
           () {

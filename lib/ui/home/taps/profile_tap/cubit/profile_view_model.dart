@@ -28,7 +28,7 @@ class ProfileCubit extends Cubit<ProfileStates> {
   ProfileCubit() : super(ProfileInitial());
   void getUserByToken() async {
     var token = await AppPreferences.getUserToken();
-    print('My token => ${token}');
+    print('My user token => ${token}');
     if (token == null) {
       throw Exception("No token found, user not logged in");
     }
@@ -71,8 +71,7 @@ class ProfileCubit extends Cubit<ProfileStates> {
     }
 
     try {
-      final prefs = await SharedPreferences.getInstance();
-      final token = prefs.getString('token');
+      var token = await AppPreferences.getUserToken();
 
       print('on update : My token => ${token}');
       print(currentProfile!.avaterId);
@@ -83,10 +82,14 @@ class ProfileCubit extends Cubit<ProfileStates> {
             "Content-Type": "application/json",
             "Authorization": "Bearer $token",
           },
-          body: jsonEncode({"name": name, "phone": phone, "avaterId": avatar}));
+          body: jsonEncode({
+            "name": name,
+            "phone": phone,
+            "avaterId": avatar}));
+
       if (response.statusCode == 200) {
         final updatedProfile =
-            currentProfile!.copyWith(name: name, avatar: avatar, phone: phone);
+        currentProfile!.copyWith(name: name, avatar: avatar, phone: phone);
         currentProfile = updatedProfile;
         print(currentProfile!.name);
         print(currentProfile!.phone);
@@ -121,10 +124,9 @@ class ProfileCubit extends Cubit<ProfileStates> {
       return;
     }
     try {
-       await AppPreferences.logout();
+      await AppPreferences.logout();
     } catch (e) {
       emit(DeleteProfileErrorState("Failed exit"));
     }
   }
-
 }

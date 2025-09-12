@@ -6,8 +6,7 @@ import 'package:movies_app/utils/app_assets.dart';
 import 'package:movies_app/utils/app_colors.dart';
 import 'package:movies_app/utils/app_routes.dart';
 import 'package:movies_app/utils/app_styles_roboto.dart';
-
-import '../../../../model/movie_details_response/movie.dart';
+import '../../../../model/responsemovies/movie.dart';
 
 class MovieWidget extends StatefulWidget {
   MovieWidget({super.key, required this.movie});

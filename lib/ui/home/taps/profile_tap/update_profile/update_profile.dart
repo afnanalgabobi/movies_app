@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/data/avatarList.dart';
 import 'package:movies_app/l10n/app_localizations.dart';
-import 'package:movies_app/ui/OnBoarding/onBoarding_screen.dart';
 import 'package:movies_app/ui/home/taps/profile_tap/update_profile/widgets/build_bottomSheet.dart';
 import 'package:movies_app/utils/app_assets.dart';
 import 'package:movies_app/utils/app_colors.dart';
 import 'package:movies_app/utils/app_styles_roboto.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../../model/register_model/user_data.dart';
 import '../../../../../utils/app_routes.dart';
 import '../../../../../utils/dialogue_utils.dart';
@@ -186,7 +184,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
             message: 'user updated',
             posActionTitle: 'ok',
             posAction: (){
-              Navigator.pushNamed(context, AppRoutes.profileTabRouteName);
+              Navigator.popAndPushNamed(context, AppRoutes.profileTabRouteName);
             },);
         },
       );

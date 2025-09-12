@@ -7,7 +7,7 @@ import '../../utils/app_colors.dart';
 import '../../utils/app_styles_roboto.dart';
 
 class CustomMoviesContainerItem_Network extends StatelessWidget {
-  Movie movie;
+  MovieModel movie;
 
   CustomMoviesContainerItem_Network({super.key, required this.movie});
 

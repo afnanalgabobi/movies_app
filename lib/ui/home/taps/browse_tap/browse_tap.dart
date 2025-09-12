@@ -5,9 +5,11 @@ import 'package:movies_app/ui/home/taps/home_tap/cubit/category_movie_cubit/cate
 import 'package:movies_app/ui/home/taps/home_tap/cubit/category_movie_cubit/category_movie_view_model.dart';
 import 'package:movies_app/ui/home/taps/home_tap/cubit/movie_cubit/movie_statues.dart';
 import 'package:movies_app/ui/home/taps/home_tap/cubit/movie_cubit/movie_view_model.dart';
+import 'package:movies_app/ui/widgets/custom_gride_view_network/custom_gride_view.dart';
 import 'package:movies_app/utils/app_styles_inter.dart';
 
 import '../../../../model/movie_details_response/movie.dart';
+import '../../../../model/responsemovies/movie.dart';
 import '../../../../utils/app_colors.dart';
 import '../../../widgets/custom_gride_view/custom_gride_view.dart';
 //import '../../../widgets/custom_gride_view/custom_gride_view.dart';

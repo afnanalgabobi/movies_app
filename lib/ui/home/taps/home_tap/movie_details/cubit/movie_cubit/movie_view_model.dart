@@ -13,7 +13,7 @@ class MovieViewModel extends Cubit<MovieStatues> {
       if (response!.status == 'error') {
         emit(ErrorMovieStatues(errorMassage: response.statusMessage));
       } else {
-        emit(SuccessMovieStatues(listmovies: response.data!.moviesList));
+        emit(SuccessMovieStatues(listmovies: response.data!.movies));
       }
     } catch (e) {
       emit(ErrorMovieStatues(errorMassage: e.toString()));

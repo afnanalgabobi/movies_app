@@ -12,6 +12,6 @@ class ErrorMovieStatues extends MovieStatues {
 }
 
 class SuccessMovieStatues extends MovieStatues {
-  List<Movie>? listmovies;
+  List<MovieModel>? listmovies;
   SuccessMovieStatues({required this.listmovies});
 }

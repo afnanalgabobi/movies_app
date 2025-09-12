@@ -15,8 +15,7 @@ import 'package:movies_app/utils/app_assets.dart';
 import 'package:movies_app/utils/app_colors.dart';
 import 'package:movies_app/utils/app_styles_roboto.dart';
 import 'package:provider/provider.dart';
-
-import '../../../../model/movie_details_response/movie.dart';
+import '../../../../model/responsemovies/movie.dart';
 
 class HomeTap extends StatefulWidget {
   const HomeTap({super.key});
@@ -114,7 +113,7 @@ class _HomeTapState extends State<HomeTap> {
                         });
                         return CarouselSlider.builder(
                           options: CarouselOptions(
-                            height: size.height * .3,
+                            height: size.height * .28,
                             enlargeCenterPage: true,
                             viewportFraction: 0.35,
                           ),
@@ -204,3 +203,4 @@ class _HomeTapState extends State<HomeTap> {
     );
   }
 }
+

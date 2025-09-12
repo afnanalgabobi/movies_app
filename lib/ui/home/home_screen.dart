@@ -31,7 +31,9 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     var themeProvider = Provider.of<AppThemeProvider>(context);
-    var size = MediaQuery.of(context).size;
+    var size = MediaQuery
+        .of(context)
+        .size;
     return Scaffold(
       body: taps[selectedIndex],
       appBar: AppBar(),
@@ -43,56 +45,42 @@ class _HomeScreenState extends State<HomeScreen> {
           child: NavigationBar(
             onDestinationSelected: onItemTapped,
             selectedIndex: selectedIndex,
-            height: size.height * 0.05,
+            height: size.height * 0.06,
             destinations: [
               buildNavigationDestination(
-                  unselectedImage: AppAssets.homeTabUnselected,
+                        label: 'home',
+              unselectedImage: AppAssets.homeTabUnselected,
                   selectedImage: AppAssets.homeTabSelected,
                   unselectedImageColor: themeProvider.isDarkMode()
                       ? AppColors.whiteColor
-                      : AppColors.grayColor),
+                      : AppColors.blackColor),
               buildNavigationDestination(
-                  unselectedImage: AppAssets.searchTabUnselected,
+                        label: 'search',
+              unselectedImage: AppAssets.searchTabUnselected,
                   selectedImage: AppAssets.searchTabSelected,
                   unselectedImageColor: themeProvider.isDarkMode()
                       ? AppColors.whiteColor
-                      : AppColors.grayColor),
+                      : AppColors.blackColor),
               buildNavigationDestination(
+                        label: 'browse',
                   unselectedImage: AppAssets.browseTabUnselected,
                   selectedImage: AppAssets.browseTabSelected,
                   unselectedImageColor: themeProvider.isDarkMode()
                       ? AppColors.whiteColor
-                      : AppColors.grayColor),
+                      : AppColors.blackColor),
               buildNavigationDestination(
-                  unselectedImage: AppAssets.profileTabUnselected,
+                        label: 'profile',
+              unselectedImage: AppAssets.profileTabUnselected,
                   selectedImage: AppAssets.profileTabSelected,
                   unselectedImageColor: themeProvider.isDarkMode()
                       ? AppColors.whiteColor
-                      : AppColors.grayColor)
+                      : AppColors.blackColor)
             ],
             ),
-          ),
         ),
+      ),
       drawer: HomeDrawer(onDrawerItemClick: onDrawerItemClick,),
     );
-  }
-
-  buildNavigationDestination(
-      {required String unselectedImage,
-      required String selectedImage,
-      required Color unselectedImageColor}) {
-    return NavigationDestination(
-        icon: Align(
-          alignment: Alignment.bottomCenter,
-          child: Image.asset(
-            unselectedImage,
-            color: unselectedImageColor,
-          ),
-        ),
-        label: '',
-        selectedIcon: Align(
-            alignment: Alignment.bottomCenter,
-            child: Image.asset(selectedImage)));
   }
 
   void onItemTapped(int index) {
@@ -100,6 +88,26 @@ class _HomeScreenState extends State<HomeScreen> {
       selectedIndex = index;
       context.read<CategoryIndexCubit>().increaseIndex();
     });
+  }
+
+  buildNavigationDestination({required String label,
+  required String unselectedImage,
+    required String selectedImage,
+    required Color unselectedImageColor}) {
+    return NavigationDestination(
+        icon: Align(
+          alignment: Alignment.center,
+          child: Image.asset(
+            unselectedImage,
+            color: unselectedImageColor,
+          ),
+        ),
+        label: label,
+        selectedIcon: Align(
+            alignment: Alignment.center,
+            child: Image.asset(selectedImage)),
+
+    );
   }
 
   void onDrawerItemClick(){

@@ -5,6 +5,8 @@ import 'package:movies_app/api/api_constants.dart';
 import 'package:movies_app/api/end_points.dart';
 import 'package:movies_app/model/LoginResponse.dart';
 import 'package:movies_app/model/reset_password_response.dart';
+import 'package:movies_app/model/responsemovies/movie.dart';
+import 'package:movies_app/model/responsemovies/responsemovies.dart';
 
 import '../model/movie_details_response/movie.dart';
 import '../model/movie_details_response/movie_details_response.dart';
@@ -12,6 +14,7 @@ import '../model/register_model/register_request.dart';
 import '../model/register_model/register_response.dart';
 
 class ApiManager {
+
   static Future<RegisterResponse> registerAuth(RegisterRequest request) async {
     Uri url = Uri.https(
       ApiConstants.baseAuthUrl,
@@ -90,7 +93,7 @@ class ApiManager {
     }
   }
 
-  static Future<MovieDetailsResponse?> getMoviesList({String? category}) async {
+  static Future<Responsemovies?> getMoviesList({String? category}) async {
     Uri url;
     if (category != null && category.isNotEmpty) {
       url = Uri.https(ApiConstants.baseMoviesUrl, EndPoints.moviesListEndPoints,
@@ -106,7 +109,7 @@ class ApiManager {
       if (response.statusCode == 200) {
         String responsebody = response.body;
         var json = jsonDecode(responsebody);
-        return MovieDetailsResponse.fromJson(json);
+        return Responsemovies.fromJson(json);
       } else {
         print("Request failed with status: ${response.statusCode}");
         print("Response Body: ${response.body}");
@@ -152,7 +155,7 @@ class ApiManager {
     }
   }
 
-  static Future<MovieDetailsResponse?> getSuggestedMoviesList(
+  static Future<Responsemovies?> getSuggestedMoviesList(
       {String? movieId}) async {
     Uri url;
     if (movieId != null) {
@@ -169,7 +172,7 @@ class ApiManager {
       if (response.statusCode == 200) {
         String responseBody = response.body;
         var json = jsonDecode(responseBody);
-        return MovieDetailsResponse.fromJson(json);
+        return Responsemovies.fromJson(json);
       } else {
         print("Request failed with status: ${response.statusCode}");
         print("Response Body: ${response.body}");
@@ -209,7 +212,7 @@ class ApiManager {
     }
   }
 
-  static Future<List<Movie>?> getMoviesByQuery(String query, int page) async {
+  static Future<Responsemovies?> getMoviesByQuery(String query, int page) async {
     Uri uri = Uri.https(
       ApiConstants.baseMoviesUrl,
       EndPoints.moviesListEndPoints,
@@ -222,15 +225,173 @@ class ApiManager {
 
     final response = await http.get(uri);
     final jsonResponse = jsonDecode(response.body);
-    final MovieDetailsResponse data =
-        MovieDetailsResponse.fromJson(jsonResponse);
+    final Responsemovies data =
+    Responsemovies.fromJson(jsonResponse);
 
     if (data.status == 'ok' && response.statusCode == 200) {
-      return data.data?.moviesList ?? [];
+      return  Responsemovies.fromJson(jsonResponse);
     } else {
       throw data.statusMessage ?? 'Unknown error';
     }
   }
+
+
+  static Future<RegisterResponse> deleteUser(String? token) async {
+  Uri url = Uri.https(
+  ApiConstants.baseAuthUrl,
+  EndPoints.profileEndPoint,
+  );
+
+  try {
+  print("Sending request to: $url");
+
+  var response = await http.delete(
+  url,
+  headers: {
+  "Content-Type": "application/json",
+  "Authorization": "Bearer $token",
+  },
+  );
+
+  print("Status Code: ${response.statusCode}");
+  print("Response Body: ${response.body}");
+
+  var json = jsonDecode(response.body);
+
+  if (response.statusCode >= 200 && response.statusCode < 300) {
+  return RegisterResponse.fromJson(json);
+  } else {
+  throw Exception(json["message"] ?? "Register failed");
+  }
+  } catch (e) {
+  throw Exception("Error in register: $e");
+  }
+  }
+
+
+
+  static Future<MovieDetailsResponse?> addToFavouriteList({String? token, String? movieId ,String? name ,int? rating ,String? imageURL ,String? year }) async {
+  Uri url;
+  if (movieId != null && token != null) {
+  url = Uri.https(ApiConstants.baseAuthUrl, EndPoints.addToFavouriteEndPoint,);
+  } else {
+  url = Uri.https(
+  ApiConstants.baseAuthUrl,
+  EndPoints.addToFavouriteEndPoint,
+  );
+  }
+  try {
+  var response = await http.post(url,
+  headers: {
+  "Content-Type": "application/json",
+  "Authorization": "Bearer $token",
+  },
+  body: jsonEncode({
+  "movie_id": movieId,
+  "name": name,
+  "rating": rating,
+  "imageURL": imageURL,
+  "year": year
+  })
+  );
+  if (response.statusCode == 200) {
+  String responseBody = response.body;
+  var json = jsonDecode(responseBody);
+  return MovieDetailsResponse.fromJson(json);
+  } else {
+  print("Request failed with status: ${response.statusCode}");
+  print("Response Body: ${response.body}");
+  return null;
+  }
+  } catch (e) {
+  print(" Exception in getSuggestedMoviesList: $e");
+  rethrow;
+  }
+  }
+
+  static Future<Responsemovies?> getFavouriteList({String? token}) async {
+  Uri url;
+  url = Uri.https(ApiConstants.baseAuthUrl, EndPoints.allFavouritesEndPoint,);
+
+  try {
+  var response = await http.post(url,
+  headers: {
+  "Content-Type": "application/json",
+  "Authorization": "Bearer $token",
+  },);
+  if (response.statusCode == 200) {
+  String responseBody = response.body;
+  var json = jsonDecode(responseBody);
+  return Responsemovies.fromJson(json);
+  } else {
+  print("Request failed with status: ${response.statusCode}");
+  print("Response Body: ${response.body}");
+  return null;
+  }
+  } catch (e) {
+  print(" Exception in getSuggestedMoviesList: $e");
+  rethrow;
+  }
+  }
+
+  static Future<Responsemovies?> removeMovieFromFavouriteList({String? token , String? movieId}) async {
+  Uri url;
+  url = Uri.https(ApiConstants.baseAuthUrl, EndPoints.deleteFavouriteEndPoint,);
+  if(movieId != null && token != null){
+  try {
+  var response = await http.delete(url,
+  headers: {
+  "Content-Type": "application/json",
+  "Authorization": "Bearer $token",
+  },
+  body: jsonEncode({
+  "movie_id": movieId,
+  }));
+  if (response.statusCode == 200) {
+  String responseBody = response.body;
+  var json = jsonDecode(responseBody);
+  return Responsemovies.fromJson(json);
+  } else {
+  print("Request failed with status: ${response.statusCode}");
+  print("Response Body: ${response.body}");
+  return null;
+  }
+  } catch (e) {
+  print(" Exception in getSuggestedMoviesList: $e");
+  rethrow;
+  }}
+
+  }
+  static Future<Responsemovies?> movieIsFavorite({String? token , String? movieId}) async {
+  Uri url;
+  url = Uri.https(ApiConstants.baseAuthUrl, EndPoints.isFavouriteEndPoint,);
+  if(movieId != null && token != null){
+  try {
+  var response = await http.delete(url,
+  headers: {
+  "Content-Type": "application/json",
+  "Authorization": "Bearer $token",
+  },
+  body: jsonEncode({
+  "movie_id": movieId,
+  }));
+  if (response.statusCode == 200) {
+  String responseBody = response.body;
+  var json = jsonDecode(responseBody);
+  return Responsemovies.fromJson(json);
+  } else {
+  print("Request failed with status: ${response.statusCode}");
+  print("Response Body: ${response.body}");
+  return null;
+  }
+  } catch (e) {
+  print(" Exception in getSuggestedMoviesList: $e");
+  rethrow;
+  }}
+
+  }
+
+
 }
 
 // static Future<Map<String, dynamic>> saveUser(String email, String password) async {
