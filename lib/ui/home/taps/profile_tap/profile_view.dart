@@ -4,11 +4,15 @@ import 'package:movies_app/ui/home/taps/home_tap/cubit/history_cubit/history_cub
 import 'package:movies_app/ui/widgets/custom_gride_view_network/custom_gride_view.dart';
 import '../../../../data/avatarList.dart';
 import '../../../../l10n/app_localizations.dart';
+import '../../../../model/movie_details_response/movie.dart';
 import '../../../../model/responsemovies/movie.dart';
 import '../../../../utils/app_assets.dart';
 import '../../../../utils/app_colors.dart';
 import '../../../../utils/app_routes.dart';
+import '../../../../utils/dialogue_utils.dart';
 import '../../../widgets/custom_elevated_button.dart';
+import '../../../widgets/custom_gride_view/custom_gride_view.dart';
+import '../home_tap/movie_details/cubit/watch_list_cubit/watchList_cubit.dart';
 import 'cubit/profile_states.dart';
 import 'cubit/profile_view_model.dart';
 
@@ -21,16 +25,17 @@ class ProfileView extends StatefulWidget {
 
 class _ProfileViewState extends State<ProfileView> {
   var avatarList = AvatarData.avatarList;
-
+  var viewModel;
   @override
   Widget build(BuildContext context) {
-    List<Movie> watchList = [];
+    // List<MovieModel> watchList = [];
 
     List<Movie> historyList = context.read<HistoryCubit>().historyList;
+    List<MovieModel> watchList = context.read<WatchListCubit>().watchList;
 
     var height = MediaQuery.sizeOf(context).height;
     var width = MediaQuery.sizeOf(context).width;
-    var viewModel = context.read<ProfileCubit>();
+    viewModel = context.read<ProfileCubit>();
     if (viewModel.currentProfile != null) {
       print(viewModel.currentProfile!.avaterId);
     }
@@ -146,7 +151,7 @@ class _ProfileViewState extends State<ProfileView> {
                                     child: CustomElevatedButton(
                                         backgroundColor: AppColors.redColor,
                                         borderColor: AppColors.transparentColor,
-                                        onPressed: () {},
+                                        onPressed: exit,
                                         textStyle: Theme.of(context)
                                             .textTheme
                                             .headlineMedium,
@@ -214,7 +219,7 @@ class _ProfileViewState extends State<ProfileView> {
                                   : Padding(
                                 padding: EdgeInsets.symmetric(
                                     horizontal: width * 0.04),
-                                child: CustomGrideView_Network(
+                                child: CustomGrideView(
                                   crossAxisCount: 3,
                                   crossAxisSpacing: 20,
                                   mainAxisSpacing: 20,
@@ -245,5 +250,20 @@ class _ProfileViewState extends State<ProfileView> {
       }
       return const SizedBox.shrink();
     });
+  }
+  void exit() async {
+    await viewModel.exit();
+
+    Future.delayed(
+      Duration(microseconds: 500),
+          () {
+        DialogUtils.showDialogMessage(context,
+          message: 'logout',
+          posActionTitle: 'ok',
+          posAction: () {
+            Navigator.popUntil(context, (route) => route.isFirst);
+          },);
+      },
+    );
   }
 }

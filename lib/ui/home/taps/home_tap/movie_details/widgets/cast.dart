@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/l10n/app_localizations.dart';
 import 'package:movies_app/ui/home/taps/home_tap/movie_details/widgets/cast_item.dart';
-
 import '../../../../../../model/movie_details_response/movie.dart';
 
 class Cast extends StatelessWidget {
-  Movie movie;
+  MovieModel movie;
 
   Cast({super.key, required this.movie});
 

@@ -89,6 +89,38 @@ class ApiManager {
       rethrow;
     }
   }
+  static Future<RegisterResponse> deleteUser(String? token) async {
+    Uri url = Uri.https(
+      ApiConstants.baseAuthUrl,
+      EndPoints.profileEndPoint,
+    );
+
+    try {
+      print("Sending request to: $url");
+
+      var response = await http.delete(
+        url,
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer $token",
+        },
+      );
+
+      print("Status Code: ${response.statusCode}");
+      print("Response Body: ${response.body}");
+
+      var json = jsonDecode(response.body);
+
+      if (response.statusCode >= 200 && response.statusCode < 300) {
+        return RegisterResponse.fromJson(json);
+      } else {
+        throw Exception(json["message"] ?? "Register failed");
+      }
+    } catch (e) {
+      throw Exception("Error in register: $e");
+    }
+  }
+
 
   static Future<Responsemovies?> getMoviesList({String? category}) async {
     Uri url;
@@ -158,12 +190,6 @@ class ApiManager {
     if (movieId != null ) {
       url = Uri.https(ApiConstants.baseMoviesUrl, EndPoints.suggestedMoviesListEndPoints,
           {"movie_id": movieId});
-    } else {
-      url = Uri.https(
-        ApiConstants.baseMoviesUrl,
-        EndPoints.suggestedMoviesListEndPoints,
-      );
-    }
     try {
       var response = await http.get(url);
       if (response.statusCode == 200) {
@@ -178,7 +204,7 @@ class ApiManager {
     } catch (e) {
       print(" Exception in getSuggestedMoviesList: $e");
       rethrow;
-    }
+    }}
   }
 
   static Future<MovieDetailsResponse?> getScreenshots({int? movieId}) async {
@@ -210,17 +236,128 @@ class ApiManager {
     }
 
   }
+
+
+  static Future<MovieDetailsResponse?> addToFavouriteList({String? token, String? movieId ,String? name ,int? rating ,String? imageURL ,String? year }) async {
+    Uri url;
+    if (movieId != null && token != null) {
+      url = Uri.https(ApiConstants.baseAuthUrl, EndPoints.addToFavouriteEndPoint,);
+    } else {
+      url = Uri.https(
+        ApiConstants.baseAuthUrl,
+        EndPoints.addToFavouriteEndPoint,
+      );
+    }
+    try {
+      var response = await http.post(url,
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer $token",
+          },
+          body: jsonEncode({
+            "movie_id": movieId,
+            "name": name,
+            "rating": rating,
+            "imageURL": imageURL,
+            "year": year
+          })
+      );
+      if (response.statusCode == 200) {
+        String responseBody = response.body;
+        var json = jsonDecode(responseBody);
+        return MovieDetailsResponse.fromJson(json);
+      } else {
+        print("Request failed with status: ${response.statusCode}");
+        print("Response Body: ${response.body}");
+        return null;
+      }
+    } catch (e) {
+      print(" Exception in getSuggestedMoviesList: $e");
+      rethrow;
+    }
+  }
+
+  static Future<Responsemovies?> getFavouriteList({String? token}) async {
+    Uri url;
+    url = Uri.https(ApiConstants.baseAuthUrl, EndPoints.allFavouritesEndPoint,);
+
+    try {
+      var response = await http.post(url,
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer $token",
+        },);
+      if (response.statusCode == 200) {
+        String responseBody = response.body;
+        var json = jsonDecode(responseBody);
+        return Responsemovies.fromJson(json);
+      } else {
+        print("Request failed with status: ${response.statusCode}");
+        print("Response Body: ${response.body}");
+        return null;
+      }
+    } catch (e) {
+      print(" Exception in getSuggestedMoviesList: $e");
+      rethrow;
+    }
+  }
+
+  static Future<Responsemovies?> removeMovieFromFavouriteList({String? token , String? movieId}) async {
+    Uri url;
+    url = Uri.https(ApiConstants.baseAuthUrl, EndPoints.deleteFavouriteEndPoint,);
+if(movieId != null && token != null){
+    try {
+      var response = await http.delete(url,
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer $token",
+        },
+          body: jsonEncode({
+            "movie_id": movieId,
+          }));
+      if (response.statusCode == 200) {
+        String responseBody = response.body;
+        var json = jsonDecode(responseBody);
+        return Responsemovies.fromJson(json);
+      } else {
+        print("Request failed with status: ${response.statusCode}");
+        print("Response Body: ${response.body}");
+        return null;
+      }
+    } catch (e) {
+      print(" Exception in getSuggestedMoviesList: $e");
+      rethrow;
+    }}
+
+  }
+  static Future<Responsemovies?> movieIsFavorite({String? token , String? movieId}) async {
+    Uri url;
+    url = Uri.https(ApiConstants.baseAuthUrl, EndPoints.isFavouriteEndPoint,);
+if(movieId != null && token != null){
+    try {
+      var response = await http.delete(url,
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer $token",
+        },
+          body: jsonEncode({
+            "movie_id": movieId,
+          }));
+      if (response.statusCode == 200) {
+        String responseBody = response.body;
+        var json = jsonDecode(responseBody);
+        return Responsemovies.fromJson(json);
+      } else {
+        print("Request failed with status: ${response.statusCode}");
+        print("Response Body: ${response.body}");
+        return null;
+      }
+    } catch (e) {
+      print(" Exception in getSuggestedMoviesList: $e");
+      rethrow;
+    }}
+
+  }
+
+
 }
-// static Future<Map<String, dynamic>> saveUser(String email, String password) async {
-//   final token = "your_access_token_here";
-//   Uri url = Uri.https(ApiConstants.baseUrl, EndPoints.loginAuthApi);
-//
-//   final response = await http.get(
-//     url,
-//     headers: {
-//       "Content-Type": "application/json",
-//       "Authorization": "Bearer $token",
-//     },
-//   );
-//   return jsonDecode(response.body);
-// }

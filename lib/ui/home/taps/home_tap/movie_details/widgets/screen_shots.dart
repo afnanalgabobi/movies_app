@@ -5,7 +5,8 @@ import 'package:movies_app/ui/home/taps/home_tap/movie_details/cubit/screenshots
 import 'package:movies_app/ui/home/taps/home_tap/movie_details/cubit/screenshots_cubit/screenshots_view_model.dart';
 import 'package:movies_app/utils/app_colors.dart';
 
-import '../../../../../../model/movie_details_response/movie.dart';
+import '../../../../../../model/responsemovies/movie.dart';
+
 
 class ScreenShots extends StatefulWidget {
   int movieId;

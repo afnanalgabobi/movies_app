@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies_app/l10n/app_localizations.dart';
 import 'package:movies_app/ui/home/taps/home_tap/movie_details/cubit/suggested_movie_cubit/suggested_movie_statues.dart';
 import 'package:movies_app/ui/home/taps/home_tap/movie_details/cubit/suggested_movie_cubit/suggested_movie_view_model.dart';
-import 'package:movies_app/ui/widgets/custom_gride_view_network/custom_gride_view.dart';
 import '../../../../../../model/responsemovies/movie.dart';
 import '../../../../../../utils/app_colors.dart';
+import '../../../../../widgets/custom_gride_view_network/custom_gride_view.dart';
 
 class SimilarMovies extends StatefulWidget {
   final Movie movie;
@@ -20,8 +20,9 @@ class _SimilarMoviesState extends State<SimilarMovies> {
 
   // @override
   void initState() {
-    suggestedViewModel.getSuggestedMoviesList(movieId: widget.movie.id.toString());
-    super.initState();
+      suggestedViewModel.getSuggestedMoviesList(movieId: widget.movie.id.toString());
+      super.initState();
+
   }
   @override
   Widget build(BuildContext context) {
@@ -48,7 +49,7 @@ class _SimilarMoviesState extends State<SimilarMovies> {
               } else if (state is ErrorSuggestedMovieStatues) {
                 return Column(
                   children: [
-                    Text(state.errorMassage!),
+                    Text(state.errorMassage ?? ''),
                     ElevatedButton(
                         onPressed: () {
                           print(widget.movie.id.toString());
@@ -62,8 +63,7 @@ class _SimilarMoviesState extends State<SimilarMovies> {
               } else if (state is SuccessSuggestedMovieStatues) {
 
                 List<Movie> suggestedMoviesList = state.suggestedMovieList!;
-                print(suggestedMoviesList[0].title);
-                print(widget.movie!.id);
+                print(widget.movie.id);
 
                 return SizedBox(
                     height: height * 0.5,

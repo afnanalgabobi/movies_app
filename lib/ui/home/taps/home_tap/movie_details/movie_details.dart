@@ -8,7 +8,6 @@ import 'package:movies_app/ui/home/taps/home_tap/movie_details/widgets/screen_sh
 import 'package:movies_app/ui/home/taps/home_tap/movie_details/widgets/similar_movies.dart';
 import 'package:movies_app/ui/home/taps/home_tap/movie_details/widgets/summary.dart';
 import 'package:movies_app/utils/app_colors.dart';
-
 import '../../../../../../model/movie_details_response/movie.dart';
 import 'cubit/movie_info_cubit/movie_info_statues.dart';
 
@@ -96,7 +95,7 @@ class _MovieDetailsState extends State<MovieDetails> {
                     ],
                   );
                 } else if (state is SuccessMovieInfoStatues) {
-                  Movie movie = state.movie!;
+                  MovieModel movie = state.movie!;
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -107,7 +106,7 @@ class _MovieDetailsState extends State<MovieDetails> {
                       SizedBox(
                         height: size.height * .02,
                       ),
-                      ScreenShots(movie: movie, movieId: movieId), //Alia
+                      ScreenShots(movie: myMovie, movieId: movieId), //Alia
                       SizedBox(
                         height: size.height * .02,
                       ),

@@ -6,7 +6,7 @@ import 'package:movies_app/utils/app_styles_roboto.dart';
 import '../../../../../../model/movie_details_response/movie.dart';
 
 class Genres extends StatelessWidget {
-  final Movie movie;
+  final MovieModel movie;
 
   const Genres({super.key, required this.movie});
 

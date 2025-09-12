@@ -12,6 +12,8 @@ class ErrorMovieInfoStatues extends MovieInfoStatues {
 }
 
 class SuccessMovieInfoStatues extends MovieInfoStatues {
-  Movie? movie;
-  SuccessMovieInfoStatues({required this.movie});
+  MovieModel? movie;
+  final bool isFavorite;
+
+  SuccessMovieInfoStatues({required this.movie,required this.isFavorite});
 }

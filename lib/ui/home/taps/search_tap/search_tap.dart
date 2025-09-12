@@ -38,17 +38,17 @@ class SearchTap extends StatelessWidget {
             SizedBox(
               height: size.height * 0.02,
             ),
-            Expanded(
-              child: CustomGrideView(
-                moviesList: searchList,
-                crossAxisCount: 2,
-                crossAxisSpacing: 20,
-                mainAxisSpacing: 20,
-                //     itemCount: 10,
-                //     childAspectRatio: 2/3,
-                // isMovie: false,
-              ),
-            ),
+            // Expanded(
+              // child: CustomGrideView(
+              //   moviesList: searchList,
+              //   crossAxisCount: 2,
+              //   crossAxisSpacing: 20,
+              //   mainAxisSpacing: 20,
+              //   //     itemCount: 10,
+              //   //     childAspectRatio: 2/3,
+              //   // isMovie: false,
+              // ),
+            // ),
           ],
         ),
       )),

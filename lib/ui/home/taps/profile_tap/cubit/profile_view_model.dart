@@ -1,8 +1,10 @@
 import 'dart:convert';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
+import 'package:movies_app/api/api_manager.dart';
 import 'package:movies_app/model/register_model/user_data.dart';
 import 'package:movies_app/ui/home/taps/profile_tap/cubit/profile_states.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../../api/api_constants.dart';
 import '../../../../../api/end_points.dart';
 import '../../../../../model/user_model/shared_preference.dart';
@@ -18,6 +20,8 @@ class ProfileCubit extends Cubit<ProfileStates> {
   void changeTab(int newTab) {
     selectedTab = newTab;
   }
+
+  // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4YjJhMGNiOWY2ODhhYmMzZmMyYTdmOCIsImVtYWlsIjoiYWZuYW5hbGdhYmdvYmlAZ21haWwuY29tIiwiaWF0IjoxNzU3NTkyODQxfQ.jyr23Vim9cD4mt-WlVj7CEJpHurXbnhBbIOki-5U3HA
 
   UserData? currentProfile;
 
@@ -67,7 +71,9 @@ class ProfileCubit extends Cubit<ProfileStates> {
     }
 
     try {
-      var token = await AppPreferences.getUserToken();
+      final prefs = await SharedPreferences.getInstance();
+      final token = prefs.getString('token');
+
       print('on update : My token => ${token}');
       print(currentProfile!.avaterId);
       Uri url = Uri.https(ApiConstants.baseAuthUrl, EndPoints.profileEndPoint);
@@ -95,23 +101,30 @@ class ProfileCubit extends Cubit<ProfileStates> {
     }
   }
 
-//
-// updateProfile
-// Future<void> updateProfile(String name,int avatar, String phone) async {
-//   if (currentProfile == null) {
-//     print('not found');
-//     return;
-//   }
-//   emit(ProfileLoading());
-//   try {
-//     await Future.delayed(const Duration(seconds: 1));
-//     final updated = currentProfile!.copyWith(name: name,avatar: avatar, phone: phone);
-//     currentProfile = updated;
-//     print(currentProfile!.phone);
-//     print('user is updatedddddddddd');
-//     emit(ProfileLoaded(updated));
-//   } catch (e) {
-//     emit(ProfileError("field to update profile"));
-//   }
-//   }
+  Future<void> deleteProfile() async {
+    if (currentProfile == null) {
+      emit(DeleteProfileErrorState("Failed delete user"));
+      return;
+    }
+    try {
+      var token = await AppPreferences.getUserToken();
+      print('on delete : My token => ${token}');
+      ApiManager.deleteUser(token);
+      emit(DeleteProfileSuccessState("user deleted Successfully"));
+    } catch (e) {
+      emit(DeleteProfileErrorState("Failed $e"));
+    }
+  }
+  Future<void> exit() async {
+    if (currentProfile == null) {
+      emit(DeleteProfileErrorState("Failed exit"));
+      return;
+    }
+    try {
+       await AppPreferences.logout();
+    } catch (e) {
+      emit(DeleteProfileErrorState("Failed exit"));
+    }
+  }
+
 }

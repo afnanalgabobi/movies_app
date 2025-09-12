@@ -1,7 +1,7 @@
 import 'cast_response.dart';
 import 'torrent.dart';
 
-class Movie {
+class MovieModel {
   int? id;
   String? url;
   String? imdbCode;
@@ -31,7 +31,7 @@ class Movie {
   String? mediumScreenshotImage1;
   String? mediumScreenshotImage2;
   String? mediumScreenshotImage3;
-  Movie({
+  MovieModel({
     this.id,
     this.url,
     this.imdbCode,
@@ -63,7 +63,7 @@ class Movie {
     this.mediumScreenshotImage3,
   });
 
-  factory Movie.fromJson(Map<String, dynamic> json) => Movie(
+  factory MovieModel.fromJson(Map<String, dynamic> json) => MovieModel(
         id: json['id'] as int?,
         url: json['url'] as String?,
         imdbCode: json['imdb_code'] as String?,

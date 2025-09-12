@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movies_app/l10n/app_localizations.dart';
 import 'package:movies_app/model/movie_details_response/movie.dart';
 class MovieSummary extends StatelessWidget {
-  final Movie movie;
+  final MovieModel movie;
   const MovieSummary({super.key, required this.movie});
 
   @override

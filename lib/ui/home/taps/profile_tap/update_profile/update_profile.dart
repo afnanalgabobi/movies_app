@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/data/avatarList.dart';
 import 'package:movies_app/l10n/app_localizations.dart';
+import 'package:movies_app/ui/OnBoarding/onBoarding_screen.dart';
 import 'package:movies_app/ui/home/taps/profile_tap/update_profile/widgets/build_bottomSheet.dart';
 import 'package:movies_app/utils/app_assets.dart';
 import 'package:movies_app/utils/app_colors.dart';
 import 'package:movies_app/utils/app_styles_roboto.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../../model/register_model/user_data.dart';
 import '../../../../../utils/app_routes.dart';
 import '../../../../../utils/dialogue_utils.dart';
@@ -29,6 +31,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
   var _formKey = GlobalKey<FormState>();
   var userNameController = TextEditingController();
   var phoneController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.sizeOf(context).height;
@@ -140,7 +143,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                   SizedBox(height: height * 0.04),
 
                   CustomElevatedButton(
-                    onPressed: () {},
+                    onPressed: (){deleteProfile();},
                     text: AppLocalizations.of(context)!.delete_account,
                     textStyle: AppStylesRoboto.regular20White,
                     backgroundColor: AppColors.redColor,
@@ -189,7 +192,23 @@ class _UpdateProfileState extends State<UpdateProfile> {
       );
     }
   }
+  void deleteProfile() async {
+    await viewModel.deleteProfile();
 
+    Future.delayed(
+      Duration(microseconds: 500),
+          () {
+        DialogUtils.showDialogMessage(context,
+          message: 'user deleted',
+          posActionTitle: 'ok',
+          posAction: () {
+            Navigator.pushReplacementNamed(
+                context, AppRoutes.onboardingScreenRouteName);
+          },);
+      },
+    );
+
+  }
 // Future ChooseAvatarBottomSheet() {
 //   var height = MediaQuery.sizeOf(context).height;
 //   var width = MediaQuery.sizeOf(context).width;

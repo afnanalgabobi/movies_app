@@ -12,6 +12,9 @@ import 'package:movies_app/ui/home/home_screen.dart';
 import 'package:movies_app/ui/home/taps/browse_tap/browse_tap.dart';
 import 'package:movies_app/ui/home/taps/home_tap/cubit/category_index_cubit/category_index_cubit.dart';
 import 'package:movies_app/ui/home/taps/home_tap/cubit/history_cubit/history_cubit.dart';
+import 'package:movies_app/ui/home/taps/home_tap/cubit/movie_cubit/movie_view_model.dart';
+import 'package:movies_app/ui/home/taps/home_tap/movie_details/cubit/movie_info_cubit/movie_info_view_model.dart';
+import 'package:movies_app/ui/home/taps/home_tap/movie_details/cubit/watch_list_cubit/watchList_cubit.dart';
 import 'package:movies_app/ui/home/taps/home_tap/movie_details/movie_details.dart';
 import 'package:movies_app/ui/home/taps/profile_tap/cubit/profile_view_model.dart';
 import 'package:movies_app/ui/home/taps/profile_tap/profile_tap.dart';
@@ -23,7 +26,6 @@ import 'package:movies_app/utils/app_themes.dart';
 import 'package:movies_app/utils/my_bloc_observer.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'l10n/app_localizations.dart';
 
 void main() async {
@@ -35,6 +37,7 @@ void main() async {
   final savedTheme =
       prefs.getString('theme') == 'dark' ? ThemeMode.dark : ThemeMode.light;
   Bloc.observer = MyBlocObserver();
+  var watchListCubit = WatchListCubit();
   runApp(MultiProvider(
       providers: [
         ChangeNotifierProvider(
@@ -48,7 +51,10 @@ void main() async {
       ],
       child: MultiBlocProvider(
         providers: [
-          //  BlocProvider.value(
+           BlocProvider.value(
+            value: watchListCubit, // reuse same instance everywhere
+          ),  
+          // BlocProvider.value(
           //   value: historyCubit, // reuse same instance everywhere
           // ),
           // BlocProvider.value(
@@ -57,7 +63,8 @@ void main() async {
           BlocProvider(create: (context) => CategoryIndexCubit()),
           BlocProvider(create: (context) => HistoryCubit()),
           BlocProvider(create: (context) => ProfileCubit()),
-          //    BlocProvider(create: (context) => MovieViewModel()),
+          // BlocProvider(create: (context) => WatchListCubit()),
+             BlocProvider(create: (context) => MovieInfoViewModel()),
         ],
         child: MyApp(),
       )));

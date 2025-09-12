@@ -71,17 +71,17 @@ class _BrowseTapState extends State<BrowseTap> {
             SizedBox(
               height: size.height * 0.02,
             ),
-            Expanded(
-              child: CustomGrideView(
-                moviesList: browseList,
-                crossAxisCount: 2,
-                crossAxisSpacing: 20,
-                mainAxisSpacing: 20,
-                //     itemCount: 10,
-                // childAspectRatio: 2 / 3,
-                // isMovie: false,
-              ),
-            ),
+            // Expanded(
+            //   child: CustomGrideView(
+            //     moviesList: browseList,
+            //     crossAxisCount: 2,
+            //     crossAxisSpacing: 20,
+            //     mainAxisSpacing: 20,
+            //     //     itemCount: 10,
+            //     // childAspectRatio: 2 / 3,
+            //     // isMovie: false,
+            //   ),
+            // ),
           ],
         ),
       )),
